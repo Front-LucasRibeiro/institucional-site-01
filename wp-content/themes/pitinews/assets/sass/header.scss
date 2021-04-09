@@ -1,0 +1,108 @@
+@import "./variables";
+
+header {
+  width: 100%;
+  height: 80px;
+  background-color: $orange;
+  display: flex;
+  align-items: center;
+
+  .container {
+    max-height: 80px;
+  }
+
+  .menu-menu-topo-container {
+    padding-right: 103px;
+  }
+
+  #menu-menu-topo {
+    display: flex;
+    justify-content: space-between;
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+
+      &.menu-item-type-custom {
+        a {
+          background-image: url($logo);
+          width: 170px;
+          height: 38px;
+          margin: 21px 0;
+          font-size: 0;
+        }
+      }
+
+      a {
+        font-family: $raleway;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        text-transform: uppercase;
+        color: $white;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .box-search-buttons {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+
+    .search {
+      display: inline-block;
+      width: 18px;
+      height: 19px;
+      background-image: url($lupa);
+    }
+
+    .close {
+      display: none;
+      background-image: url($closeSearch);
+      width: 13px;
+      height: 13px;
+    }
+  }
+
+  .wrapper-busca {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 100%;
+
+    form {
+      position: relative;
+
+      input.search-field {
+        width: 100%;
+        height: 60px;
+        background: $white;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 0px 0px 20px 20px;
+        border: 0;
+        padding: 21px 68px 21px 34px;
+        color: $texto;
+        font-family: $raleway;
+        font-size: 14px;
+        line-height: 16px;
+      }
+      button.search-submit {
+        position: absolute;
+        right: 21px;
+        top: 21px;
+        background-image: url($lupaOrange);
+        display: inline-block;
+        width: 18px;
+        height: 19px;
+        border: 0;
+        background-color: $white;
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@import "./variables";
+
+html {
+	font-size: 16px;
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	font-family: $raleway;
+	color: $texto;
+	-webkit-font-smoothing: antialiased;
+}
+
+.container {
+	position: relative;
+	width: 1170px;
+	margin: 0 auto;
+}
+
+#wpadminbar{
+	display: none;
+}
+
+
+input{
+	&:focus{
+		outline: 0;
+	}
+}
+
+button{
+	cursor: pointer;
+
+	&:focus{
+		outline: 0;
+	}
+}
