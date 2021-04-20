@@ -1,0 +1,1 @@
+function slickPrincipal(){var o=window.innerWidth;$("#sliderTopo").slick({arrows:!1,dots:!0,autoplay:!0,autoplaySpeed:2e3}),o<=480&&$("#sliderTopoMob").slick({arrows:!1,dots:!0,autoplay:!0,autoplaySpeed:2e3})}$(document).ready(()=>{slickPrincipal()});

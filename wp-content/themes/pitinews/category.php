@@ -1,8 +1,3 @@
-<?php
-$css_escolhido = 'page';
-require_once('header.php');
-?>
-
 <section class="box-ultimas-noticias">
 		<div class="container">
 			<h2 class="section-title">
@@ -67,5 +62,3 @@ require_once('header.php');
 			</ul>
 		</div>
 	</section>
-
-<?php get_footer(); ?>
