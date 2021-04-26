@@ -1,4 +1,5 @@
 <?php
+	$home = get_template_directory_uri();
 	$css_escolhido = 'index';
 	require_once('header.php');
 ?>
@@ -828,5 +829,300 @@
 	</div>
 </section>
 
+<section class="colunas-criticas">
+	<div class="container">
+		<div class="wrapper-colunas">
+			<h2 class="section-title">
+				<span class="title-desk">
+					<?= get_post_meta( 134, 'title-colunas', true) ?>
+				</span>
+				<span class="title-mob">
+					<?= get_post_meta( 135, 'title-colunas-mob', true) ?>
+				</span>
+				<span class="separator"></span>
+				<span class="veja-mais">
+					<a href="<?= get_post_meta( 136, 'link-ver-tudo', true) ?>">
+						<span class="desk">
+							<?= get_post_meta( 139, 'texto-ver-mais', true) ?>
+						</span>
+						<span class="mob">
+							<?= get_post_meta( 138, 'texto-ver-mais-mob', true) ?>
+						</span>
+					</a>
+				</span>
+			</h2>
+	
+			<ul class="list-posts desk">
+				<?php				
+					$args = array( 
+						'posts_per_page' => 6,
+						'order' => 'DESC', //Ou ASC
+						'orderby' => 'date',
+						'hide_empty' => true,
+						'category_name' => get_post_meta( 131, 'categoria-colunas', true)
+					);
+					
+					$loop = new WP_Query( $args );
+					if( $loop->have_posts() ) { 
+						while( $loop-> have_posts()) {
+							$loop-> the_post();
+							$post = get_post();
+							$id_post = $post->ID;
+							$autor_id = $post->post_author;
+				?>
+		
+				<li class="list-post-item">
+					<a href="<?php the_permalink() ?>">
+						<div class="image-desk">
+							<?php the_post_thumbnail('banner-370x260');?>
+						</div>
+					</a>
+					
+					<div class="box-title">
+						<a href="<?php the_permalink() ?>">
+							<h3 class="title-post">
+								<?php the_title(); ?>
+							</h3>
+	
+							<div class="data">
+								<?= get_the_date('d \d\e F Y'); ?>
+							</div>
+						</a>
+					</div>
 
-<?php get_footer(); ?>
+					<div class="box-bottom">
+						<div class="box-autor">
+							<?php 
+								$user_info = get_userdata($autor_id);
+								$user_name = $user_info->display_name;
+								$user_email = $user_info->user_email;
+							?>
+
+							<div class="box-avatar">
+								<?= get_avatar($user_email, 24);?>
+							</div>
+							
+							<?php
+								$autor_formatted = str_replace ( " ", "-", strtolower($user_name) );
+							?>
+
+							<p class="nome-autor">
+								<a href="<?= get_home_url().'/'.$autor_formatted; ?>">
+									<?php the_author(); ?>
+								</a>
+							</p>
+						</div>
+						<a href="<?php the_permalink() ?>" class="ler-tudo"><?= get_post_meta( 141, 'texto-ler-mais-colunas', true) ?></a>
+					</div>
+				</li>
+		
+				<?php
+					wp_reset_query(); 
+					wp_reset_postdata();
+						}
+					}
+				?> 
+			</ul>			
+		</div>		
+		<div class="wrapper-criticas">
+			<h2 class="section-title">
+				<span class="title-desk">
+					<?= get_post_meta( 142, 'title-criticas', true) ?>
+				</span>
+				<span class="separator"></span>
+				<span class="veja-mais">
+					<a href="<?= get_post_meta( 143, 'link-ver-mais-criticas', true) ?>">
+						<span class="mob">
+							<?= get_post_meta( 144, 'texto-ver-mais-mob-criticas', true) ?>
+						</span>
+					</a>
+				</span>
+			</h2>
+
+			<ul class="list-posts desk">
+				<?php				
+					$args = array( 
+						'posts_per_page' => 3,
+						'order' => 'DESC', //Ou ASC
+						'orderby' => 'date',
+						'hide_empty' => true,
+						'category_name' => get_post_meta( 132, 'categoria-criticas', true)
+					);
+					
+					$loop = new WP_Query( $args );
+					if( $loop->have_posts() ) { 
+						while( $loop-> have_posts()) {
+							$loop-> the_post();
+							$post = get_post();
+							$id_post = $post->ID;
+				?>
+		
+				<li class="list-post-item">
+					<a href="<?php the_permalink() ?>">
+						<div class="image-desk">
+							<?php the_post_thumbnail('banner-370x160');?>
+						</div>
+					</a>
+					
+					<div class="box-title">
+						<a href="<?php the_permalink() ?>">
+							<h3 class="title-post">
+								<?php the_title(); ?>
+							</h3>
+						</a>
+					</div>
+				</li>
+		
+				<?php
+					wp_reset_query(); 
+					wp_reset_postdata();
+						}
+					}
+				?> 
+			</ul>	
+			<div class="banner-bottom">
+	
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="diversidade">
+	<div class="container">
+		<div class="wrapper-diversidade">
+			<h2 class="section-title">
+				<span class="title-desk">
+					<?= get_post_meta( 154, 'title-diversidade', true) ?>
+				</span>
+				<span class="separator"></span>
+				<span class="veja-mais">
+					<a href="<?= get_post_meta( 146, 'link-ver-tudo-diversidade', true) ?>">
+						<span class="desk">
+							<?= get_post_meta( 152, 'texto-ver-mais-desk-diversidade', true) ?>
+						</span>
+						<span class="mob">
+							<?= get_post_meta( 155, 'texto-ver-mais-mob-diversidade', true) ?>
+						</span>
+					</a>
+				</span>
+			</h2>
+
+			<ul class="list-posts desk">
+				<?php				
+					$args = array( 
+						'posts_per_page' => 6,
+						'order' => 'DESC', //Ou ASC
+						'orderby' => 'date',
+						'hide_empty' => true,
+						'category_name' => get_post_meta( 150, 'categoria-diversidade', true),
+					);
+					
+					$loop = new WP_Query( $args );
+					if( $loop->have_posts() ) { 
+						while( $loop-> have_posts()) {
+							$loop-> the_post();
+							$post = get_post();
+							$id_post = $post->ID;
+							$autor_id = $post->post_author;
+				?>
+		
+				<li class="list-post-item">
+					<a href="<?php the_permalink() ?>">
+						<div class="image-desk">
+							<?php the_post_thumbnail('banner-370x260');?>
+						</div>
+					</a>
+					
+					<div class="box-title">
+						<a href="<?php the_permalink() ?>">
+							<h3 class="title-post">
+								<?php the_title(); ?>
+							</h3>
+	
+							<div class="data">
+								<?= get_the_date('d \d\e F Y'); ?>
+							</div>
+						</a>
+					</div>
+	
+					<div class="box-bottom">
+						<div class="box-autor">
+							<?php 
+								$user_info = get_userdata($autor_id);
+								$user_name = $user_info->display_name;
+								$user_email = $user_info->user_email;
+							?>
+
+							<div class="box-avatar">
+								<?= get_avatar($user_email, 24);?>
+							</div>
+							
+							<?php
+								$autor_formatted = str_replace ( " ", "-", strtolower($user_name) );
+							?>
+
+							<p class="nome-autor">
+								<a href="<?= get_home_url().'/'.$autor_formatted; ?>">
+									<?php the_author(); ?>
+								</a>
+							</p>
+						</div>
+						<a href="<?php the_permalink() ?>" class="ler-tudo"><?= get_post_meta( 156, 'texto-ler-mais-diversidade', true) ?></a>
+					</div>
+				</li>
+		
+				<?php
+					wp_reset_query(); 
+					wp_reset_postdata();
+						}
+					}
+				?> 
+			</ul>	
+
+			<ul class="list-posts mob">
+				<?php				
+					$args = array( 
+						'posts_per_page' => 3,
+						'order' => 'DESC', //Ou ASC
+						'orderby' => 'date',
+						'hide_empty' => true,
+						'category_name' => get_post_meta( 150, 'categoria-diversidade', true),
+					);
+					
+					$loop = new WP_Query( $args );
+					if( $loop->have_posts() ) { 
+						while( $loop-> have_posts()) {
+							$loop-> the_post();
+							$post = get_post();
+							$id_post = $post->ID;
+				?>
+		
+				<li class="list-post-item">
+					<a href="<?php the_permalink() ?>">
+						<div class="image-mob">
+							<?php the_post_thumbnail('banner-370x160');?>
+
+							<div class="box-title">
+								<h3 class="title-post">
+									<?php the_title(); ?>
+								</h3>
+							</div>
+						</div>
+					</a>
+				</li>
+		
+				<?php
+					wp_reset_query(); 
+					wp_reset_postdata();
+						}
+					}
+				?> 
+			</ul>	
+		</div>
+	</div>
+</section>
+
+<?php 
+	$js_escolhido = 'home';
+	require_once('footer.php');
+?>

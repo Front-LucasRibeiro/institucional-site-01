@@ -1,6 +1,6 @@
-function slickPrincipal() {
-  let tela = window.innerWidth
+let tela = window.innerWidth
 
+function slickPrincipal() {
   $('#sliderTopo').slick({
     arrows: false,
     dots: true,
@@ -17,7 +17,6 @@ function slickPrincipal() {
     });
   }
 }
-
 
 $(document).ready(() => {
   slickPrincipal()
