@@ -1,5 +1,4 @@
 <?php
-	$home = get_template_directory_uri();
 	$css_escolhido = 'index';
 	require_once('header.php');
 ?>
@@ -71,7 +70,7 @@
 </section>
 
 <section class="box-adsense">
-	
+	<?= get_post_meta( 165, 'banner-adsense-home-topo', true) ?>
 </section>
 
 <div class="wrapper-section">
@@ -980,8 +979,8 @@
 					}
 				?> 
 			</ul>	
-			<div class="banner-bottom">
-	
+			<div class="banner-bottom box-adsense">
+				<?= get_post_meta( 170, 'banner-adsense-home-bottom', true) ?>
 			</div>
 		</div>
 	</div>
@@ -1118,6 +1117,151 @@
 					}
 				?> 
 			</ul>	
+		</div>
+	</div>
+</section>
+
+<section class="piticast">
+	<div class="container">
+		<div class="wrapper-piticast">
+			<h2 class="section-title">
+				<span class="title-desk">
+					<img src="<?= get_post_meta( 172, 'title-piticast', true) ?>" alt="Piticast" />
+				</span>
+				<span class="separator"></span>
+				<span class="veja-mais">
+					<a href="<?= get_post_meta( 176, 'link-ver-tudo-piticast', true) ?>">
+						<span class="desk">
+							<?= get_post_meta( 174, 'texto-ver-mais-desk-piticast', true) ?>
+						</span>
+						<span class="mob">
+							<?= get_post_meta( 178, 'texto-ver-mais-mob-piticast', true) ?>
+						</span>
+					</a>
+				</span>
+			</h2>
+
+			<ul class="list-posts desk">
+				<?php
+					$args = array(
+						'post_type' => 'piticast',
+						'posts_per_page' => 4,
+					);
+					
+					$loop = new WP_Query( $args );
+					if( $loop->have_posts() ) { 
+						while( $loop-> have_posts()) {
+							$loop-> the_post();
+							$post = get_post();
+							$id_post = $post->ID;
+				?>
+		
+				<li class="list-post-item">
+					<a href="<?= get_post_meta( $id_post, 'link-card-piticast', true) ?>" target="_blank">
+						<div class="card">
+							<div class="image-desk">
+								<?php the_post_thumbnail('banner-270x270-piticast');?>
+							</div>
+							<div class="box-title">
+								<audio controls>
+									<source src="<?= get_post_meta( $id_post, 'url-audio-piticast', true) ?>" type="audio/mp3">
+									Seu navegador não suporta a tag de áudio.
+								</audio>
+	
+								<h3 class="title-post">
+									<?php the_title(); ?>
+								</h3>
+		
+								<div class="content">
+									<?php
+										$limite = '67';
+										$descricao = get_the_content();
+										$descricao =  trim($descricao, '\n');
+										$descricao = mb_substr($descricao,0,$limite);
+										echo $descricao."...";
+									?>
+								</div>
+							</div>
+						</div>
+					</a>
+				</li>
+		
+				<?php
+						}
+					}
+				?>
+			</ul>	
+
+		</div>
+	</div>
+</section>
+
+<section class="pitiplay">
+	<div class="container">
+		<div class="wrapper-pitiplay">
+			<h2 class="section-title">
+				<span class="title-desk">
+					<img src="<?= get_post_meta( 187, 'title-pitiplay', true) ?>" alt="Pitiplay" />
+				</span>
+				<span class="separator"></span>
+				<span class="veja-mais">
+					<a href="<?= get_post_meta( 181, 'link-ver-tudo-pitiplay', true) ?>">
+						<span class="desk">
+							<?= get_post_meta( 185, 'texto-ver-mais-desk-pitiplay', true) ?>
+						</span>
+						<span class="mob">
+							<?= get_post_meta( 183, 'texto-ver-mais-mob-pitiplay', true) ?>
+						</span>
+					</a>
+				</span>
+			</h2>
+
+			<ul class="list-posts desk">
+				<?php
+					$args = array(
+						'post_type' => 'pitiplay',
+						'posts_per_page' => 3,
+					);
+					
+					$loop = new WP_Query( $args );
+					if( $loop->have_posts() ) { 
+						while( $loop-> have_posts()) {
+							$loop-> the_post();
+							$post = get_post();
+							$id_post = $post->ID;
+				?>
+		
+				<li class="list-post-item">
+					<div class="card">
+						<div class="image-desk">
+							<?= get_post_meta( $id_post, 'iframe-pitiplay', true) ?>
+						</div>
+						<div class="box-title">
+							<a href="<?= get_post_meta( $id_post, 'link-card-pitiplay', true) ?>" target="_blank">
+								<h3 class="title-post">
+									<?php the_title(); ?>
+								</h3>
+		
+								<div class="content">
+									<?php
+										$limite = '87';
+										$descricao = get_the_content();
+										$descricao =  trim($descricao, '\n');
+										$descricao = mb_substr($descricao,0,$limite);
+										echo $descricao."...";
+									?>
+								</div>
+							</a>
+						</div>
+					</div>
+				</li>
+		
+				<?php
+						}
+					}
+				?>
+			</ul>	
+
 		</div>
 	</div>
 </section>

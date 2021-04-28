@@ -205,3 +205,19 @@ button {
 		}
 	}
 }
+
+.box-adsense {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	iframe {
+		background: yellow;
+		max-width: 728px;
+		height: auto;
+		display: block;
+		right: 0;
+		margin: 0 auto;
+		width: 100%;
+	}
+}

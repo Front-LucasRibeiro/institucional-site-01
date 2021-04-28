@@ -8,6 +8,8 @@
 		<?php get_titulo(); ?>
 	</title>
 
+	<link rel="shortcut icon" sizes="57x57" href="/wp-content/uploads/2021/04/apple-icon-57x57-1.png">
+
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 	
@@ -18,6 +20,9 @@
 	<link rel="stylesheet" href="<?= $home; ?>/assets/css/header.css">
 
 	<link rel="stylesheet" href="<?= $home; ?>/assets/css/<?= $css_escolhido; ?>.css">
+
+	<!-- google adsense -->
+	<script data-ad-client="ca-pub-6636390705016140" async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 </head>
 <body>
 

@@ -1,5 +1,4 @@
 <?php
-
 add_theme_support('post-thumbnails');
 add_theme_support( 'custom-logo', array(
     'height' => 38,
@@ -13,6 +12,7 @@ add_image_size('banner-220x243', 220, 243, true);
 add_image_size('banner-170x119', 170, 119, true);
 add_image_size('banner-370x260', 370, 260, true);
 add_image_size('banner-370x160', 370, 160, true);
+add_image_size('banner-270x270-piticast', 270, 270, true);
 add_image_size('banner-67x67', 67, 67, true);
 
 
@@ -36,6 +36,45 @@ function get_titulo() {
 
 //Posts Type
 function meus_posts_type(){
+	register_post_type('pitiplay',
+		array(
+			'labels'         => array(
+				'name'         => __('Pitiplay'),
+				'singular_name' => __('Pitiplay')
+			),
+			'public'      => true,
+			'has_archive' => true,
+			'menu_icon'   => 'dashicons-buddicons-buddypress-logo',
+			'supports'    => array('title','editor'),
+		) 
+	);
+	
+	register_post_type('piticast',
+		array(
+			'labels'         => array(
+				'name'         => __('Piticast'),
+				'singular_name' => __('Piticast')
+			),
+			'public'      => true,
+			'has_archive' => true,
+			'menu_icon'   => 'dashicons-buddicons-buddypress-logo',
+			'supports'    => array('title','editor', 'thumbnail'),
+		) 
+	);
+
+	register_post_type('box_adsense',
+		array(
+			'labels'         => array(
+				'name'         => __('Banners AdSense'),
+				'singular_name' => __('Banners AdSense')
+			),
+			'public'      => true,
+			'has_archive' => true,
+			'menu_icon'   => 'dashicons-buddicons-buddypress-logo',
+			'supports'    => array('title'),
+		) 
+	);
+
 	register_post_type('home_slide_principal',
 		array(
 			'labels'         => array(
@@ -538,6 +577,60 @@ function pn_funcao_callback_title_section(){
 			</div>
 		</div>
 		<!-- end - seção diversidade -->
+
+		<!-- start - seção piticast -->
+		<?php
+			$title_piticast1= get_post_meta( 172, 'title-piticast', true);
+			$title_piticast2= get_post_meta( 176, 'link-ver-tudo-piticast', true);
+			$title_piticast3= get_post_meta( 174, 'texto-ver-mais-desk-piticast', true);
+			$title_piticast4= get_post_meta( 178, 'texto-ver-mais-mob-piticast', true);
+		?>
+		<div class="wrapper-section">
+			<div class="field">
+				<label for="title-piticast">Título Seção Piticast(url da imagem) - Home</label>
+				<input type="text" name="title-piticast" id="title-piticast" value="<?= $title_piticast1; ?>" />
+			</div>
+			<div class="field">
+				<label for="link-ver-tudo-piticast">Link Ver Mais Piticast - Home</label>
+				<input type="text" name="link-ver-tudo-piticast" id="link-ver-tudo-piticast" value="<?= $title_piticast2; ?>" />
+			</div>
+			<div class="field">
+				<label for="texto-ver-mais-desk-piticast">Texto Ver Mais Piticast Desk - Home</label>
+				<input type="text" name="texto-ver-mais-desk-piticast" id="texto-ver-mais-desk-piticast" value="<?= $title_piticast3; ?>" />
+			</div>
+			<div class="field">
+				<label for="texto-ver-mais-mob-piticast">Texto Ver Mais Piticast Mobile - Home</label>
+				<input type="text" name="texto-ver-mais-mob-piticast" id="texto-ver-mais-mob-piticast" value="<?= $title_piticast4; ?>" />
+			</div>
+		</div>
+		<!-- end - seção piticast -->
+
+		<!-- start - seção pitiplay -->
+		<?php
+			$title_pitiplay1= get_post_meta( 187, 'title-pitiplay', true);
+			$title_pitiplay2= get_post_meta( 181, 'link-ver-tudo-pitiplay', true);
+			$title_pitiplay3= get_post_meta( 185, 'texto-ver-mais-desk-pitiplay', true);
+			$title_pitiplay4= get_post_meta( 183, 'texto-ver-mais-mob-pitiplay', true);
+		?>
+		<div class="wrapper-section">
+			<div class="field">
+				<label for="title-pitiplay">Título Seção Pitiplay(url da imagem) - Home</label>
+				<input type="text" name="title-pitiplay" id="title-pitiplay" value="<?= $title_pitiplay1; ?>" />
+			</div>
+			<div class="field">
+				<label for="link-ver-tudo-pitiplay">Link Ver Mais Pitiplay - Home</label>
+				<input type="text" name="link-ver-tudo-pitiplay" id="link-ver-tudo-pitiplay" value="<?= $title_pitiplay2; ?>" />
+			</div>
+			<div class="field">
+				<label for="texto-ver-mais-desk-pitiplay">Texto Ver Mais Pitiplay Desk - Home</label>
+				<input type="text" name="texto-ver-mais-desk-pitiplay" id="texto-ver-mais-desk-pitiplay" value="<?= $title_pitiplay3; ?>" />
+			</div>
+			<div class="field">
+				<label for="texto-ver-mais-mob-pitiplay">Texto Ver Mais Pitiplay Mobile - Home</label>
+				<input type="text" name="texto-ver-mais-mob-pitiplay" id="texto-ver-mais-mob-pitiplay" value="<?= $title_pitiplay4; ?>" />
+			</div>
+		</div>
+		<!-- end - seção pitiplay -->
 		
 	</div>
 	
@@ -583,10 +676,151 @@ function pn_funcao_callback_border_section_category(){
 	<?php
 }
 
+function pn_funcao_callback_box_adsense(){
+		$banner1= get_post_meta( 165, 'banner-adsense-home-topo', true);
+		$banner2= get_post_meta( 170, 'banner-adsense-home-bottom', true);
+	?>
+
+	<style>
+		.field textarea {
+			width: 100%;
+			height: 174px;
+			margin-top: 5px;
+		}
+
+		label{
+			font-weight: bold;
+		}
+
+		.field{
+			margin: 12px 0;
+		}
+	</style>
+
+	<div class="box">
+		<div class="field">
+			<label for="banner-adsense-home-topo">Banner AdSense - Home topo</label>
+			<textarea name="banner-adsense-home-topo" id="banner-adsense-home-topo"><?= $banner1; ?></textarea>
+		</div>
+		<div class="field">
+			<label for="banner-adsense-home-bottom">Banner AdSense - Home inferior</label>
+			<textarea name="banner-adsense-home-bottom" id="banner-adsense-home-bottom"><?= $banner2; ?></textarea>
+		</div>
+	</div>
+
+	<?php
+}
+
+function pn_funcao_callback_piticast(){
+		$post = get_post();
+		$id_post = $post->ID;
+
+		$field_piticast1= get_post_meta( $id_post, 'link-card-piticast', true);
+		$field_piticast2= get_post_meta( $id_post, 'url-audio-piticast', true);
+	?>
+
+	<style>
+		textarea,
+		input{
+			width: 100%;
+			margin-top: 5px;
+		}
+
+		label{
+			font-weight: bold;
+		}
+
+		.field{
+			margin: 12px 0;
+		}
+		.wrapper-section{
+			margin-bottom:42px
+		}
+	</style>
+
+	<div class="box">
+		<div class="field">
+			<label for="link-card-piticast">Link Externo Piticast - Home</label>
+			<input type="text" name="link-card-piticast" id="link-card-piticast" value="<?= $field_piticast1; ?>" />
+		</div>
+		<div class="field">
+			<label for="url-audio-piticast">Url Áudio Piticast(mp3) - Home</label>
+			<input type="text" name="url-audio-piticast" id="url-audio-piticast" value="<?= $field_piticast2; ?>" />
+		</div>
+	</div>
+
+	<?php
+}
+
+function pn_funcao_callback_pitiplay(){
+		$post = get_post();
+		$id_post = $post->ID;
+
+		$field_pitiplay1= get_post_meta( $id_post, 'link-card-pitiplay', true);
+		$field_pitiplay2= get_post_meta( $id_post, 'iframe-pitiplay', true);
+	?>
+
+	<style>
+		textarea,
+		input{
+			width: 100%;
+			margin-top: 5px;
+		}
+
+		textarea{
+			height: 170px
+		}
+
+		label{
+			font-weight: bold;
+		}
+
+		.field{
+			margin: 12px 0;
+		}
+		.wrapper-section{
+			margin-bottom:42px
+		}
+	</style>
+
+	<div class="box">
+		<div class="field">
+			<label for="link-card-pitiplay">Link Externo Pitiplay - Home</label>
+			<input type="text" name="link-card-pitiplay" id="link-card-pitiplay" value="<?= $field_pitiplay1; ?>" />
+		</div>
+		<div class="field">
+			<label for="iframe-pitiplay">Iframe Piticast - Home</label>
+			<textarea name="iframe-pitiplay" id="iframe-pitiplay"><?= $field_pitiplay2; ?></textarea>
+		</div>
+	</div>
+
+	<?php
+}
 
 
 // Metabox
 function pitinews_registrando_metabox(){
+	add_meta_box(
+		'pn_pitiplay',
+		'Pitiplay',
+		'pn_funcao_callback_pitiplay',
+		'pitiplay'
+	);
+
+	add_meta_box(
+		'pn_piticast',
+		'Piticast',
+		'pn_funcao_callback_piticast',
+		'piticast'
+	);
+
+	add_meta_box(
+		'pn_box_adsense',
+		'Box Banners AdSense',
+		'pn_funcao_callback_box_adsense',
+		'box_adsense'
+	);
+
 	add_meta_box(
 		'pn_links_app',
 		'Links App Mobile',
@@ -823,6 +1057,58 @@ function atualiza_meta_info() {
 		update_post_meta( 156, 'texto-ler-mais-diversidade', sanitize_text_field($_POST['texto-ler-mais-diversidade']) );
 	}
 	// end - seção diversidade 
+
+	// start - seção banners adSense
+	if( isset($_POST['banner-adsense-home-topo'])){
+		update_post_meta( 165, 'banner-adsense-home-topo', $_POST['banner-adsense-home-topo']);
+	}
+	if( isset($_POST['banner-adsense-home-bottom'])){
+		update_post_meta( 170, 'banner-adsense-home-bottom', $_POST['banner-adsense-home-bottom']);
+	}
+	// end - seção banners adSense
+
+	// start - seção piticast
+	if( isset($_POST['title-piticast'])){
+		update_post_meta( 172, 'title-piticast', $_POST['title-piticast']);
+	}
+	if( isset($_POST['link-ver-tudo-piticast'])){
+		update_post_meta( 176, 'link-ver-tudo-piticast', $_POST['link-ver-tudo-piticast']);
+	}
+	if( isset($_POST['texto-ver-mais-desk-piticast'])){
+		update_post_meta( 174, 'texto-ver-mais-desk-piticast', $_POST['texto-ver-mais-desk-piticast']);
+	}
+	if( isset($_POST['texto-ver-mais-mob-piticast'])){
+		update_post_meta( 178, 'texto-ver-mais-mob-piticast', $_POST['texto-ver-mais-mob-piticast']);
+	}
+	if( isset($_POST['link-card-piticast'])){
+		update_post_meta( $id_post, 'link-card-piticast', $_POST['link-card-piticast']);
+	}
+	if( isset($_POST['url-audio-piticast'])){
+		update_post_meta( $id_post, 'url-audio-piticast', $_POST['url-audio-piticast']);
+	}
+	// end - seção piticast
+	
+	// start - seção pitiplay
+	if( isset($_POST['title-pitiplay'])){
+		update_post_meta( 187, 'title-pitiplay', $_POST['title-pitiplay']);
+	}
+	if( isset($_POST['link-ver-tudo-pitiplay'])){
+		update_post_meta( 181, 'link-ver-tudo-pitiplay', $_POST['link-ver-tudo-pitiplay']);
+	}
+	if( isset($_POST['texto-ver-mais-desk-pitiplay'])){
+		update_post_meta( 185, 'texto-ver-mais-desk-pitiplay', $_POST['texto-ver-mais-desk-pitiplay']);
+	}
+	if( isset($_POST['texto-ver-mais-mob-pitiplay'])){
+		update_post_meta( 183, 'texto-ver-mais-mob-pitiplay', $_POST['texto-ver-mais-mob-pitiplay']);
+	}
+	if( isset($_POST['link-card-pitiplay'])){
+		update_post_meta( $id_post, 'link-card-pitiplay', $_POST['link-card-pitiplay']);
+	}
+	if( isset($_POST['iframe-pitiplay'])){
+		update_post_meta( $id_post, 'iframe-pitiplay', $_POST['iframe-pitiplay']);
+	}
+	// end - seção pitiplay
+
 
 }
 add_action('save_post', 'atualiza_meta_info');

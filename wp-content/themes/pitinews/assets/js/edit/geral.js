@@ -40,9 +40,35 @@ function setColorCategory() {
   })
 }
 
+function cardPiticast() {
+  
+  setTimeout(function () {  
+    $('.wrapper-piticast .list-post-item').each(function () {
+      let audio = $(this).find('audio source').attr('src').indexOf('.mp3');
+  
+      if (audio === -1) {
+        $(this).find('audio').hide()
+        $(this).find('.title-post').css('margin-top', '0');
+      }
+    });
+    
+  },1000)
+
+  $('.wrapper-piticast .list-post-item > a').on('click', function (e) {
+    e.preventDefault();
+
+    let url = $(this).attr('href');
+
+    if (url !== '') {
+      window.open(url, '_blank');
+    }
+  });
+}
+
 $(document).ready(() => {
   openSearch()
   openMenuMob()
   setColorCategory()
+  cardPiticast()
 })
 

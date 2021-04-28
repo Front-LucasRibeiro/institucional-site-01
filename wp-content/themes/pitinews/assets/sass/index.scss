@@ -1162,7 +1162,7 @@
         font-size: 14px;
         line-height: 16px;
 
-        @media(max-width: 480px){
+        @media (max-width: 480px) {
           display: none;
         }
 
@@ -1301,6 +1301,152 @@
           }
         }
       }
+    }
+  }
+}
+
+.pitiplay,
+.piticast {
+  .wrapper-pitiplay,
+  .wrapper-piticast {
+    padding-bottom: 42px;
+  }
+
+  .section-title {
+    margin: 32px 0 28px;
+
+    .title-desk {
+      max-width: 105px;
+      padding: 0 22px 0 0;
+    }
+
+    .veja-mais {
+      display: inline-block;
+
+      .desk {
+        display: inline-block;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        width: 74px;
+        padding-left: 30px;
+
+        &:after {
+          content: "";
+          display: inline-block;
+          position: relative;
+          top: 2px;
+          margin-left: 7px;
+          background-image: url($arrowVerMais);
+          width: 7px;
+          height: 13px;
+        }
+
+        @media (max-width: 480px) {
+          display: none;
+        }
+      }
+
+      .mob {
+        display: none;
+
+        @media (max-width: 480px) {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .list-posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .list-post-item {
+    max-width: 270px;
+    width: 100%;
+
+    .card {
+      .image-desk {
+        img {
+          border-radius: 20px 20px 0px 0px;
+        }
+      }
+
+      audio {
+        max-width: 94%;
+        position: absolute;
+        top: 6px;
+        height: 23px;
+      }
+
+      .title-post {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 30px;
+        text-align: center;
+        text-decoration: underline;
+        padding: 4px 0;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        padding: 0 10px;
+        margin-top: 10px;
+      }
+
+      .content {
+        font-size: 14px;
+        line-height: 17px;
+        padding: 0 10px;
+      }
+
+      .box-title {
+        height: 100px;
+        background: $white;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 0 0 20px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        position: relative;
+        top: -3px;
+      }
+    }
+  }
+}
+
+.pitiplay {
+  .section-title {
+    margin-top: 5px;
+  }
+
+  .list-post-item {
+    max-width: 370px;
+
+    .card{
+      .box-title{
+        height: 63px;
+        background: none;
+        box-shadow: none;
+        margin-top: 15px;
+      }
+
+      .content{
+        padding-top: 5px;
+      }
+    }
+  }
+
+  .image-desk {
+    iframe {
+      max-width: 100%;
+      height: 230px;
+      filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.25));
+      border-radius: 20px;
     }
   }
 }
