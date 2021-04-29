@@ -113,7 +113,9 @@
 </script>
 
 <script src="<?= $home; ?>/assets/js/lib/slick.min.js"></script>
+<script src="<?= $home; ?>/assets/js/lib/jquery.mask.min.js"></script>
 <script src="<?= $home; ?>/assets/js/geral.js"></script>
+<script src="<?= $home; ?>/assets/js/page.js"></script>
 <script src="<?= $home; ?>/assets/js/<?= $js_escolhido; ?>.js"></script>
 
 <?php	wp_footer(); ?>

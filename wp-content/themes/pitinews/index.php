@@ -580,7 +580,15 @@
 								while ( $indexContent === 0 ) {
 						?>
 							<div class="box-content">
-									<?php the_title(); ?>
+									<?php
+										$limite = '200';
+										$descricao = get_the_content();
+										$descricao = strip_tags($descricao); 
+										$descricao = mb_substr($descricao,0,$limite);
+										echo $descricao."...";
+
+										$indexContent++;
+									?>
 							</div>	
 
 							<a href="<?php the_permalink() ?>" class="ler-tudo">Ler tudo</a>
@@ -1283,7 +1291,7 @@
 		  <h2 class="section-title">
 				<span class="title-desk">
 					<a href="<?= get_post_meta( 212, 'link-ver-tudo-loja-online', true) ?>" target="_blank">
-						<?= get_post_meta( 193, 'title-loja-online', true) ?>
+						<?= get_post_meta( 230, 'title-loja-online', true) ?>
 					</a>
 				</span>
 				<span class="separator"></span>

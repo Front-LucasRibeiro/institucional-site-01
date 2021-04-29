@@ -1,49 +1,86 @@
 <?php
-/**
- * The template for displaying search results pages.
- *
- * @package Seri.e Design
- */
+	$css_escolhido = 'search';
+	require_once('header.php');
+?>
 
-get_header(); ?>
+<?php
+	global $sa_options;
+	$sa_settings = get_option( 'sa_options', $sa_options );
+?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
-			<div class="container">
-				<div class="wrap-content-col">
-					<div class="content-col">
-					<?php if ( have_posts() ) : ?>
 
-						<header class="page-header">
-							<h1 class="page-title"><?php printf( esc_html__( 'Resultados da pesquisa para: %s', 'seri-e-design' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-						</header><!-- .page-header -->
+<section class="search">
+	<div class="container">
+		<?php			
+			$args_search = array( 
+				's' => $_GET["s"],
+				'posts_per_page' => 6,
+				'category_name' => 'filmes,series,games,animes,colunas,criticas,diversidade'
+			);
+			$the_query_post = new WP_Query( $args_search );
 
-						<?php /* Start the Loop */ ?>
-						<?php while ( have_posts() ) : the_post(); ?>
+			if( $the_query_post->have_posts()){
+		?>
+		<p class="header-result">Resultado da busca para: <span>"<?=get_search_query();?>"</span></p>
+
+
+		<ul class="list-posts desk">
+			<?php
+				while($the_query_post->have_posts()){
+					$the_query_post->the_post();
+			?>
+
+			<li class="list-post-item">
+				<a href="<?php the_permalink() ?>">
+					<div class="image-desk">
+						<?php
+								the_post_thumbnail('banner-370x260');
+						?>
+					</div>
+				</a>
+				
+				<div class="box-title">
+					<a href="<?php the_permalink() ?>">
+						<h3 class="title-post">
+							<?php the_title(); ?>
+						</h3>
+
+						<div class="data">
+							<?= get_the_date('d \d\e F Y'); ?>
+						</div>
+					</a>
+				</div>
+
+				
+					<div class="box-content">
 							<?php
-							/**
-							 * Run the loop for the search to output the results.
-							 * If you want to overload this in a child theme then include a file
-							 * called content-search.php and that will be used instead.
-							 */
-							get_template_part( 'template-parts/content', 'search' );
+								$limite = '200';
+								$descricao = get_the_content();
+								$descricao = strip_tags($descricao); 
+								$descricao = mb_substr($descricao,0,$limite);
+								echo $descricao."...";
 							?>
-						<?php endwhile; ?>
+					</div>	
 
-						<?php the_posts_navigation(); ?>
+					<a href="<?php the_permalink() ?>" class="ler-tudo">Ler tudo</a>
+			
+			</li>
 
-					<?php else : ?>
+			<?php }} else { ?>
+		</ul>
 
-						<?php get_template_part( 'template-parts/content', 'none' ); ?>
+		<p class="no-result">Nenhum resultado encontrado para o termo: <span>"<?=get_search_query();?>"</span></p>
 
-					<?php endif; ?>
-				</div>
-				</div>
-				<?php get_sidebar(); ?>
-			</div>
+		<?php 
+			} 
+		?>
+	</div>
+	
+	
+	<div class="pagination">
+		<?php wp_pagenavi(); ?> 
+	</div>
+</section>
 
-		</main><!-- #main -->
-	</section><!-- #primary -->
-
-
+	
 <?php get_footer(); ?>

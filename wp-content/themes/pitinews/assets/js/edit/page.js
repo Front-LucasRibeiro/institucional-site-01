@@ -1,17 +1,8 @@
-function showPage() {
-  let url = window.location.href;
-
-  if (url.indexOf('/fale-conosco') !== -1) {
-    $('.institucional.fale-conosco').show();
-  }
-
-  if (url.indexOf('/autor') !== -1) {
-    $('.institucional.autor').show();
-  }
+function setMask() {
+  $('input[name="telefone"]').mask('(00) 00000-0000');
 }
 
 
-
-$(document).ready(function () {
-  showPage();
+$(document).ready(() => {
+  setMask()
 })

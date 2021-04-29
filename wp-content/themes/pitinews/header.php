@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="<?= $home; ?>/assets/css/comum.css">
 	<link rel="stylesheet" href="<?= $home; ?>/assets/css/header.css">
 	<link rel="stylesheet" href="<?= $home; ?>/assets/css/footer.css">
+	<link rel="stylesheet" href="<?= $home; ?>/assets/css/page.css">
 
 	<link rel="stylesheet" href="<?= $home; ?>/assets/css/<?= $css_escolhido; ?>.css">
 

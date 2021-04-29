@@ -1,43 +1,23 @@
 <?php
-
 add_theme_support('post-thumbnails');
-
 add_theme_support( 'custom-logo', array(
-
     'height' => 38,
-
     'width'  => 170,
-
 ) );
 
 
-
-
-
 add_image_size('banner-370x370', 370, 370, true);
-
 add_image_size('banner-570x400', 570, 400, true);
-
 add_image_size('banner-220x243', 220, 243, true);
-
 add_image_size('banner-170x119', 170, 119, true);
-
 add_image_size('banner-370x260', 370, 260, true);
-
 add_image_size('banner-370x160', 370, 160, true);
-
 add_image_size('banner-270x270-piticast', 270, 270, true);
-
 add_image_size('banner-67x67', 67, 67, true);
 
 
 
-
-
-
-
 /* Registrando menu de navegação */
-
 function registrar_menu_navegacao() {
 	register_nav_menu('header-menu', 'Menu Header');
 	register_nav_menu('footer-menu-pitinews', 'Menu Footer Pitinews');
@@ -48,31 +28,18 @@ function registrar_menu_navegacao() {
 }
 add_action( 'init', 'registrar_menu_navegacao');
 
-
 function get_titulo() {
-
 	if( is_home() ) {
-
 		bloginfo('name');
-
 	} else {
-
 		bloginfo('name');
-
 		echo ' | ';
-
 		the_title();
-
 	}
-
 }
 
 
-
-
-
 //Posts Type
-
 function meus_posts_type(){
 	register_post_type('footer',
 		array(
@@ -218,9 +185,6 @@ function meus_posts_type(){
 	);
 }
 add_action( 'init', 'meus_posts_type' );
-
-
-
 
 
 // Callback
@@ -718,7 +682,7 @@ function pn_funcao_callback_title_section(){
 
 		<!-- start - seção Loja Online -->
 		<?php
-			$titleLoja1= get_post_meta( 193, 'title-loja-online', true);
+			$titleLoja1= get_post_meta( 230, 'title-loja-online', true);
 			$titleLoja2= get_post_meta( 212, 'link-ver-tudo-loja-online', true);
 			$titleLoja3= get_post_meta( 191, 'texto-ver-mais-desk-loja-online', true);
 			$titleLoja4= get_post_meta( 192, 'texto-ver-mais-mob-loja-online', true);
@@ -1036,8 +1000,6 @@ function pn_funcao_callback_loja_online(){
 
 
 
-
-
 // Metabox
 function pitinews_registrando_metabox(){
 	
@@ -1111,11 +1073,7 @@ function pitinews_registrando_metabox(){
 add_action('add_meta_boxes', 'pitinews_registrando_metabox');
 
 
-
-
-
 //Atualiza Metabox
-
 function atualiza_meta_info() { 
 	$post = get_post();
   $id_post = $post->ID;
@@ -1408,7 +1366,7 @@ function atualiza_meta_info() {
 
 	// start - seção Loja Online
 	if( isset($_POST['title-loja-online'])){
-		update_post_meta( 193, 'title-loja-online', $_POST['title-loja-online']);
+		update_post_meta( 230, 'title-loja-online', $_POST['title-loja-online']);
 	}
 	if( isset($_POST['link-ver-tudo-loja-online'])){
 		update_post_meta( 212, 'link-ver-tudo-loja-online', $_POST['link-ver-tudo-loja-online']);
@@ -1427,18 +1385,3 @@ function atualiza_meta_info() {
 }
 add_action('save_post', 'atualiza_meta_info');
 
-
-
-
-
-
-
-// disable srcset on frontend
-
-function disable_wp_responsive_images() {
-
-	return 1;
-
-}
-
-add_filter('max_srcset_image_width', 'disable_wp_responsive_images');
