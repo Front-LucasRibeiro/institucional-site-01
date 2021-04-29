@@ -16,7 +16,7 @@ function openMenuMob() {
   $('.menu-mob .menu').on('click', function () {
     $(this).hide()
     $('.menu-content-mob').show()
-    $('.menu-mob .close').css('display','inline-block')
+    $('.menu-mob .close').css('display', 'inline-block')
   })
 
   $('.menu-mob .close').on('click', function () {
@@ -36,23 +36,23 @@ function setColorCategory() {
 
   categoryJSON.map((item) => {
     $(`.${item.nome}`).css('backgroundColor', `${item.color}`)
-    $(`.${item.nome} a`).css('color',`${item.corTexto}`)
+    $(`.${item.nome} a`).css('color', `${item.corTexto}`)
   })
 }
 
 function cardPiticast() {
-  
-  setTimeout(function () {  
+
+  setTimeout(function () {
     $('.wrapper-piticast .list-post-item').each(function () {
       let audio = $(this).find('audio source').attr('src').indexOf('.mp3');
-  
+
       if (audio === -1) {
         $(this).find('audio').hide()
         $(this).find('.title-post').css('margin-top', '0');
       }
     });
-    
-  },1000)
+
+  }, 1000)
 
   $('.wrapper-piticast .list-post-item > a').on('click', function (e) {
     e.preventDefault();

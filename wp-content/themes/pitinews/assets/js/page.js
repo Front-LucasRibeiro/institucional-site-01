@@ -1,0 +1,1 @@
+function showPage(){let o=window.location.href;-1!==o.indexOf("/fale-conosco")&&$(".institucional.fale-conosco").show(),-1!==o.indexOf("/autor")&&$(".institucional.autor").show()}$(document).ready(function(){showPage()});

@@ -580,15 +580,7 @@
 								while ( $indexContent === 0 ) {
 						?>
 							<div class="box-content">
-									<?php
-										$limite = '200';
-										$descricao = get_the_content();
-										$descricao = strip_tags($descricao); 
-										$descricao = mb_substr($descricao,0,$limite);
-										echo $descricao."...";
-
-										$indexContent++;
-									?>
+									<?php the_title(); ?>
 							</div>	
 
 							<a href="<?php the_permalink() ?>" class="ler-tudo">Ler tudo</a>
@@ -1261,6 +1253,93 @@
 					}
 				?>
 			</ul>	
+
+		</div>
+	</div>
+</section>
+
+<section class="instagram">
+	<div class="container">
+		<div class="wrapper-instagram">
+		  <h2 class="section-title">
+				<span class="title-desk">
+					<a href="<?= get_post_meta( 211, 'link-instagram', true) ?>" target="_blank">
+						<?= get_post_meta( 189, 'title-instagram', true) ?>
+					</a>
+				</span>
+				<span class="separator"></span>
+			</h2>
+		</div>
+
+		<div class="content-posts">
+			<img src="http://localhost/pitinews/wp-content/uploads/2021/04/instafeed.png" alt="">
+		</div>
+	</div>
+</section>
+
+<section class="loja-online">
+	<div class="container">
+		<div class="wrapper-loja-online">
+		  <h2 class="section-title">
+				<span class="title-desk">
+					<a href="<?= get_post_meta( 212, 'link-ver-tudo-loja-online', true) ?>" target="_blank">
+						<?= get_post_meta( 193, 'title-loja-online', true) ?>
+					</a>
+				</span>
+				<span class="separator"></span>
+				<span class="veja-mais">
+					<a href="<?= get_post_meta( 212, 'link-ver-tudo-loja-online', true) ?>" target="_blank">
+						<span class="desk">
+							<?= get_post_meta( 191, 'texto-ver-mais-desk-loja-online', true) ?>
+						</span>
+						<span class="mob">
+							<?= get_post_meta( 192, 'texto-ver-mais-mob-loja-online', true) ?>
+						</span>
+					</a>
+				</span>
+			</h2>
+
+			<ul class="list-posts desk">
+				<?php
+					$args = array(
+						'post_type' => 'loja_online',
+						'posts_per_page' => 4,
+					);
+					
+					$loop = new WP_Query( $args );
+					if( $loop->have_posts() ) { 
+						while( $loop-> have_posts()) {
+							$loop-> the_post();
+							$post = get_post();
+							$id_post = $post->ID;
+				?>
+		
+				<li class="list-post-item">
+					<a href="<?= get_post_meta( $id_post, 'link-comprar-agora', true) ?>" target="_blank">
+						<div class="card">
+							<div class="image-desk">
+								<?php the_post_thumbnail(); ?>
+							</div>
+							<div class="box-title">
+								<h3 class="title-post">
+									<?php the_title(); ?>
+								</h3>
+		
+								<div class="content">
+									<?php the_content(); ?>
+								</div>
+								
+								<a href="<?= get_post_meta( $id_post, 'link-comprar-agora', true) ?>" target="_blank" class="btn-comprar">Comprar Agora</a>
+							</div>
+						</div>
+					</a>
+				</li>
+		
+				<?php
+						}
+					}
+				?>
+			</ul>
 
 		</div>
 	</div>

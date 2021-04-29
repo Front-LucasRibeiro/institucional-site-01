@@ -1,41 +1,105 @@
 <?php
+
 add_theme_support('post-thumbnails');
+
 add_theme_support( 'custom-logo', array(
+
     'height' => 38,
+
     'width'  => 170,
+
 ) );
 
 
+
+
+
 add_image_size('banner-370x370', 370, 370, true);
+
 add_image_size('banner-570x400', 570, 400, true);
+
 add_image_size('banner-220x243', 220, 243, true);
+
 add_image_size('banner-170x119', 170, 119, true);
+
 add_image_size('banner-370x260', 370, 260, true);
+
 add_image_size('banner-370x160', 370, 160, true);
+
 add_image_size('banner-270x270-piticast', 270, 270, true);
+
 add_image_size('banner-67x67', 67, 67, true);
 
 
 
+
+
+
+
 /* Registrando menu de navegação */
+
 function registrar_menu_navegacao() {
 	register_nav_menu('header-menu', 'Menu Header');
+	register_nav_menu('footer-menu-pitinews', 'Menu Footer Pitinews');
+	register_nav_menu('footer-menu-categorias', 'Menu Footer Categorias');
+	register_nav_menu('footer-menu-outros-canais', 'Menu Footer Outros-canais');
+	register_nav_menu('footer-menu-outros-canais', 'Menu Footer Outros-canais');
+	register_nav_menu('footer-menu-piticas', 'Menu Footer Piticas');
 }
 add_action( 'init', 'registrar_menu_navegacao');
 
+
 function get_titulo() {
+
 	if( is_home() ) {
+
 		bloginfo('name');
+
 	} else {
+
 		bloginfo('name');
+
 		echo ' | ';
+
 		the_title();
+
 	}
+
 }
 
 
+
+
+
 //Posts Type
+
 function meus_posts_type(){
+	register_post_type('footer',
+		array(
+			'labels'         => array(
+				'name'         => __('Footer'),
+				'singular_name' => __('Footer')
+			),
+			'public'      => true,
+			'has_archive' => true,
+			'menu_icon'   => 'dashicons-buddicons-buddypress-logo',
+			'supports'    => array('title'),
+		) 
+	);
+
+	register_post_type('loja_online',
+		array(
+			'labels'         => array(
+				'name'         => __('Loja Online'),
+				'singular_name' => __('Loja Online')
+			),
+			'public'      => true,
+			'has_archive' => true,
+			'menu_icon'   => 'dashicons-buddicons-buddypress-logo',
+			'supports'    => array('title','editor', 'thumbnail'),
+		) 
+	);
+
 	register_post_type('pitiplay',
 		array(
 			'labels'         => array(
@@ -154,6 +218,9 @@ function meus_posts_type(){
 	);
 }
 add_action( 'init', 'meus_posts_type' );
+
+
+
 
 
 // Callback
@@ -631,12 +698,142 @@ function pn_funcao_callback_title_section(){
 			</div>
 		</div>
 		<!-- end - seção pitiplay -->
+
+		<!-- start - seção instagram -->
+		<?php
+			$title_insta1= get_post_meta( 189, 'title-instagram', true);
+			$title_insta2= get_post_meta( 211, 'link-instagram', true);
+		?>
+		<div class="wrapper-section">
+			<div class="field">
+				<label for="title-instagram">Título Seção Instagram - Home</label>
+				<input type="text" name="title-instagram" id="title-instagram" value="<?= $title_insta1; ?>" />
+			</div>
+			<div class="field">
+				<label for="link-instagram">Link Instagram - Home</label>
+				<input type="text" name="link-instagram" id="link-instagram" value="<?= $title_insta2; ?>" />
+			</div>
+		</div>
+		<!-- end - seção instagram -->
+
+		<!-- start - seção Loja Online -->
+		<?php
+			$titleLoja1= get_post_meta( 193, 'title-loja-online', true);
+			$titleLoja2= get_post_meta( 212, 'link-ver-tudo-loja-online', true);
+			$titleLoja3= get_post_meta( 191, 'texto-ver-mais-desk-loja-online', true);
+			$titleLoja4= get_post_meta( 192, 'texto-ver-mais-mob-loja-online', true);
+		?>
+		<div class="wrapper-section">
+			<div class="field">
+				<label for="title-loja-online">Título Seção Loja Online - Home</label>
+				<input type="text" name="title-loja-online" id="title-loja-online" value="<?= $titleLoja1; ?>" />
+			</div> 
+			<div class="field">
+				<label for="link-ver-tudo-loja-online">Link ver mais seção Loja Online</label>
+				<input type="text" id="link-ver-tudo-loja-online" name="link-ver-tudo-loja-online" value="<?= $titleLoja2; ?>" />
+			</div>
+			<div class="field">
+				<label for="texto-ver-mais-desk-loja-online">Texto ver mais desk da seção Loja Online</label>
+				<input type="text" id="texto-ver-mais-desk-loja-online" name="texto-ver-mais-desk-loja-online" value="<?= $titleLoja3; ?>" />
+			</div>
+			<div class="field">
+				<label for="texto-ver-mais-mob-loja-online">Texto ver mais mob da seção Loja Online</label>
+				<input type="text" id="texto-ver-mais-mob-loja-online" name="texto-ver-mais-mob-loja-online" value="<?= $titleLoja4; ?>" />
+			</div>
+		</div>
+		<!-- end - seção Loja Online -->
 		
 	</div>
 	
 	<?php
 }
 
+function pn_funcao_callback_footer(){
+	?>
+
+	<style>
+		textarea,
+		input{
+			width: 100%;
+			margin-top: 5px;
+		}
+
+		label{
+			font-weight: bold;
+		}
+
+		.field{
+			margin: 12px 0;
+		}
+		.wrapper-section{
+			margin-bottom:42px
+		}
+	</style>
+
+	<div class="box">
+		<?php
+			$item1= get_post_meta( 195, 'item1-footer', true);
+		?>
+		<div class="wrapper-section">
+			<div class="field">
+				<label for="item1-footer">Título Seção 1</label>
+				<input type="text" id="item1-footer" name="item1-footer" value="<?= $item1; ?>" />
+			</div>	
+		</div>
+
+		<?php
+			$item5= get_post_meta( 199, 'item5-footer', true);
+		?>
+		<div class="wrapper-section">
+			<div class="field">
+				<label for="item5-footer">Título Seção 2</label>
+				<input type="text" id="item5-footer" name="item5-footer" value="<?= $item5; ?>" />
+			</div>	
+		</div>
+
+		<?php
+			$item10= get_post_meta( 204, 'item10-footer', true);
+		?>
+		<div class="wrapper-section">
+			<div class="field">
+				<label for="item10-footer">Título Seção 3</label>
+				<input type="text" id="item10-footer" name="item10-footer" value="<?= $item10; ?>" />
+			</div>	
+		</div>
+
+		<?php
+			$item13= get_post_meta( 207, 'item13-footer', true);
+		?>
+		<div class="wrapper-section">
+			<div class="field">
+				<label for="item13-footer">Título Seção 4</label>
+				<input type="text" id="item13-footer" name="item13-footer" value="<?= $item13; ?>" />
+			</div>	
+		</div>
+
+		<?php
+			$link_face= get_post_meta( 210, 'link_face', true);
+			$link_twitter= get_post_meta( 208, 'link_twitter', true);
+			$link_instagram= get_post_meta( 209, 'link_instagram', true);
+		?>
+		<div class="wrapper-section">
+			<div class="field">
+				<label for="link_face">Link Facebook</label>
+				<input type="text" id="link_face" name="link_face" value="<?= $link_face; ?>" />
+			</div>	
+			<div class="field">
+				<label for="link_twitter">Link Twitter</label>
+				<input type="text" id="link_twitter" name="link_twitter" value="<?= $link_twitter; ?>" />
+			</div>	
+			<div class="field">
+				<label for="link_instagram">Link Instagram</label>
+				<input type="text" id="link_instagram" name="link_instagram" value="<?= $link_instagram; ?>" />
+			</div>	
+		</div>
+
+	
+	<?php
+}
 
 function pn_funcao_callback_border_section_category(){
 		$post = get_post();
@@ -797,9 +994,68 @@ function pn_funcao_callback_pitiplay(){
 	<?php
 }
 
+function pn_funcao_callback_loja_online(){
+		$post = get_post();
+		$id_post = $post->ID;
+
+		$field_comprar= get_post_meta( $id_post, 'link-comprar-agora', true);
+	?>
+
+	<style>
+		textarea,
+		input{
+			width: 100%;
+			margin-top: 5px;
+		}
+
+		textarea{
+			height: 170px
+		}
+
+		label{
+			font-weight: bold;
+		}
+
+		.field{
+			margin: 12px 0;
+		}
+		.wrapper-section{
+			margin-bottom:42px
+		}
+	</style>
+
+	<div class="box">
+		<div class="field">
+			<label for="link-comprar-agora">Link Comprar Agora - Loja Online</label>
+			<input type="text" name="link-comprar-agora" id="link-comprar-agora" value="<?= $field_comprar; ?>" />
+		</div>
+	</div>
+	
+	<?php
+}
+
+
+
+
 
 // Metabox
 function pitinews_registrando_metabox(){
+	
+
+	add_meta_box(
+		'pn_footer',
+		'Footer',
+		'pn_funcao_callback_footer',
+		'footer'
+	);
+
+	add_meta_box(
+		'pn_loja_online',
+		'Loja Online',
+		'pn_funcao_callback_loja_online',
+		'loja_online'
+	);
+
 	add_meta_box(
 		'pn_pitiplay',
 		'Pitiplay',
@@ -855,10 +1111,41 @@ function pitinews_registrando_metabox(){
 add_action('add_meta_boxes', 'pitinews_registrando_metabox');
 
 
+
+
+
 //Atualiza Metabox
+
 function atualiza_meta_info() { 
 	$post = get_post();
   $id_post = $post->ID;
+
+	// start seção footer
+	if( isset($_POST['link_face'])){
+		update_post_meta( 210, 'link_face', sanitize_text_field($_POST['link_face']) );
+	}
+	if( isset($_POST['link_twitter'])){
+		update_post_meta( 208, 'link_twitter', sanitize_text_field($_POST['link_twitter']) );
+	}
+	if( isset($_POST['link_instagram'])){
+		update_post_meta( 209, 'link_instagram', sanitize_text_field($_POST['link_instagram']) );
+	}
+
+
+	if( isset($_POST['item1-footer'])){
+		update_post_meta( 195, 'item1-footer', sanitize_text_field($_POST['item1-footer']) );
+	}
+	if( isset($_POST['item5-footer'])){
+		update_post_meta( 199, 'item5-footer', sanitize_text_field($_POST['item5-footer']) );
+	}
+	if( isset($_POST['item10-footer'])){
+		update_post_meta( 204, 'item10-footer', sanitize_text_field($_POST['item10-footer']) );
+	}
+	if( isset($_POST['item13-footer'])){
+		update_post_meta( 207, 'item13-footer', sanitize_text_field($_POST['item13-footer']) );
+	}
+
+	// end seção footer
 
 
 	// start seção menu mobile Links 
@@ -1109,7 +1396,49 @@ function atualiza_meta_info() {
 	}
 	// end - seção pitiplay
 
+	// start - seção instagram
+	if( isset($_POST['title-instagram'])){
+		update_post_meta( 189, 'title-instagram', $_POST['title-instagram']);
+	}
+	if( isset($_POST['link-instagram'])){
+		update_post_meta( 211, 'link-instagram', $_POST['link-instagram']);
+	}
+	// end - seção instagram
+
+
+	// start - seção Loja Online
+	if( isset($_POST['title-loja-online'])){
+		update_post_meta( 193, 'title-loja-online', $_POST['title-loja-online']);
+	}
+	if( isset($_POST['link-ver-tudo-loja-online'])){
+		update_post_meta( 212, 'link-ver-tudo-loja-online', $_POST['link-ver-tudo-loja-online']);
+	}
+	if( isset($_POST['texto-ver-mais-desk-loja-online'])){
+		update_post_meta( 191, 'texto-ver-mais-desk-loja-online', $_POST['texto-ver-mais-desk-loja-online']);
+	}
+	if( isset($_POST['texto-ver-mais-mob-loja-online'])){
+		update_post_meta( 192, 'texto-ver-mais-mob-loja-online', $_POST['texto-ver-mais-mob-loja-online']);
+	}
+	if( isset($_POST['link-comprar-agora'])){
+		update_post_meta( $id_post, 'link-comprar-agora', $_POST['link-comprar-agora']);
+	}
+	// end - seção Loja Online
 
 }
 add_action('save_post', 'atualiza_meta_info');
 
+
+
+
+
+
+
+// disable srcset on frontend
+
+function disable_wp_responsive_images() {
+
+	return 1;
+
+}
+
+add_filter('max_srcset_image_width', 'disable_wp_responsive_images');

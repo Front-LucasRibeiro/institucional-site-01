@@ -57,7 +57,12 @@
     img {
       margin: 0 auto;
       width: 100%;
-      height: auto;
+      height: 500px;
+      border-radius: 20px;
+
+      @media (max-width: 480px) {
+        border-radius: 0 0 20px 20px;
+      }
     }
 
     .slick-dots {
@@ -224,6 +229,13 @@
 
           @media (max-width: 480px) {
             margin: 10px 5px 0;
+          }
+        }
+
+        &:nth-of-type(5),
+        &:nth-of-type(6) {
+          @media (max-width: 480px) {
+            display: none;
           }
         }
 
@@ -1305,11 +1317,19 @@
   }
 }
 
+.loja-online,
+.instagram,
 .pitiplay,
 .piticast {
   .wrapper-pitiplay,
   .wrapper-piticast {
     padding-bottom: 42px;
+  }
+
+  .wrapper-pitiplay {
+    @media (max-width: 480px) {
+      padding-bottom: 0;
+    }
   }
 
   .section-title {
@@ -1318,6 +1338,10 @@
     .title-desk {
       max-width: 105px;
       padding: 0 22px 0 0;
+
+      @media (max-width: 480px) {
+        display: inline-block;
+      }
     }
 
     .veja-mais {
@@ -1361,16 +1385,31 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    @media (max-width: 1170px) {
+      overflow-x: auto;
+      overflow-y: hidden;
+      flex-wrap: nowrap;
+    }
   }
 
   .list-post-item {
     max-width: 270px;
     width: 100%;
 
+    @media (max-width: 1170px) {
+      padding-left: 10px;
+    }
+
     .card {
       .image-desk {
         img {
           border-radius: 20px 20px 0px 0px;
+
+          @media (max-width: 480px) {
+            max-width: 160px;
+            height: auto;
+          }
         }
       }
 
@@ -1394,12 +1433,23 @@
         -webkit-box-orient: vertical;
         padding: 0 10px;
         margin-top: 10px;
+
+        @media (max-width: 480px) {
+          font-size: 14px;
+        }
       }
 
       .content {
         font-size: 14px;
         line-height: 17px;
         padding: 0 10px;
+
+        @media (max-width: 480px) {
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
       }
 
       .box-title {
@@ -1427,15 +1477,24 @@
   .list-post-item {
     max-width: 370px;
 
-    .card{
-      .box-title{
+    @media (max-width: 1170px) {
+      max-width: 300px;
+    }
+
+    .card {
+      .box-title {
         height: 63px;
         background: none;
         box-shadow: none;
         margin-top: 15px;
+
+        @media (max-width: 1170px) {
+          margin-top: 0;
+          height: 70px;
+        }
       }
 
-      .content{
+      .content {
         padding-top: 5px;
       }
     }
@@ -1447,6 +1506,139 @@
       height: 230px;
       filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.25));
       border-radius: 20px;
+
+      @media (max-width: 1170px) {
+        width: 300px;
+        height: auto;
+        max-width: 300px;
+      }
+    }
+  }
+}
+
+.instagram {
+  .section-title {
+    @media (max-width: 540px) {
+      padding: 0;
+    }
+
+    .title-desk {
+      max-width: 209px;
+      padding: 0 35px 0 0;
+      display: flex;
+      align-items: center;
+
+      @media (max-width: 540px) {
+        width: 800px;
+        font-size: 18px;
+      }
+
+      background-image: url($iconInsta);
+      background-repeat: no-repeat;
+      background-position: left 2px;
+      padding: 0 25px;
+    }
+  }
+
+  .content-posts {
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.loja-online {
+  padding-bottom: 50px;
+  .section-title {
+    margin-top: 40px;
+    .title-desk {
+      max-width: 132px;
+      padding: 0 35px 0 0;
+      display: flex;
+      align-items: center;
+
+      @media (max-width: 540px) {
+        width: 800px;
+        font-size: 18px;
+      }
+
+      background-image: url($iconLojaOnline);
+      background-repeat: no-repeat;
+      background-position: left 0;
+      padding: 0 25px;
+    }
+  }
+
+  .list-post-item {
+    @media (max-width: 480px) {
+      max-width: 145px;
+    }
+
+    .card {
+      .image-desk {
+        img {
+          border-radius: 0;
+          @media (max-width: 480px) {
+            max-width: 145px;
+          }
+        }
+      }
+
+      .box-title {
+        background: none;
+        box-shadow: none;
+        height: 124px;
+        @media (max-width: 480px) {
+          height: 82px;
+        }
+
+        .title-post {
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 30px;
+          text-decoration: none;
+          @media (max-width: 480px) {
+            font-size: 12px;
+            line-height: 18px;
+          }
+        }
+        .content {
+          color: #000;
+          font-weight: bold;
+        }
+        .btn-comprar {
+          max-width: 270px;
+          width: 100%;
+          height: 50px;
+          background-color: $orange;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 14px;
+          text-transform: uppercase;
+          color: $white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 16px;
+
+          @media (max-width: 480px) {
+            height: 26px;
+            margin-top: 8px;
+            font-size: 10px;
+            line-height: 10px;
+          }
+
+          &:before {
+            content: "";
+            display: inline-block;
+            background-image: url($iconBtnComprar);
+            width: 14px;
+            height: 13px;
+            margin-right: 11px;
+          }
+        }
+      }
     }
   }
 }
