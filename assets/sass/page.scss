@@ -549,6 +549,14 @@
       }
     }
   }
+
+  &.piticast{
+    #buzzsprout-large-player-1757249,
+    iframe{
+      max-height: 1000px;
+      overflow: auto;
+    }
+  }
 }
 
 footer ul,

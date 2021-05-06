@@ -1,0 +1,18 @@
+@mixin scrollBar($corFundo, $corBarra, $size){
+  ul::-webkit-scrollbar{
+    height: $size;
+    width: $size;
+    background-color: #f2f2f2;
+  }
+
+  ul::-webkit-scrollbar-track {
+    background: $corFundo;
+  }
+
+  ul::-webkit-scrollbar-thumb{
+    height: $size;
+    width: $size;
+    border-radius: $size;
+    background-color: $corBarra;
+  }
+}

@@ -1,4 +1,5 @@
 @import "./variables";
+@import "./mixins";
 
 .wrapper-slider {
   position: relative;
@@ -868,11 +869,11 @@
           padding: 0 22px 0 0;
         }
 
-        span{
+        span {
           color: $corColunas;
         }
 
-        .separator{
+        .separator {
           border-color: $corColunas;
         }
 
@@ -921,12 +922,12 @@
             }
           }
 
-          span{
+          span {
             color: $corColunas;
           }
 
-          @media(max-width: 480px){
-            a:after{
+          @media (max-width: 480px) {
+            a:after {
               content: "";
               background-image: url($arrowLinkVejaMaisColunas);
             }
@@ -1083,9 +1084,9 @@
             max-width: 80px;
             padding-left: 14px;
 
-            a:after{
-              content: '';
-              background-image: url($arrowVerMaisCriticas)!important;
+            a:after {
+              content: "";
+              background-image: url($arrowVerMaisCriticas) !important;
             }
           }
 
@@ -1119,19 +1120,19 @@
               }
             }
           }
-          
-          @media(max-width: 480px){
-            a:after{
-              content: '';
-              background-image: url($arrowLinkVejaMaisCriticas)
+
+          @media (max-width: 480px) {
+            a:after {
+              content: "";
+              background-image: url($arrowLinkVejaMaisCriticas);
             }
           }
         }
 
-        .separator{
-          border-color: $corCriticas; 
+        .separator {
+          border-color: $corCriticas;
         }
-        span{
+        span {
           color: $corCriticas;
         }
       }
@@ -1193,7 +1194,7 @@
   }
 }
 
-.box-diversidade { 
+.box-diversidade {
   .section-title {
     margin: 19px 0 31px;
 
@@ -1232,9 +1233,9 @@
         min-width: 74px;
       }
 
-      @media(max-width: 480px){
-        a:after{
-          content: '';
+      @media (max-width: 480px) {
+        a:after {
+          content: "";
           background-image: url($arrowLinkVejaMaisDiversidade);
         }
       }
@@ -1270,11 +1271,11 @@
       }
     }
 
-    .separator{
+    .separator {
       border-color: $corDiversidade;
     }
 
-    span{
+    span {
       color: $corDiversidade;
     }
   }
@@ -1624,9 +1625,87 @@
   }
 
   .content-posts {
-    img {
-      max-width: 100%;
-      height: auto;
+    @include scrollBar(#bbb, $orange2, 9px);
+
+    @media (max-width: 480px) {
+      display: flex;
+      justify-content: center;
+    }
+
+    .popup-gallery {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      height: 202px;
+
+      @media (max-width: 480px) {
+        display: inline-block;
+        column-count: 2;
+        column-gap: 0;
+        height: auto;
+      }
+
+      li {
+        width: auto;
+        height: 195px;
+        position: relative;
+
+        &:hover {
+          cursor: pointer;
+
+          a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:before {
+              content: "";
+              display: inline-block;
+              background-image: url($iconInstagramHover);
+              height: 27px;
+              width: 27px;
+              position: absolute;
+            }
+            &:after {
+              content: "";
+              background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+              width: 100%;
+              height: 100%;
+              display: inline-block;
+              position: absolute;
+            }
+          }
+        }
+
+        @media (max-width: 480px) {
+          width: 170px;
+          max-height: 170px;
+          overflow: hidden;
+        }
+
+        @media (max-width: 350px) {
+          width: 150px;
+          max-height: 150px;
+        }
+
+        img {
+          width: auto;
+          height: 195px;
+
+          @media (max-width: 480px) {
+            width: auto;
+            height: 170px;
+            overflow: hidden;
+          }
+
+          @media (max-width: 350px) {
+            height: 150px;
+          }
+        }
+      }
+    }
+    .profile-link {
+      display: none;
     }
   }
 }

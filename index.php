@@ -1276,7 +1276,7 @@
 		</div>
 
 		<div class="content-posts">
-			<img src="http://pitinews.com.br/wp-content/uploads/2021/04/instafeed.png" alt="">
+			<?php echo do_shortcode("[blossomthemes_instagram_feed]"); ?> 
 		</div>
 	</div>
 </section>

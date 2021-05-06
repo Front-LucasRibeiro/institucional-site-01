@@ -37,9 +37,18 @@ function slickPrincipal() {
 }
 
 
+function instafeed(){
+  let linkInstagram = $('.wrapper-instagram .title-desk a').attr('href')
+
+  $('.instagram .popup-gallery li').each(function(){
+    $(this).find('a').attr('href', `${linkInstagram}`).attr('target','_blank')
+  })
+}
+
 
 $(document).ready(() => {
 
   slickPrincipal()
+  instafeed()
 
 })

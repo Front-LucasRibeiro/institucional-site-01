@@ -1,4 +1,5 @@
 @import "./variables";
+@import "./mixins";
 
 html {
 	font-size: 16px;
@@ -55,22 +56,7 @@ button {
 	
 	@media(min-width: 481px){
 		// custom overflow 
-		ul::-webkit-scrollbar{
-			height: 7px;
-			width: 7px;
-			background-color: #f2f2f2;
-		}
-
-		ul::-webkit-scrollbar-track {
-			background: #555;
-		}
-	
-		ul::-webkit-scrollbar-thumb{
-			height: 7px;
-			width: 7px;
-			border-radius: 7px;
-			background-color: #104481;
-		}
+		@include scrollBar(#bbb,$orange2, 6px);
 	}
 
 
