@@ -19,8 +19,8 @@
       border-radius: 10px;
       width: 170px;
       height: 45px;
-      
-      @media(max-width: 480px){
+
+      @media (max-width: 480px) {
         height: 38px;
       }
 
@@ -29,6 +29,19 @@
         line-height: 18px;
         text-transform: capitalize;
       }
+    }
+  }
+
+  .box-category {
+    position: absolute;
+    bottom: -13px;
+    max-width: 770px;
+    width: 100%;
+
+    li {
+      position: relative;
+      margin-right: 10px;
+      bottom: initial;
     }
   }
 
@@ -55,6 +68,11 @@
       font-weight: 500;
       color: #4f4f4f;
     }
+
+    ul {
+      padding: 0;
+      overflow: auto;
+    }
   }
 
   .adsence {
@@ -67,14 +85,13 @@
 
   .box-content {
     margin: 16px 0 40px;
-    max-height: 1096px;
-    overflow: auto;
+    height: auto;
     word-break: break-all;
 
     img {
       max-width: 100%;
       height: auto;
-    } 
+    }
   }
 
   aside {
@@ -115,6 +132,8 @@
       }
     }
     .last-posts {
+      padding: 0;
+
       li {
         position: relative;
         display: flex;
@@ -227,7 +246,7 @@
       height: auto;
       max-height: 400px;
       margin: 0 0 20px;
-      border-radius: 20px; 
+      border-radius: 20px;
     }
   }
 
@@ -266,6 +285,7 @@
     .box-list-post {
       display: flex;
       justify-content: space-between;
+      padding: 0;
 
       @media (max-width: 1170px) {
         overflow: auto;
@@ -310,6 +330,7 @@
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+        height: 60px;
 
         @media (max-width: 768px) {
           font-size: 18px;

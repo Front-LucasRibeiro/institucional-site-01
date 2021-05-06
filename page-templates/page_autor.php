@@ -34,7 +34,7 @@ $sa_settings = get_option( 'sa_options', $sa_options );
 
         <span class="image">
 
-          <?php the_post_thumbnail(); ?>
+          <?php the_post_thumbnail('imagem-autor-170x170'); ?>
 
         </span>
 
