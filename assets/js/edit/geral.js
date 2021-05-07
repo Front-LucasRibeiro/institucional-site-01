@@ -122,15 +122,22 @@ function cardPiticast() {
 }
 
 function popupHome() {
-  let iframe = $('.overlay-popup.popup-ativo iframe');
+  let urlvideo = $('.overlay-popup.popup-ativo .box-video').attr('urlvideo');
   let btnClose = $('.overlay-popup.popup-ativo .btn-close');
   let modalHasClose = sessionStorage.getItem('modalClose');
 
-  console.log('mod', modalHasClose)
+  if(urlvideo !== undefined){
+    urlvideo = urlvideo.split('https://www.youtube.com/watch?v=')[1];
+  }
+
+  let iframe = `<iframe src="https://www.youtube.com/embed/${urlvideo}?enablejsapi=1&version=3&playerapiid=ytplayer" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
+  $('.overlay-popup.popup-ativo .box-video').append(iframe);
+
 
   if (modalHasClose !== 'true') {
     let interval = setInterval(function () {
-      if (iframe.length > 0) {
+      if ($('.overlay-popup.popup-ativo iframe').length > 0) {
         clearInterval(interval)
 
         setTimeout(function () {
@@ -145,11 +152,15 @@ function popupHome() {
   btnClose.on('click', function (e) {
     e.preventDefault();
 
+    pauseIframeVideo()
     sessionStorage.setItem('modalClose', 'true');
     $('.overlay-popup').hide().removeClass('popup-ativo')
   })
 }
 
+function pauseIframeVideo() {
+  $('.overlay-popup iframe')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}','*');
+}
 
 
 

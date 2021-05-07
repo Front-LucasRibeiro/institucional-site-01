@@ -1356,8 +1356,8 @@
     <a href="#" class="btn-close">X</a>  
 
     <div class="box-content">
-      <div class="box-video">
-        <?= get_post_meta( 360, 'url_video', true) ?>
+      <div class="box-video" urlVideo="<?= get_post_meta( 360, 'url_video', true) ?>">
+        
       </div>
     </div>
   </div>

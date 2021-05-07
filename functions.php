@@ -857,7 +857,7 @@ function pn_funcao_callback_popup(){
 		<div class="wrapper-section">
 			<div class="field">
 				<label for="url_video">Url vídeo</label>
-				<textarea type="text" id="url_video" name="url_video"><?php echo htmlentities($urlVideo); ?></textarea>
+				<input type="text" id="url_video" name="url_video" value="<?= $urlVideo; ?>" />
 			</div>	
 			<div class="field">
 				<label for="ativar_popup">Ativar Popup</label>
