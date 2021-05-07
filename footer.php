@@ -102,8 +102,6 @@
 </footer>
 
 
-
-
 <?php $home = get_template_directory_uri(); ?>
 
 <script>

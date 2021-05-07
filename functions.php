@@ -43,6 +43,19 @@ function get_titulo() {
 
 //Posts Type
 function meus_posts_type(){
+	register_post_type('popup',
+		array(
+			'labels'         => array(
+				'name'         => __('Popup'),
+				'singular_name' => __('Popup')
+			),
+			'public'      => true,
+			'has_archive' => true,
+			'menu_icon'   => 'dashicons-buddicons-buddypress-logo',
+			'supports'    => array('title'),
+		) 
+	);
+
 	register_post_type('footer',
 		array(
 			'labels'         => array(
@@ -806,6 +819,57 @@ function pn_funcao_callback_footer(){
 	<?php
 }
 
+function pn_funcao_callback_popup(){
+	?>
+
+	<style>
+		textarea{
+			height: 150px;
+			width: 100%;
+  		margin: 12px 0;
+		}
+
+		input{
+			width: 100%;
+			margin-top: 5px;
+		}
+
+		label{
+			font-weight: bold;
+		}
+
+		.field{
+			margin: 12px 0;
+		}
+		.wrapper-section{
+			margin-bottom:42px
+		}
+	</style>
+
+	<div class="box">
+		<?php
+			$urlVideo= get_post_meta( 360, 'url_video', true);
+			$ativarPopup= get_post_meta( 380, 'ativar_popup', true);
+
+			$checkedPopup = '';
+	    if($ativarPopup) $checkedPopup = 'checked';
+		?>
+		<div class="wrapper-section">
+			<div class="field">
+				<label for="url_video">Url vídeo</label>
+				<textarea type="text" id="url_video" name="url_video"><?php echo htmlentities($urlVideo); ?></textarea>
+			</div>	
+			<div class="field">
+				<label for="ativar_popup">Ativar Popup</label>
+				<input type="checkbox" id="ativar_popup" class="checkbox" name="ativar_popup" value="popup-ativo" <?= $checkedPopup; ?> />
+			</div>	
+		</div>
+	</div>
+
+	
+	<?php
+}
+
 function pn_funcao_callback_border_section_category(){
 		$post = get_post();
 		$id_post = $post->ID;
@@ -1030,6 +1094,12 @@ function pn_funcao_callback_loja_online(){
 // Metabox
 function pitinews_registrando_metabox(){
 	
+	add_meta_box(
+		'pn_popup',
+		'Popup',
+		'pn_funcao_callback_popup',
+		'popup'
+	);
 
 	add_meta_box(
 		'pn_footer',
@@ -1104,6 +1174,15 @@ add_action('add_meta_boxes', 'pitinews_registrando_metabox');
 function atualiza_meta_info() { 
 	$post = get_post();
   $id_post = $post->ID;
+
+	// start - seção popup 
+	if( isset($_POST['url_video'])){
+		update_post_meta( 360, 'url_video', $_POST['url_video']);
+	}
+	if( isset($_POST['ativar_popup'])){
+		update_post_meta( 380, 'ativar_popup', $_POST['ativar_popup']);
+	}
+	// end - seção popup 
 
 	// start seção footer
 	if( isset($_POST['link_face'])){

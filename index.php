@@ -1350,6 +1350,20 @@
 	</div>
 </section>
 
+<!-- popup  home-->
+<div class="overlay-popup <?= get_post_meta( 380, 'ativar_popup', true); ?>">
+  <div class="popup-content">
+    <a href="#" class="btn-close">X</a>  
+
+    <div class="box-content">
+      <div class="box-video">
+        <?= get_post_meta( 360, 'url_video', true) ?>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <?php 
 	$js_escolhido = 'home';
 	require_once('footer.php');
