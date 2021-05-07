@@ -1212,6 +1212,8 @@
 				</span>
 			</h2>
 
+			<?php do_shortcode('[yourchannel user="Lucas Ribeiro"]'); ?>
+
 			<ul class="list-posts desk">
 				<?php
 					$args = array(
