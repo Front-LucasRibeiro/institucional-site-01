@@ -92,6 +92,47 @@
       max-width: 100%;
       height: auto;
     }
+
+    .wrapper-tags {
+      display: flex;
+      margin-top: 38px;
+
+      .title {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 14px;
+        color: $texto;
+        margin: 0 10px 0 0;
+        min-width: 38px; 
+        height: 27px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .list-tags {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 0;
+
+        li {
+          padding: 8px 20px;
+          background-color: $white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-sizing: border-box;
+          font-weight: bold;
+          font-size: 12px;
+          line-height: 12px;
+          margin-right: 10px;
+          margin-bottom: 10px;
+          border-radius: 6px;
+          letter-spacing: 0.3px;
+        }
+      }
+    }
   }
 
   aside {

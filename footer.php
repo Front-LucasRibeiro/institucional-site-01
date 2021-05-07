@@ -115,7 +115,6 @@
 <script data-ad-client="ca-pub-6636390705016140" async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
 <script src="<?= $home; ?>/assets/js/lib/slick.min.js"></script>
 <script src="<?= $home; ?>/assets/js/lib/jquery.mask.min.js"></script>
-<script type='text/javascript' charset='utf-8' src='https://www.buzzsprout.com/1757249.js?container_id=buzzsprout-large-player-1757249&player=large'></script>
 <!-- end libs  -->
 
 <!-- start scripts  -->

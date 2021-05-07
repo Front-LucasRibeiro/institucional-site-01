@@ -10,7 +10,7 @@ $sa_settings = get_option( 'sa_options', $sa_options );
 
 <!-- Content -->
 <div class="institucional page pitiplay">  
-  <div class="container">
+  <div class="container">    
     <?php the_content(); ?>
   </div>
 </div>

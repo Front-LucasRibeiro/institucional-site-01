@@ -47,6 +47,24 @@ require_once('header.php');
 
 								<div class="box-content">
 									<?php the_content(); ?>
+
+									<div class="wrapper-tags">
+										
+										<p class="title"><strong>Tags</strong></p>
+											
+										<ul class="list-tags">
+											<?php
+												$posttags = get_the_tags();
+												if ($posttags) {
+													foreach($posttags as $tag) {
+											?>
+											<li><?= $tag->name?></li>
+											<?php
+													}
+												}
+											?>
+										</ul>
+									</div>
 								</div>
 			</article>
 
