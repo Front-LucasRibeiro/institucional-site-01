@@ -1665,6 +1665,7 @@
               height: 27px;
               width: 27px;
               position: absolute;
+              z-index: 9;
             }
             &:after {
               content: "";

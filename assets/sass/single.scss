@@ -5,6 +5,10 @@
 
   .box-content-last-posts {
     width: 76%;
+
+    .title {
+      min-height: 0;
+    }
   }
 
   .box-category {
@@ -87,6 +91,8 @@
     margin: 16px 0 40px;
     height: auto;
     word-break: break-all;
+    overflow-x: auto;
+    overflow-y: unset;
 
     img {
       max-width: 100%;
@@ -103,7 +109,7 @@
         line-height: 14px;
         color: $texto;
         margin: 0 10px 0 0;
-        min-width: 38px; 
+        min-width: 38px;
         height: 27px;
         padding: 0;
         display: flex;
@@ -147,6 +153,18 @@
     @media screen and (max-width: 768px) {
       width: 100%;
       margin: 0;
+      display: flex;
+      flex-direction: column;
+
+      .box-ultimas-noticias{
+        order: 2;
+      }
+      .banner-destaque{
+        order: 1;
+      }
+      .adsence{
+        order: 3;
+      }
     }
 
     .title {
@@ -210,14 +228,14 @@
     .banner-destaque {
       width: 100%;
       height: auto;
-      max-height: 500px;
-      border-radius: 20px;
-      margin: 0 auto 40px;
+      margin: 0 auto;
       max-width: 370px;
 
       img {
         max-width: 100%;
         height: auto;
+        border-radius: 20px;
+        margin-bottom: 20px;
       }
     }
 
@@ -325,7 +343,6 @@
 
     .box-list-post {
       display: flex;
-      justify-content: space-between;
       padding: 0;
 
       @media (max-width: 1170px) {
@@ -340,8 +357,18 @@
       list-style: none;
       float: left;
 
+      &:nth-of-type(2) {
+        margin: 0 30px;
+
+        @media (max-width: 1170px) {
+          margin: 0;
+        }
+      }
+
       @media (max-width: 1170px) {
-        padding-left: 10px;
+        padding-right: 10px;
+        max-width: 300px;
+        margin: 0;
       }
 
       .image-desk {

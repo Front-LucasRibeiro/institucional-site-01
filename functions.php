@@ -8,6 +8,7 @@ add_theme_support( 'custom-logo', array(
 
 add_image_size('banner-370x370', 370, 370, true);
 add_image_size('imagem-autor-170x170', 170, 170, true);
+add_image_size('banner-post-770x400', 770, 400, true);
 add_image_size('banner-570x400', 570, 400, true);
 add_image_size('banner-220x243', 220, 243, true);
 add_image_size('banner-170x119', 170, 119, true);

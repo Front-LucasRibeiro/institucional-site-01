@@ -13,7 +13,12 @@ require_once('header.php');
 			</div>
 		</div>
 
-		<?php while ( have_posts() ) : the_post(); ?>
+		<?php while ( have_posts() ) : the_post(); 
+			if( class_exists('Dynamic_Featured_Image') ) {
+				global $dynamic_featured_image;
+				$featured_images = $dynamic_featured_image->get_featured_images();
+			}
+		?>
 
             <?php the_title( '<h1 class="title">', '</h1>' ); ?>
 
@@ -36,9 +41,9 @@ require_once('header.php');
                 <span class="date"><?=get_the_date('d '.'\d\e'.' F '.'Y '.'\á\s'.' H'.'\h'.'i');?></span>
             </div>
 
-			<article id="post-<?php the_ID();?>" <?php post_class(); ?>>
+							<article id="post-<?php the_ID();?>" <?php post_class(); ?>>
                 <div class="thumb">
-                    <?php the_post_thumbnail();?>
+                    <?php the_post_thumbnail('banner-post-770x400');?>
 
 										<div class="box-category">
 											<?php the_category(); ?>
@@ -69,14 +74,26 @@ require_once('header.php');
 			</article>
 
             <aside>
-                <div class="title">
-					<span>Últimas notícias</span>
-					<div class="sep"></div>
-				</div>
-                <?php  include (TEMPLATEPATH . '/inc/sidebar-lastposts.php'); ?>
-                <div class="banner-destaque">
-									<img src="<?= get_post_meta( 242, 'banner-destaque-post-lateral', true) ?>" />
+								<div class="box-ultimas-noticias">
+									<div class="title">
+										<span>Últimas notícias</span>
+										<div class="sep"></div>
+									</div>
+									<?php  include (TEMPLATEPATH . '/inc/sidebar-lastposts.php'); ?>
 								</div>
+
+                <div class="banner-destaque">									
+									<?php
+										foreach ($featured_images as $image) {
+									?>
+
+										<img src="<?= $image['full']; ?>">
+
+									<?php
+										}
+									?>
+								</div>
+								
                 <div class="adsence">
 									<?= get_post_meta( 241, 'banner-adsense-post-lateral', true) ?>
 								</div>
