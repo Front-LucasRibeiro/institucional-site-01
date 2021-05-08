@@ -156,12 +156,32 @@
 
 		<article>
 			<ul>
+				<?php
+					$category = get_category( get_query_var( 'cat' ) );
+					$cat_id = $category->cat_ID;
+					$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+
+					$args = array( 
+						'posts_per_page' => 24,
+						'cat' => $cat_id,
+						'paged' => $paged,
+					);
+				
+					// the query
+					$the_query = new WP_Query( $args ); 
+				?>
+					
 				<?php 
-				$cont = 1;
-				if ( have_posts() ) {
-					while ( have_posts() ) {
-						the_post(); 
-						if($cont < 7){ ?>
+					$cont = 1;
+					if ( $the_query->have_posts() ) {
+				?>
+				
+				<?php 
+					while ( $the_query->have_posts() ) {
+						$the_query->the_post(); 
+						
+						if($cont < 7){ 
+				?>
 
 				<li class="item-first-list">
 					<a href="<?php the_permalink() ?>">
@@ -259,7 +279,7 @@
 
 					<?php }else{ ?>
 
-					<?php if($cont == 9) { ?>
+					<?php if($cont == 15) { ?>
 					<li class="list-post-item list-post-item-<?=$cont?>">
 						<a href="<?php the_permalink() ?>">
 							<div class="image-desk">
@@ -373,8 +393,11 @@
 		</div>			
 	</div>
 
+	<div class="container">
+		<ul class="list-mais-noticias">
+
 	<?php } else { ?>
-		<div class="container list-post-item">
+		<div class="list-post-item">
 			<!-- start lista abaixo carousel  -->
 			<ul class="list-mais-noticias list-down">
 				<li class="list-post-item list-post-item-<?=$cont?>">
@@ -452,7 +475,6 @@
 		if ( have_posts() ) :
 			while (have_posts()) : the_post();
 				echo '<li>';
-				echo 'teste';
 				the_title();
 				echo '</li>';
 			endwhile;
@@ -468,7 +490,24 @@
 		}
 	?>
 
+		</ul>
+	</div>
+	<!-- fecha container lista abaixo  -->
+
 	<div class="clear"></div>
+
+	<div class="pagination">
+		<?php
+			$big = 999999999; // need an unlikely integer
+			
+			echo paginate_links( array(
+				'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+				'format' => '?paged=%#%',
+				'current' => max( 1, get_query_var('paged') ),
+				'total' => $the_query->max_num_pages
+			));
+		?>
+	</div>
 				
 </main>
 
