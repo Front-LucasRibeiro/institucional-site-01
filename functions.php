@@ -81,19 +81,6 @@ function meus_posts_type(){
 			'supports'    => array('title','editor', 'thumbnail'),
 		) 
 	);
-
-	register_post_type('pitiplay',
-		array(
-			'labels'         => array(
-				'name'         => __('Pitiplay'),
-				'singular_name' => __('Pitiplay')
-			),
-			'public'      => true,
-			'has_archive' => true,
-			'menu_icon'   => 'dashicons-buddicons-buddypress-logo',
-			'supports'    => array('title','editor'),
-		) 
-	);
 	
 	register_post_type('piticast',
 		array(
@@ -1004,51 +991,6 @@ function pn_funcao_callback_piticast(){
 	<?php
 }
 
-function pn_funcao_callback_pitiplay(){
-		$post = get_post();
-		$id_post = $post->ID;
-
-		$field_pitiplay1= get_post_meta( $id_post, 'link-card-pitiplay', true);
-		$field_pitiplay2= get_post_meta( $id_post, 'iframe-pitiplay', true);
-	?>
-
-	<style>
-		textarea,
-		input{
-			width: 100%;
-			margin-top: 5px;
-		}
-
-		textarea{
-			height: 170px
-		}
-
-		label{
-			font-weight: bold;
-		}
-
-		.field{
-			margin: 12px 0;
-		}
-		.wrapper-section{
-			margin-bottom:42px
-		}
-	</style>
-
-	<div class="box">
-		<div class="field">
-			<label for="link-card-pitiplay">Link Externo Pitiplay - Home</label>
-			<input type="text" name="link-card-pitiplay" id="link-card-pitiplay" value="<?= $field_pitiplay1; ?>" />
-		</div>
-		<div class="field">
-			<label for="iframe-pitiplay">Iframe Pitiplay - Home</label>
-			<textarea name="iframe-pitiplay" id="iframe-pitiplay"><?= $field_pitiplay2; ?></textarea>
-		</div>
-	</div>
-
-	<?php
-}
-
 function pn_funcao_callback_loja_online(){
 		$post = get_post();
 		$id_post = $post->ID;
@@ -1113,13 +1055,6 @@ function pitinews_registrando_metabox(){
 		'Loja Online',
 		'pn_funcao_callback_loja_online',
 		'loja_online'
-	);
-
-	add_meta_box(
-		'pn_pitiplay',
-		'Pitiplay',
-		'pn_funcao_callback_pitiplay',
-		'pitiplay'
 	);
 
 	add_meta_box(
@@ -1463,12 +1398,6 @@ function atualiza_meta_info() {
 	}
 	if( isset($_POST['texto-ver-mais-mob-pitiplay'])){
 		update_post_meta( 183, 'texto-ver-mais-mob-pitiplay', $_POST['texto-ver-mais-mob-pitiplay']);
-	}
-	if( isset($_POST['link-card-pitiplay'])){
-		update_post_meta( $id_post, 'link-card-pitiplay', $_POST['link-card-pitiplay']);
-	}
-	if( isset($_POST['iframe-pitiplay'])){
-		update_post_meta( $id_post, 'iframe-pitiplay', $_POST['iframe-pitiplay']);
 	}
 	// end - seção pitiplay
 

@@ -590,7 +590,7 @@
     .yrc-core {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      justify-content: space-between;
       margin: 22px 0;
 
       @media (max-width: 786px) {

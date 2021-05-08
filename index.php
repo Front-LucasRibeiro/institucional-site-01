@@ -1212,54 +1212,7 @@
 				</span>
 			</h2>
 
-			<?php do_shortcode('[yourchannel user="Lucas Ribeiro"]'); ?>
-
-			<ul class="list-posts desk">
-				<?php
-					$args = array(
-						'post_type' => 'pitiplay',
-						'posts_per_page' => 3,
-					);
-					
-					$loop = new WP_Query( $args );
-					if( $loop->have_posts() ) { 
-						while( $loop-> have_posts()) {
-							$loop-> the_post();
-							$post = get_post();
-							$id_post = $post->ID;
-				?>
-		
-				<li class="list-post-item">
-					<div class="card">
-						<div class="image-desk">
-							<?= get_post_meta( $id_post, 'iframe-pitiplay', true) ?>
-						</div>
-						<div class="box-title">
-							<a href="<?= get_post_meta( $id_post, 'link-card-pitiplay', true) ?>" target="_blank">
-								<h3 class="title-post">
-									<?php the_title(); ?>
-								</h3>
-		
-								<div class="content">
-									<?php
-										$limite = '87';
-										$descricao = get_the_content();
-										$descricao =  trim($descricao, '\n');
-										$descricao = mb_substr($descricao,0,$limite);
-										echo $descricao."...";
-									?>
-								</div>
-							</a>
-						</div>
-					</div>
-				</li>
-		
-				<?php
-						}
-					}
-				?>
-			</ul>	
-
+			<?php echo do_shortcode('[yourchannel user="Piticas"]'); ?>
 		</div>
 	</div>
 </section>

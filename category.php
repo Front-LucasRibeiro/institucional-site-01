@@ -1,23 +1,16 @@
 <?php
 
-$css_escolhido = 'category';
-$has_reset_css = true;
-require_once('header.php');
-
-
+	$css_escolhido = 'category';
+	$has_reset_css = true;
+	require_once('header.php');
 
 ?>
 
 
-
 <main id="category-page">
-
 	<div class="container">
 
-
-
 		<!-- start h2 tag abertura  -->
-
 			<?php if(is_category('series')){ ?>
 
 		<h1 class="title-post-by-category title-item" style="color: <?= get_post_meta( 107, 'cor-item-1', true) ?>;font-weight: 600; font-size: 26px; text-transform: capitalize;">
@@ -193,289 +186,165 @@ require_once('header.php');
 
 
 		<div class="title-page">
-
 			<span>Últimas notícias</span>
-
 			<div class="sep"></div>
-
 		</div>
 
 
-
 		<article>
-
+			<ul>
 			<?php 
-
 			$cont = 1;
-
 			if ( have_posts() ) {
-
 				while ( have_posts() ) {
-
 					the_post(); 
-
 					if($cont < 7){ ?>
 
-				
 
 						<li class="item-first-list">
-
 							<a href="<?php the_permalink() ?>">
-
 								<div class="image-desk">
-
 									<?php the_post_thumbnail('banner-370x370');?>
-
 								</div>
 
 								<div class="image-mob">
-
 									<?php the_post_thumbnail('banner-220x243');?>
-
 								</div>
-
 							</a>
 
-
-
 							<div class="wrapper-title">
-
 								<div class="box-category">
-
 									<?php the_category(); ?>
-
 								</div>
-
-								
 
 								<div class="box-title">
-
 									<a href="<?php the_permalink() ?>">
-
 										<h3 class="title-post">
-
 											<?php the_title(); ?>
-
 										</h3>
-
 									</a>
-
 								</div>
-
 							</div>
-
 						</li>
-
-
 
 					<?php } else if($cont == 7){ ?>
 
-
-
 						<div class="clear"></div>
-
 						
-
 						<div class="box-wrapper-adsense topo">
-
 							<div class="adsence topo">
-
 								<?= get_post_meta( 240, 'banner-adsense-post-topo', true) ?>
-
 							</div>
-
 						</div>
-
-
 
 						<div class="title-page">
-
 							<span>Mais notícias</span>
-
 							<div class="sep"></div>
-
 						</div>
 
-
-
 						<li class="list-post-item list-post-item-<?=$cont?>">
-
 							<a href="<?php the_permalink() ?>">
-
 								<div class="image-desk">
-
 									<?php the_post_thumbnail('banner-370x260');?>
-
 								</div>
-
 							</a>
 
-							
-
 							<div class="box-title">
-
 								<a href="<?php the_permalink() ?>">
-
 									<h3 class="title-post">
-
 										<?php the_title(); ?>
-
 									</h3>
 
-
-
 									<div class="data">
-
 										<?= get_the_date('d \d\e F Y'); ?>
-
 									</div>
-
 								</a>
-
 							</div>
 
-
-
 							<div class="box-bottom">
-
 								<div class="box-autor">
-
 									<?php 
-
-										$user_info = get_userdata($autor_id);
-
+										$author_id = get_post_field( 'post_author', $post_id );
+										$id_do_autor = (int)$author_id;
+										$user_info = get_userdata($id_do_autor);
 										$user_name = $user_info->display_name;
-
 										$user_email = $user_info->user_email;
-
 									?>
-
-
 
 									<div class="box-avatar">
-
 										<?= get_avatar($user_email, 24);?>
-
 									</div>
 
-									
-
 									<?php
-
-										$autor_formatted = str_replace ( " ", "-", strtolower($user_name) );
-
+						
+										$userName =  preg_replace(array("/(á|à|ã|â|ä)/","/(Á|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Í|Ì|Î|Ï)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/"),explode(" ","a A e E i I o O u U n N"),$user_name);
+											
+										$autor_formatted = str_replace ( " ", "-", strtolower($userName) );
 									?>
 
-
-
 									<p class="nome-autor">
-
 										<a href="<?= get_home_url().'/'.$autor_formatted; ?>">
-
 											<?php the_author(); ?>
-
 										</a>
-
 									</p>
-
 								</div>
 
 								<a href="<?php the_permalink() ?>" class="ler-tudo"><?= get_post_meta( 141, 'texto-ler-mais-colunas', true) ?></a>
-
 							</div>
-
 						</li>
-
-
 
 					<?php }else{ ?>
 
-
-
 						<li class="list-post-item list-post-item-<?=$cont?>">
-
 							<a href="<?php the_permalink() ?>">
-
 								<div class="image-desk">
-
 									<?php the_post_thumbnail('banner-370x260');?>
-
 								</div>
-
 							</a>
 
-							
-
 							<div class="box-title">
-
 								<a href="<?php the_permalink() ?>">
-
 									<h3 class="title-post">
-
 										<?php the_title(); ?>
-
 									</h3>
 
-
-
 									<div class="data">
-
 										<?= get_the_date('d \d\e F Y'); ?>
-
 									</div>
-
 								</a>
-
 							</div>
 
 
 
 							<div class="box-bottom">
-
 								<div class="box-autor">
-
 									<?php 
-
-										$user_info = get_userdata($autor_id);
-
+										$author_id = get_post_field( 'post_author', $post_id );
+										$id_do_autor = (int)$author_id;
+										$user_info = get_userdata($id_do_autor);
 										$user_name = $user_info->display_name;
-
 										$user_email = $user_info->user_email;
-
 									?>
-
-
 
 									<div class="box-avatar">
-
 										<?= get_avatar($user_email, 24);?>
-
 									</div>
 
-									
-
 									<?php
-
-										$autor_formatted = str_replace ( " ", "-", strtolower($user_name) );
-
+						
+										$userName =  preg_replace(array("/(á|à|ã|â|ä)/","/(Á|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Í|Ì|Î|Ï)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/"),explode(" ","a A e E i I o O u U n N"),$user_name);
+											
+										$autor_formatted = str_replace ( " ", "-", strtolower($userName) );
 									?>
 
-
-
 									<p class="nome-autor">
-
 										<a href="<?= get_home_url().'/'.$autor_formatted; ?>">
-
 											<?php the_author(); ?>
-
 										</a>
-
 									</p>
-
 								</div>
 
 								<a href="<?php the_permalink() ?>" class="ler-tudo"><?= get_post_meta( 141, 'texto-ler-mais-colunas', true) ?></a>
-
 							</div>
 
 						</li>
@@ -484,8 +353,39 @@ require_once('header.php');
 
 					<?php } $cont++; } } ?>
 
-			<div class="clear"></div>
+					<?php
+						$posttags = get_the_tags();
 
+						if ($posttags) {
+							foreach($posttags as $tag) {
+					?>
+					
+					<?php
+						$original_query = $wp_query;
+						$wp_query = null;
+						$args=array('posts_per_page'=> 5, 'tag' => $tag->term_id);
+						$wp_query = new WP_Query( $args );
+						if ( have_posts() ) :
+							while (have_posts()) : the_post();
+								echo '<li>';
+								echo 'teste';
+								the_title();
+								echo '</li>';
+							endwhile;
+						endif;
+						$wp_query = null;
+						$wp_query = $original_query;
+						wp_reset_postdata();
+
+					?>
+
+					<?php
+							}
+						}
+					?>
+
+			<div class="clear"></div>
+			</ul>
 		</article>
 
 	</div>
