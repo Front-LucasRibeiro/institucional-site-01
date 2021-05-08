@@ -174,6 +174,10 @@
           background-repeat: no-repeat;
           background-position: center right 20px;
 
+          @media(max-width: 768px){
+            padding: 0 30px;
+          }
+
           &:focus {
             outline: 0;
           }
@@ -308,7 +312,6 @@
       font-size: 16px;
       line-height: 30px;
       color: #4f4f4f;
-      word-break: break-all;
 
       .image {
         width: 100%;
@@ -590,7 +593,6 @@
     .yrc-core {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
       margin: 22px 0;
 
       @media (max-width: 786px) {
@@ -598,9 +600,19 @@
       }
 
       li {
-        max-width: 370px;
+        max-width: 32%;
         width: 100%;
         margin-bottom: 38px !important;
+
+        &:nth-child(3n + 2) {
+          @media(min-width: 767px){
+            margin: 0 2% !important; 
+          }
+
+          @media (max-width: 480px) {
+            margin: 0;
+          }
+        }
 
         @media (max-width: 786px) {
           max-width: 100%;
@@ -617,7 +629,6 @@
         }
 
         .yrc-thumb {
-          min-height: 275px;
           display: flex;
           align-items: center;
 
