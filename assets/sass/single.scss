@@ -3,7 +3,7 @@
 #single-post {
   padding: 32px 0;
 
-  .box-category .post-categories{
+  .box-category .post-categories {
     padding-left: 0;
   }
 
@@ -3253,7 +3253,7 @@ article {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      margin: 0!important;
+      margin: 0 !important;
 
       li {
         padding: 8px 20px;
@@ -3269,6 +3269,7 @@ article {
         margin-bottom: 10px;
         border-radius: 6px;
         letter-spacing: 0.3px;
+        cursor: pointer;
       }
     }
   }

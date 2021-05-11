@@ -162,7 +162,13 @@ function pauseIframeVideo() {
   $('.overlay-popup iframe')[0].contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}','*');
 }
 
-
+function searchTagsPost(){
+  $('.list-tags li').on('click', function(){
+    let termoTag = $(this).text();
+    let urlSite = window.location.origin;
+    window.location = `${urlSite}?s=${termoTag}`;
+  })
+}
 
 $(document).ready(() => {
   openSearch()
@@ -170,6 +176,7 @@ $(document).ready(() => {
   setColorCategory()
   cardPiticast()
   popupHome()
+  searchTagsPost()
 })
 
 
