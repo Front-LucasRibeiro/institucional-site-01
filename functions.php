@@ -81,19 +81,6 @@ function meus_posts_type(){
 			'supports'    => array('title','editor', 'thumbnail'),
 		) 
 	);
-	
-	register_post_type('piticast',
-		array(
-			'labels'         => array(
-				'name'         => __('Piticast'),
-				'singular_name' => __('Piticast')
-			),
-			'public'      => true,
-			'has_archive' => true,
-			'menu_icon'   => 'dashicons-buddicons-buddypress-logo',
-			'supports'    => array('title','editor', 'thumbnail'),
-		) 
-	);
 
 	register_post_type('box_adsense',
 		array(
@@ -238,6 +225,7 @@ function pn_funcao_callback_slide_principal_mob(){
 		$id_post = $post->ID;
 
 		$imageMob= get_post_meta( $id_post, 'image_slide_mob', true);
+		$linkBannerSlide= get_post_meta( $id_post, 'link_banner_slide', true);
 	?>
 
 	<style>
@@ -261,7 +249,12 @@ function pn_funcao_callback_slide_principal_mob(){
 			<label for="image_slide_mob">Link da imagem mobile(480x600)</label>
 			<input type="text" id="image_slide_mob" name="image_slide_mob" value="<?= $imageMob; ?>" />
 		</div>
+		<div class="field">
+			<label for="link_banner_slide">Link do banner</label>
+			<input type="text" id="link_banner_slide" name="link_banner_slide" value="<?= $linkBannerSlide; ?>" />
+		</div>
 	</div>
+
 	
 	<?php
 }
@@ -616,33 +609,6 @@ function pn_funcao_callback_title_section(){
 		</div>
 		<!-- end - seção diversidade -->
 
-		<!-- start - seção piticast -->
-		<?php
-			$title_piticast1= get_post_meta( 172, 'title-piticast', true);
-			$title_piticast2= get_post_meta( 176, 'link-ver-tudo-piticast', true);
-			$title_piticast3= get_post_meta( 174, 'texto-ver-mais-desk-piticast', true);
-			$title_piticast4= get_post_meta( 178, 'texto-ver-mais-mob-piticast', true);
-		?>
-		<div class="wrapper-section">
-			<div class="field">
-				<label for="title-piticast">Título Seção Piticast(url da imagem) - Home</label>
-				<input type="text" name="title-piticast" id="title-piticast" value="<?= $title_piticast1; ?>" />
-			</div>
-			<div class="field">
-				<label for="link-ver-tudo-piticast">Link Ver Mais Piticast - Home</label>
-				<input type="text" name="link-ver-tudo-piticast" id="link-ver-tudo-piticast" value="<?= $title_piticast2; ?>" />
-			</div>
-			<div class="field">
-				<label for="texto-ver-mais-desk-piticast">Texto Ver Mais Piticast Desk - Home</label>
-				<input type="text" name="texto-ver-mais-desk-piticast" id="texto-ver-mais-desk-piticast" value="<?= $title_piticast3; ?>" />
-			</div>
-			<div class="field">
-				<label for="texto-ver-mais-mob-piticast">Texto Ver Mais Piticast Mobile - Home</label>
-				<input type="text" name="texto-ver-mais-mob-piticast" id="texto-ver-mais-mob-piticast" value="<?= $title_piticast4; ?>" />
-			</div>
-		</div>
-		<!-- end - seção piticast -->
-
 		<!-- start - seção pitiplay -->
 		<?php
 			$title_pitiplay1= get_post_meta( 187, 'title-pitiplay', true);
@@ -807,6 +773,8 @@ function pn_funcao_callback_footer(){
 }
 
 function pn_funcao_callback_popup(){
+	$post = get_post();
+  $id_post = $post->ID;
 	?>
 
 	<style>
@@ -835,11 +803,16 @@ function pn_funcao_callback_popup(){
 
 	<div class="box">
 		<?php
-			$urlVideo= get_post_meta( 360, 'url_video', true);
-			$ativarPopup= get_post_meta( 380, 'ativar_popup', true);
+			$urlVideo = get_post_meta( $id_post, 'url_video', true);
+			$ativarPopup = get_post_meta( $id_post, 'ativar_popup', true);
+			$selectedPopupInativo = '';
+			$selectedPopupAtivo = '';
 
-			$checkedPopup = '';
-	    if($ativarPopup) $checkedPopup = 'checked';
+	    if($ativarPopup === ''){
+				$selectedPopupInativo = 'selected';
+			}else{
+				$selectedPopupAtivo = 'selected';
+			} 
 		?>
 		<div class="wrapper-section">
 			<div class="field">
@@ -848,8 +821,11 @@ function pn_funcao_callback_popup(){
 			</div>	
 			<div class="field">
 				<label for="ativar_popup">Ativar Popup</label>
-				<input type="checkbox" id="ativar_popup" class="checkbox" name="ativar_popup" value="popup-ativo" <?= $checkedPopup; ?> />
-			</div>	
+				<select name="ativar_popup" id="ativar_popup">
+					<option value="popup-ativo" <?= $selectedPopupAtivo ?> >Popup Ativo</option>
+					<option value="" <?= $selectedPopupInativo ?> >Popup Inativo</option>
+				</select>
+			</div>
 		</div>
 	</div>
 
@@ -950,47 +926,6 @@ function pn_funcao_callback_box_adsense(){
 	<?php
 }
 
-function pn_funcao_callback_piticast(){
-		$post = get_post();
-		$id_post = $post->ID;
-
-		$field_piticast1= get_post_meta( $id_post, 'link-card-piticast', true);
-		$field_piticast2= get_post_meta( $id_post, 'url-audio-piticast', true);
-	?>
-
-	<style>
-		textarea,
-		input{
-			width: 100%;
-			margin-top: 5px;
-		}
-
-		label{
-			font-weight: bold;
-		}
-
-		.field{
-			margin: 12px 0;
-		}
-		.wrapper-section{
-			margin-bottom:42px
-		}
-	</style>
-
-	<div class="box">
-		<div class="field">
-			<label for="link-card-piticast">Link Externo Piticast - Home</label>
-			<input type="text" name="link-card-piticast" id="link-card-piticast" value="<?= $field_piticast1; ?>" />
-		</div>
-		<div class="field">
-			<label for="url-audio-piticast">Url Áudio Piticast(mp3) - Home</label>
-			<input type="text" name="url-audio-piticast" id="url-audio-piticast" value="<?= $field_piticast2; ?>" />
-		</div>
-	</div>
-
-	<?php
-}
-
 function pn_funcao_callback_loja_online(){
 		$post = get_post();
 		$id_post = $post->ID;
@@ -1058,13 +993,6 @@ function pitinews_registrando_metabox(){
 	);
 
 	add_meta_box(
-		'pn_piticast',
-		'Piticast',
-		'pn_funcao_callback_piticast',
-		'piticast'
-	);
-
-	add_meta_box(
 		'pn_box_adsense',
 		'Box Banners AdSense',
 		'pn_funcao_callback_box_adsense',
@@ -1112,10 +1040,10 @@ function atualiza_meta_info() {
 
 	// start - seção popup 
 	if( isset($_POST['url_video'])){
-		update_post_meta( 360, 'url_video', $_POST['url_video']);
+		update_post_meta( $id_post, 'url_video', $_POST['url_video']);
 	}
 	if( isset($_POST['ativar_popup'])){
-		update_post_meta( 380, 'ativar_popup', $_POST['ativar_popup']);
+		update_post_meta( $id_post, 'ativar_popup', sanitize_text_field($_POST['ativar_popup']) );
 	}
 	// end - seção popup 
 
@@ -1163,6 +1091,9 @@ function atualiza_meta_info() {
 	// start seção slide home
 	if( isset($_POST['image_slide_mob'])){
 		update_post_meta( $id_post, 'image_slide_mob', sanitize_text_field($_POST['image_slide_mob']) );
+	}
+	if( isset($_POST['link_banner_slide'])){
+		update_post_meta( $id_post, 'link_banner_slide', sanitize_text_field($_POST['link_banner_slide']) );
 	}
 	// end seção slide home
 
@@ -1377,12 +1308,6 @@ function atualiza_meta_info() {
 	}
 	if( isset($_POST['texto-ver-mais-mob-piticast'])){
 		update_post_meta( 178, 'texto-ver-mais-mob-piticast', $_POST['texto-ver-mais-mob-piticast']);
-	}
-	if( isset($_POST['link-card-piticast'])){
-		update_post_meta( $id_post, 'link-card-piticast', $_POST['link-card-piticast']);
-	}
-	if( isset($_POST['url-audio-piticast'])){
-		update_post_meta( $id_post, 'url-audio-piticast', $_POST['url-audio-piticast']);
 	}
 	// end - seção piticast
 	

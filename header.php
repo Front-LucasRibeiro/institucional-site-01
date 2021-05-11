@@ -15,7 +15,7 @@
 	
 	<link rel="stylesheet" href="<?= $home ?>/assets/css/lib/slick.css">
 
-	<?php 
+	<?php 		
 		if($has_reset_css){
 	?>
 		<link rel="stylesheet" href="<?= $home ?>/assets/css/reset.css">
@@ -26,6 +26,9 @@
 	<link rel="stylesheet" href="<?= $home; ?>/assets/css/page.css">
 
 	<link rel="stylesheet" href="<?= $home; ?>/assets/css/<?= $css_escolhido; ?>.css">
+
+	<!-- style default wp  -->
+	<link rel="stylesheet" href="<?= $home ?>/style.css">
 
 	<!-- google adsense -->
 	<script data-ad-client="ca-pub-6636390705016140" async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>

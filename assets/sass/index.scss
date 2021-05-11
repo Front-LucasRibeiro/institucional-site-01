@@ -115,9 +115,11 @@
       color: #fff;
       padding: 10px 50px 10px 40px;
       max-width: 100%;
+      width: 100%;
       text-shadow: 1px 2px #000;
       background-color: rgba(87, 96, 102, 0.5);
       margin-bottom: 50px;
+      box-sizing: border-box;
 
       p {
         overflow: hidden;
@@ -132,7 +134,7 @@
         margin-bottom: 40px;
       }
 
-      a {
+      a:not(.link-full) {
         font-weight: 500;
         font-size: 14px;
         line-height: 16px;
@@ -154,6 +156,12 @@
           position: relative;
           top: 2px;
         }
+      }
+    }
+
+    a.link-full{
+      &:after{
+        display: none;
       }
     }
   }
@@ -264,7 +272,7 @@
 
           .post-categories {
             position: absolute;
-            top: 205px;
+            top: 212px;
             left: 20px;
 
             @media (max-width: 819px) {
@@ -1542,6 +1550,12 @@
         top: -3px;
       }
     }
+  }
+}
+
+.piticast{
+  iframe{
+    max-height: 375px; 
   }
 }
 
