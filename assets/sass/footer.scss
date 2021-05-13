@@ -1,0 +1,183 @@
+@import "./variables";
+@import "./popup";
+
+footer {
+  background-color: $purple;
+  padding: 44px 40px 27px;
+  box-sizing: border-box;
+  height: auto;
+  border-radius: 20px 20px 0px 0px;
+  max-width: 1250px;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    height: auto;
+    padding: 25px 20px;
+  }
+
+  .container {
+    max-width: 1250px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+  }
+
+  .box-colunas {
+    display: flex;
+    justify-content: space-between;
+    max-width: 980px;
+    width: 100%;
+
+    &.desk {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    &.mob {
+      display: none;
+
+      @media (max-width: 768px) {
+        display: flex;
+      }
+
+      .col {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .secao-pitinews {
+        margin-bottom: 56px;
+      }
+
+      .secao-categorias {
+        margin-bottom: 26px;
+      }
+
+      .secao-categorias,
+      .secao-piticas,
+      .secao-outros-canais,
+      .secao-pitinews {
+        text-align: center;
+      }
+
+      .col-left {
+        border-right: 2px solid $orange;
+        padding-right: 14px;
+      }
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 21px;
+      color: $white;
+      margin-bottom: 24px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      
+      li {
+        font-size: 14px;
+        line-height: 18px;
+        color: $white;
+        margin-bottom: 16px;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  .box-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 54px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    .copy {
+      font-weight: normal;
+      font-size: 14px;
+      color: $white;
+    }
+
+    .redes-socias {
+      @media (max-width: 768px) {
+        padding: 22px 0 27px;
+      }
+
+      ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 152px;
+
+        li {
+          a {
+            display: inline-block;
+          }
+
+          &.facebook {
+            a {
+              background-image: url($iconFace);
+              width: 12px;
+              height: 21px;
+            }
+          }
+          &.twitter {
+            a {
+              background-image: url($iconTwitter);
+              width: 18px;
+              height: 15px;
+            }
+          }
+          &.instagram {
+            a {
+              background-image: url($iconInstaFooter);
+              width: 18px;
+              height: 17px;
+            }
+          }
+        }
+      }
+    }
+
+    .developed {
+      display: flex;
+      align-items: center;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
+
+      .text {
+        color: $white;
+        font-weight: bold;
+        font-size: 12px;
+        margin-right: 31px;
+
+        @media (max-width: 768px) {
+          margin-right: 0;
+        }
+      }
+      .logo-serie {
+        display: inline-block;
+        background-image: url($logoSerie);
+        width: 69px;
+        height: 26px;
+
+        @media (max-width: 768px) {
+          margin-top: 14px;
+        }
+      }
+    }
+  }
+}

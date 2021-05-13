@@ -1,8 +1,0 @@
-function setMask() {
-  $('input[name="telefone"]').mask('(00) 00000-0000');
-}
-
-
-$(document).ready(() => {
-  setMask()
-})

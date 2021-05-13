@@ -1,0 +1,300 @@
+@import "./variables";
+@import "./mixins";
+
+html {
+	font-size: 16px;
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	font-family: $raleway;
+	color: $texto;
+	-webkit-font-smoothing: antialiased;
+	background-color: #f3f3f3;
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	position: relative;
+	max-width: 1170px;
+	width: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
+
+	@media (max-width: 1200px) {
+		padding: 0 10px;
+	}
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+#wpadminbar {
+	display: none;
+}
+
+input {
+	&:focus {
+		outline: 0;
+	}
+}
+
+a,
+button {
+	cursor: pointer;
+
+	&:focus {
+		outline: 0;
+	}
+}
+
+.box-category {
+	
+	@media(min-width: 481px){
+		// custom overflow 
+		@include scrollBar(#bbb,$orange2, 6px);
+	}
+
+
+	.post-categories {
+		display: flex;
+		overflow: hidden;
+		width: 100%;
+		padding-left: 20px;
+		box-sizing: border-box;
+		left: 0!important;
+
+		li {
+			margin: 0 10px 10px 0;
+		}
+	}
+}
+
+.box-secao-category{
+	.box-category{
+		.post-categories{
+			padding: 0;
+			flex-wrap: wrap;
+		}
+	}
+}
+
+.section-title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-family: $raleway;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 23px;
+	color: $texto;
+	margin: 10px 0 4px;
+
+	@media (max-width: 1200px) {
+		padding: 0 10px;
+	}
+
+	span {
+		&.title-desk {
+			display: inline-block;
+			width: 100%;
+			max-width: 152px;
+			padding: 0 48px 0 0;
+
+			@media (max-width: 480px) {
+				display: none;
+			}
+		}
+
+		&.title-mob {
+			display: none;
+
+			@media (max-width: 480px) {
+				display: inline-block;
+				width: 100%;
+				padding: 0 15px 0 0;
+				min-width: 115px;
+				max-width: 115px;
+				font-size: 18px;
+				line-height: 21px;
+			}
+		}
+
+		&.separator {
+			border-top: 4px solid $gray;
+			border-radius: 50px;
+			max-width: 970px;
+			width: 100%;
+			display: inline-block;
+			top: 2px;
+			position: relative;
+		}
+
+		&.veja-mais {
+			display: none;
+
+			@media (max-width: 480px) {
+				display: inline-block;
+				min-width: 66px;
+				max-width: 66px;
+				width: 100%;
+				padding-left: 14px;
+
+				a {
+					font-weight: 500;
+					font-size: 12px;
+					line-height: 14px;
+					color: $texto;
+					text-decoration: none;
+					position: relative;
+					top: -2px;
+
+					&:after {
+						content: "";
+						display: inline-block;
+						background-image: url($arrowLink2);
+						width: 6px;
+						height: 11px;
+						position: relative;
+						top: 2px;
+						margin-left: 6px;
+					}
+				}
+			}
+		}
+	}
+}
+
+.post-categories {
+	li {
+		background: $categoryColorDefault;
+		border-radius: 6px;
+		width: 100%;
+		height: 24px;
+		padding: 0 6px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+		width: max-content;
+
+		a {
+			font-family: $raleway;
+			font-weight: bold;
+			font-size: 12px;
+			line-height: 14px;
+			text-align: center;
+			letter-spacing: 0.3px;
+			color: $white;
+			text-decoration: none;
+
+			@media (max-width: 480px) {
+				font-size: 11px;
+			}
+		}
+	}
+}
+
+// box autor
+.list-post-item {
+	.box-bottom {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 28px;
+
+		.box-autor {
+			display: flex;
+			align-items: center;
+
+			.box-avatar {
+				margin-right: 8px;
+
+				@media (max-width: 480px) {
+					margin-right: 10px;
+				}
+
+				img {
+					border-radius: 100%;
+					@media (max-width: 480px) {
+						width: 26px;
+						height: 26px;
+					}
+				}
+			}
+			.nome-autor {
+				font-size: 16px;
+				line-height: 16px;
+				text-decoration: underline;
+
+				@media (max-width: 480px) {
+					text-decoration: none;
+					font-size: 14px;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}
+
+.box-adsense {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	iframe {
+		background: yellow;
+		max-width: 728px;
+		height: auto;
+		display: block;
+		right: 0;
+		margin: 0 auto;
+		width: 100%;
+	}
+}
+
+main#category-page article li.item-first-list .wrapper-title .box-title .title-post {
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	right: 0;
+	bottom: 20px;
+	max-width: 100%;
+	font-family: $raleway;
+	font-weight: bold;
+	font-size: 24px;
+	line-height: 30px;
+	color: #fff;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	height: 90px;
+	text-shadow: 1px 2px #000;
+	background-color: rgba(87, 96, 102, 0.5);
+	width: 100%;
+	padding: 0 20px;
+	box-sizing: border-box;
+
+	@media (max-width: 819px) {
+		font-size: 15px;
+		line-height: 18px;
+		height: 54px;
+	}
+
+	@media (max-width: 480px) {
+		font-size: 14px;
+		line-height: 22px;
+		-webkit-line-clamp: 2;
+		left: 0;
+		right: 6px;
+		top: 9px;
+		height: 41px;
+	}
+}
+
+

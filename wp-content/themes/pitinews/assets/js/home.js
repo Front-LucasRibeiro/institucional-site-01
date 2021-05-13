@@ -1,1 +1,0 @@
-let tela=window.innerWidth;function slickPrincipal(){$("#sliderTopo").slick({arrows:!1,dots:!0,autoplay:!0,autoplaySpeed:2e3}),tela<=480&&$("#sliderTopoMob").slick({arrows:!1,dots:!0,autoplay:!0,autoplaySpeed:2e3})}$(document).ready(()=>{slickPrincipal()});
