@@ -876,7 +876,7 @@ function pn_funcao_callback_box_adsense(){
 		$banner2= get_post_meta( 170, 'banner-adsense-home-bottom', true);
 		$banner3= get_post_meta( 240, 'banner-adsense-post-topo', true);
 		$banner4= get_post_meta( 241, 'banner-adsense-post-lateral', true);
-		$banner5= get_post_meta( 242, 'banner-destaque-post-lateral', true);
+		$banner5= get_post_meta( 401, 'banner-adsense-categoria-topo', true);
 	?>
 
 	<style>
@@ -918,8 +918,8 @@ function pn_funcao_callback_box_adsense(){
 			<textarea name="banner-adsense-post-lateral" id="banner-adsense-post-lateral"><?= $banner4; ?></textarea>
 		</div>
 		<div class="field">
-			<label for="banner-destaque-post-lateral">Link Banner Destaque(370x500) - Post Lateral</label>
-			<input name="banner-destaque-post-lateral" id="banner-destaque-post-lateral" value="<?= $banner5; ?>" />
+			<label for="banner-adsense-categoria-topo">Banner AdSense - Categoria Topo</label>
+			<textarea name="banner-adsense-categoria-topo" id="banner-adsense-categoria-topo"><?= $banner5; ?></textarea>
 		</div>
 	</div>
 
@@ -1291,8 +1291,8 @@ function atualiza_meta_info() {
 	if( isset($_POST['banner-adsense-post-lateral'])){
 		update_post_meta( 241, 'banner-adsense-post-lateral', $_POST['banner-adsense-post-lateral']);
 	}
-	if( isset($_POST['banner-destaque-post-lateral'])){
-		update_post_meta( 242, 'banner-destaque-post-lateral', $_POST['banner-destaque-post-lateral']);
+	if( isset($_POST['banner-adsense-categoria-topo'])){
+		update_post_meta( 401, 'banner-adsense-categoria-topo', $_POST['banner-adsense-categoria-topo']);
 	}
 	// end - seção banners adSense
 
