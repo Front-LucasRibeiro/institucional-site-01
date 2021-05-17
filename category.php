@@ -1,6 +1,32 @@
 <?php
+	$has_title = true;
 	$css_escolhido = 'category';
 	$has_reset_css = true;
+
+	if(is_category('series')){ 
+		$categoryName = "Pitinews | Séries";
+	} elseif(is_category('filmes')){
+		$categoryName = "Pitinews | Filmes";
+	}elseif(is_category('animes')){
+		$categoryName = "Pitinews | Animes";
+	}elseif(is_category('games')){
+		$categoryName = "Pitinews | Games";
+	}elseif(is_category('diversidade')){
+		$categoryName = "Pitinews | Diversidade";
+	}elseif(is_category('colunas')){
+		$categoryName = "Pitinews | Colunas";
+	}elseif(is_category('criticas')){
+		$categoryName = "Pitinews | Críticas";
+	}elseif(is_category('piticas')){
+		$categoryName = "Pitinews | Piticas";
+	}elseif(is_category('podcast')){
+		$categoryName = "Pitinews | Podcast";
+	}else{
+		$categoryName = "Pitinews";
+	}
+
+
+	
 	require_once('header.php');
 ?>
 
@@ -9,6 +35,10 @@
 	<div class="container">
 		<!-- start h1 tag abertura  -->
 		<?php if(is_category('series')){ ?>
+
+			
+		<?php $categoryName = 'Séries'; ?>
+				
 
 		<h1 class="title-post-by-category title-item" style="color: <?= get_post_meta( 107, 'cor-item-1', true) ?>;font-weight: 600; font-size: 26px; text-transform: capitalize;">
 

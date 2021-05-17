@@ -5,7 +5,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>
-		<?php get_titulo(); ?>
+		<?php 		
+			if($has_title){
+				echo $categoryName;
+		?>
+		<?php	}	else { ?>
+			<?php get_titulo(); ?>
+		<?php } ?>
 	</title>
 
 	<link rel="shortcut icon" sizes="512x512" href="/wp-content/themes/pitinews/assets/imagens/favicon.png">
@@ -32,6 +38,17 @@
 
 	<!-- google adsense -->
 	<script data-ad-client="ca-pub-6636390705016140" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+	<!-- GA  -->
+	<!-- Global site tag (gtag.js) - Google Analytics PITINEWS-->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-WKKJJZJT9D"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-WKKJJZJT9D');
+	</script>
 </head>
 <body>
 
