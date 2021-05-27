@@ -43,6 +43,21 @@ function get_titulo() {
 
 //Posts Type
 function meus_posts_type(){
+	
+
+	register_post_type('home_link_fundo',
+		array(
+			'labels'         => array(
+				'name'         => __('Link Fundo'),
+				'singular_name' => __('Link Fundo')
+			),
+			'public'      => true,
+			'has_archive' => true,
+			'menu_icon'   => 'dashicons-buddicons-buddypress-logo',
+			'supports'    => array('title'),
+		) 
+	);
+
 	register_post_type('popup',
 		array(
 			'labels'         => array(
@@ -966,10 +981,51 @@ function pn_funcao_callback_loja_online(){
 	<?php
 }
 
+function pn_funcao_callback_link_fundo(){
+		$linkFundoHomeTop= get_post_meta( 300, 'link-fundo-home-topo', true);
+	?>
+
+	<style>
+		.field textarea {
+			width: 100%;
+			height: 174px;
+			margin-top: 5px;
+		}
+
+		input{
+			width: 100%;
+			margin-top: 5px;
+		}
+
+		label{
+			font-weight: bold;
+		}
+
+		.field{
+			margin: 12px 0;
+		}
+	</style>
+
+	<div class="box">
+		<div class="field">
+			<label for="link-fundo-home-topo">Link Fundo - Home topo</label>
+			<input name="link-fundo-home-topo" id="link-fundo-home-topo" value="<?= $linkFundoHomeTop; ?>" />
+		</div>
+	</div>
+
+	<?php
+}
 
 
 // Metabox
 function pitinews_registrando_metabox(){
+
+	add_meta_box(
+		'pn_link_fundo',
+		'Link Fundo',
+		'pn_funcao_callback_link_fundo',
+		'home_link_fundo'
+	);
 	
 	add_meta_box(
 		'pn_popup',
@@ -1038,6 +1094,14 @@ function atualiza_meta_info() {
 	$post = get_post();
   $id_post = $post->ID;
 
+	
+
+	// start - link fundo 
+	if( isset($_POST['link-fundo-home-topo'])){
+		update_post_meta( 300, 'link-fundo-home-topo', $_POST['link-fundo-home-topo']);
+	}
+	// end - link fundo 
+	
 	// start - seção popup 
 	if( isset($_POST['url_video'])){
 		update_post_meta( $id_post, 'url_video', $_POST['url_video']);

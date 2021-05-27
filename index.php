@@ -10,9 +10,24 @@ require_once('header.php');
 	while (have_posts()) : the_post();
 	?>
 
-		<div class="fundo">
-			<?php the_post_thumbnail(); ?>
-		</div>
+		<?php
+			if(get_post_meta(300, 'link-fundo-home-topo', true) !== ""){
+		?>
+			<a href="<?= get_post_meta(300, 'link-fundo-home-topo', true) ?>" target="_blank">
+				<div class="fundo">
+					<?php the_post_thumbnail(); ?>
+				</div>
+			</a>
+		<?php
+			} else {
+		?>
+			<div class="fundo">
+				<?php the_post_thumbnail(); ?>
+			</div>
+		<?php
+			}	
+		?>
+			
 
 	<?php
 	endwhile;
