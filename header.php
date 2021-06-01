@@ -37,7 +37,7 @@
 	<link rel="stylesheet" href="<?= $home ?>/style.css">
 
 	<!-- google adsense -->
-	<script data-ad-client="ca-pub-6636390705016140" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- <script data-ad-client="ca-pub-6636390705016140" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 
 	<!-- GA  -->
 	<!-- Global site tag (gtag.js) - Google Analytics PITINEWS-->
