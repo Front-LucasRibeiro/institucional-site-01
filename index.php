@@ -98,7 +98,7 @@ require_once('header.php');
 	</div>
 </section>
 
-<section class="box-adsense">
+<section class="banner-top-home box-adsense">
 	<?= get_post_meta(165, 'banner-adsense-home-topo', true) ?>
 </section>
 
