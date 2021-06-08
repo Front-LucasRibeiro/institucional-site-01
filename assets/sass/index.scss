@@ -1101,8 +1101,9 @@
         }
 
         .veja-mais {
+          display: inline-block;
+          padding-left: 10px;
           @media (max-width: 1170px) {
-            display: inline-block;
             min-width: 80px;
             max-width: 80px;
           }
@@ -1136,14 +1137,14 @@
               width: 69px;
             }
 
-            @media (min-width: 481px) and (max-width: 1170px) {
+            @media (min-width: 481px) {
               &:after {
                 content: "";
                 display: inline-block;
                 position: relative;
                 top: 2px;
                 margin-left: 7px;
-                background-image: url($arrowVerMais);
+                background-image: url($arrowVerMaisCriticas);
                 width: 7px;
                 height: 13px;
 
