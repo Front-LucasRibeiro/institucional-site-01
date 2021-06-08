@@ -7,7 +7,7 @@ function openSearch() {
     $('.box-search-buttons .close').show();
 
     $('.wrapper-busca').show();
-
+    $("header .wrapper-busca form input.search-field:visible").focus();
   })
 
 
