@@ -1207,6 +1207,12 @@ require_once('header.php');
 					</a>
 				</span>
 				<span class="separator"></span>
+				<span class="veja-mais">
+					<a href="https://www.instagram.com/piticasoficial" target="_blank">
+						<span class="desk">Ver mais</span>
+						<span class="mob">Ver tudo</span>
+					</a>
+				</span>
 			</h2>
 		</div>
 
