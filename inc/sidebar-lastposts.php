@@ -24,8 +24,8 @@
     
             <a class="content" href="<?php the_permalink() ?>">
                 <?php
-                $limite = '80';
-                $descricao = get_the_content();
+                $limite = '84';
+                $descricao = get_the_excerpt();
                 $descricao = strip_tags($descricao); 
                 $descricao = mb_substr($descricao,0,$limite);
                 echo $descricao; ?>

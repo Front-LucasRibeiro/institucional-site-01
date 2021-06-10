@@ -305,7 +305,7 @@ require_once('header.php');
 								?>
 									<div class="box-content">
 										<?php
-										the_content();
+										echo get_the_excerpt();
 										$indexContent++;
 										?>
 									</div>
@@ -460,7 +460,7 @@ require_once('header.php');
 								?>
 									<div class="box-content">
 										<?php
-										the_content();
+										echo get_the_excerpt();
 										$indexContent++;
 										?>
 									</div>
@@ -607,7 +607,7 @@ require_once('header.php');
 								?>
 									<div class="box-content">
 										<?php
-										the_content();
+										echo get_the_excerpt();
 										$indexContent++;
 										?>
 									</div>
@@ -762,7 +762,7 @@ require_once('header.php');
 								?>
 									<div class="box-content">
 										<?php
-										the_content();
+										echo get_the_excerpt();
 										$indexContent++;
 										?>
 									</div>
