@@ -1,1 +1,1 @@
-function setMask(){$('input[name="telefone"]').mask("(00) 00000-0000")}$(document).ready(()=>{setMask()});
+function setMask(){$('input[name="telefone"]').mask("(00) 00000-0000")}function setBannerPitiplay(){let n=$(".banner-top-pitiplay img");setTimeout(function(){$(".institucional.pitiplay .yrc-brand").append(n)},1500)}$(document).ready(()=>{setMask(),setBannerPitiplay()});

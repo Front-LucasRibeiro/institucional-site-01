@@ -568,12 +568,26 @@
   &.pitiplay {
     // topo
     .yrc-brand {
-      background: $purple !important;
       border-radius: 10px;
+      height: auto;
+
+      .wp-post-image{
+        border-radius: 10px;
+      }
+
+      .yrc-stats{
+        @media(max-width: 1170px){
+          display: none;
+        }
+      }
 
       .yrc-name {
         top: 8px;
         left: 15px;
+
+        @media(max-width: 1170px){
+          display: none;
+        }
       }
 
       img {
