@@ -606,6 +606,8 @@
 
     .yrc-load-more-button {
       background: $orange !important;
+      text-transform: capitalize;
+      font-size: 15px;
     }
 
     .yrc-core {

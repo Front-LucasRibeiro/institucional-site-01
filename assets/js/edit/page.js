@@ -10,8 +10,18 @@ function setBannerPitiplay(){
   },1500);
 }
 
+function setLoadMoreTxt(){
+  setTimeout(function(){
+    let texto = $('.yrc-load-more-button').html();
+    let qtdItens = texto.split(' ')[0];
+
+    $('.yrc-load-more-button').html(`carregar mais (${qtdItens})`);
+  },1500);
+}
+
 
 $(document).ready(() => {
   setMask()
   setBannerPitiplay()
+  setLoadMoreTxt()
 })
