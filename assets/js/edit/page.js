@@ -12,13 +12,31 @@ function setBannerPitiplay(){
 
 function setLoadMoreTxt(){
   setTimeout(function(){
-    let texto = $('.yrc-load-more-button').html();
-    let qtdItens = texto.split(' ')[0];
+    let textoVideos = $('.yrc-video-list .yrc-load-more-button').html();
+    let textoPlaylist = $('.yrc-playlists .yrc-load-more-button').html();
+    let qtdItensVideos = textoVideos.split(' ')[0];
+    let qtdItensPlaylist = textoPlaylist.split(' ')[0];
 
-    $('.yrc-load-more-button').html(`carregar mais (${qtdItens})`);
+    $('.yrc-video-list .yrc-load-more-button').html(`carregar mais (${qtdItensVideos})`);
+    $('.yrc-playlists .yrc-load-more-button').html(`carregar mais (${qtdItensPlaylist})`);
   },1500);
 }
 
+$(document).ajaxComplete(function (event, xhr, settings) {
+  if (settings.url) {
+    if (settings.url.indexOf('/youtube/v3/search') > -1) {
+      let textoVideos = $('.yrc-video-list .yrc-load-more-button').html();
+      let qtdItensVideos = textoVideos.split(' ')[0];
+      $('.yrc-video-list .yrc-load-more-button').html(`carregar mais (${qtdItensVideos})`);
+    }
+
+    if (settings.url.indexOf('playlists') > -1) {
+      let textoPlaylist = $('.yrc-playlists .yrc-load-more-button').html();
+      let qtdItensPlaylist = textoPlaylist.split(' ')[0];
+      $('.yrc-playlists .yrc-load-more-button').html(`carregar mais (${qtdItensPlaylist})`);
+    }
+  }
+});
 
 $(document).ready(() => {
   setMask()
