@@ -98,24 +98,16 @@ $sa_settings = get_option( 'sa_options', $sa_options );
           <?php	
 
             $author_id = get_post_field( 'post_author', $post_id );
-
-
+            $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 
             $args = array( 
-
-              'posts_per_page' => 3,
-
+              'posts_per_page' => 15,
               'order' => 'DESC', //Ou ASC
-
               'orderby' => 'date',
-
               'hide_empty' => true,
-
-              'author' => $author_id
-
+              'author' => $author_id,
+              'paged' => $paged,
             );
-
-            
 
             $loop = new WP_Query( $args );
 
@@ -244,6 +236,19 @@ $sa_settings = get_option( 'sa_options', $sa_options );
         </ul>	
 
       </div>
+
+      <div class="pagination">
+        <?php
+          $big = 999999999; // need an unlikely integer
+          
+          echo paginate_links( array(
+            'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+            'format' => '?paged=%#%',
+            'current' => max( 1, get_query_var('paged') ),
+            'total' => $loop->max_num_pages
+          ));
+        ?>
+	    </div>
 
     </div>
 
