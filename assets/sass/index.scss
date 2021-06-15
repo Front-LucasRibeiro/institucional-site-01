@@ -1741,6 +1741,12 @@
       background-position: left 2px;
       padding: 0 25px;
     }
+
+    .separator{
+      @media(max-width: 388px){
+        display: none;
+      }
+    }
   }
 
   .content-posts {

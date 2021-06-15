@@ -5,7 +5,6 @@ add_theme_support( 'custom-logo', array(
     'width'  => 170,
 ) );
 
-
 add_image_size('banner-370x370', 370, 370, true);
 add_image_size('imagem-autor-170x170', 170, 170, true);
 add_image_size('banner-post-770x400', 770, 400, true);
@@ -44,7 +43,6 @@ function get_titulo() {
 //Posts Type
 function meus_posts_type(){
 	
-
 	register_post_type('home_link_fundo',
 		array(
 			'labels'         => array(
@@ -526,7 +524,7 @@ function pn_funcao_callback_title_section(){
 			$title32= get_post_meta( 139, 'texto-ver-mais', true);
 			$title33= get_post_meta( 138, 'texto-ver-mais-mob', true);
 			$title34= get_post_meta( 141, 'texto-ler-mais-colunas', true);
-			$title38= get_post_meta( 131, 'categoria-colunas', true);
+			$title38= get_post_meta( 601, 'categoria-colunas', true);
 		?>
 		<div class="wrapper-section">
 			<div class="field">
@@ -650,6 +648,33 @@ function pn_funcao_callback_title_section(){
 			</div>
 		</div>
 		<!-- end - seção pitiplay -->
+
+		<!-- start - seção piticast -->
+		<?php
+			$title_piticast1= get_post_meta( 172, 'title-piticast', true);
+			$title_piticast2= get_post_meta( 176, 'link-ver-tudo-piticast', true);
+			$title_piticast3= get_post_meta( 174, 'texto-ver-mais-desk-piticast', true);
+			$title_piticast4= get_post_meta( 178, 'texto-ver-mais-mob-piticast', true);
+		?>
+		<div class="wrapper-section">
+			<div class="field">
+				<label for="title-piticast">Título Seção Piticast(url da imagem) - Home</label>
+				<input type="text" name="title-piticast" id="title-piticast" value="<?= $title_piticast1; ?>" />
+			</div>
+			<div class="field">
+				<label for="link-ver-tudo-piticast">Link Ver Mais Piticast - Home</label>
+				<input type="text" name="link-ver-tudo-piticast" id="link-ver-tudo-piticast" value="<?= $title_piticast2; ?>" />
+			</div>
+			<div class="field">
+				<label for="texto-ver-mais-desk-piticast">Texto Ver Mais Piticast Desk - Home</label>
+				<input type="text" name="texto-ver-mais-desk-piticast" id="texto-ver-mais-desk-piticast" value="<?= $title_piticast3; ?>" />
+			</div>
+			<div class="field">
+				<label for="texto-ver-mais-mob-piticast">Texto Ver Mais Piticast Mobile - Home</label>
+				<input type="text" name="texto-ver-mais-mob-piticast" id="texto-ver-mais-mob-piticast" value="<?= $title_piticast4; ?>" />
+			</div>
+		</div>
+		<!-- end - seção piticast -->
 
 		<!-- start - seção instagram -->
 		<?php
@@ -1284,7 +1309,7 @@ function atualiza_meta_info() {
 
 	// start - seção colunas 
 	if( isset($_POST['categoria-colunas'])){
-		update_post_meta( 131, 'categoria-colunas', sanitize_text_field($_POST['categoria-colunas']) );
+		update_post_meta( 601, 'categoria-colunas', sanitize_text_field($_POST['categoria-colunas']) );
 	}
 	if( isset($_POST['title-colunas'])){
 		update_post_meta( 134, 'title-colunas', sanitize_text_field($_POST['title-colunas']) );

@@ -46,6 +46,16 @@
       font-size: 17px;
     }
 
+    iframe{
+      margin-left: auto!important;
+      margin-right: auto!important; 
+    }
+
+    .wp-block-embed.is-type-video{
+      display: flex;
+      justify-content: center;
+    }
+
     a {
       font-size: 16px;
       line-height: 28px;
@@ -3254,9 +3264,9 @@ article {
         justify-content: center;
         align-items: center;
         box-sizing: border-box;
-        font-weight: bold;
-        font-size: 12px;
-        line-height: 12px;
+        font-weight: bold!important;
+        font-size: 12px!important;
+        line-height: 14px;
         margin-right: 10px;
         margin-bottom: 10px;
         border-radius: 6px;

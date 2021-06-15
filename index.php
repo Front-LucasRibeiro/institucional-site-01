@@ -187,9 +187,6 @@ require_once('header.php');
 					<?= get_post_meta(101, 'title-categorias', true) ?>
 				</span>
 				<span class="separator"></span>
-				<span class="veja-mais">
-					<a href="<?= get_post_meta(104, 'link-veja-mais', true) ?>">Veja mais</a>
-				</span>
 			</h2>
 
 			<ul class="list-category">
@@ -874,7 +871,7 @@ require_once('header.php');
 					'order' => 'DESC', //Ou ASC
 					'orderby' => 'date',
 					'hide_empty' => true,
-					'category_name' => get_post_meta(131, 'categoria-colunas', true)
+					'category_name' => get_post_meta(601, 'categoria-colunas', true)
 				);
 
 				$loop = new WP_Query($args);
