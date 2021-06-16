@@ -15,6 +15,8 @@ add_image_size('banner-370x260', 370, 260, true);
 add_image_size('banner-370x160', 370, 160, true);
 add_image_size('banner-270x270-piticast', 270, 270, true);
 add_image_size('banner-67x67', 67, 67, true);
+add_image_size('banner-slide-principal-mobile-480x600', 480, 600, true);
+add_image_size('banner-slide-principal-1170x500', 1170, 500, true);
 
 
 

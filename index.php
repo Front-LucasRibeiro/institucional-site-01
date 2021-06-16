@@ -52,7 +52,7 @@ require_once('header.php');
 
 					<li class="slider-topo" data-thumb="">
 						<a class="link-full" href="<?= get_post_meta($id_post, 'link_banner_slide', true) ?>">
-							<?php the_post_thumbnail(); ?>
+							<?php the_post_thumbnail('banner-slide-principal-1170x500'); ?>
 
 							<div class="box-legenda">
 								<?php the_content(); ?>
