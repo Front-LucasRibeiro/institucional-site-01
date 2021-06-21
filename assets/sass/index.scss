@@ -1752,11 +1752,93 @@
 
   .content-posts {
     @include scrollBar(#bbb, $orange2, 9px);
+    overflow: hidden;
+
+    @media (max-width: 1169px) {
+      overflow-x: scroll;
+      overflow-y: hidden;
+    }
 
     @media (max-width: 480px) {
       display: flex;
       justify-content: center;
     }
+
+    // start WD Instagram Feed 
+    .wdi_feed_main_container{
+      width: 1170px;
+      overflow: hidden;
+
+      .wdi_photo_overlay.wdi_hover_off{
+        z-index: 9;
+      }
+
+      .wdi_feed_item .wdi_photo_img {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover{
+          &:before {
+            content: "";
+            display: inline-block;
+            background-image: url($iconInstagramHover);
+            height: 27px;
+            width: 27px;
+            position: absolute;
+            z-index: 9;
+          }
+          &:after {
+            content: "";
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+            position: absolute;
+            left: 0;
+          }
+        }
+      }
+
+      .wdi_photo_overlay:hover i{
+        display: none;
+      }
+
+      .wdi_feed_container{
+        border: 0;
+        background: none;
+
+        .wdi_feed_info{
+          display: none;
+        }
+      }
+
+      .wdi_feed_item {
+        width: 195px!important; 
+      }
+
+      .wdi_photo_wrap_inner{
+        border: 0;
+        background: none;
+      }
+
+      .wdi_photo_wrap{
+        padding: 0;
+        width: 195px;
+        height: 195px;
+      }
+
+      &.wdi_layout_th .wdi_photo_img,
+      &.wdi_layout_th .wdi_shape_portrait .wdi_img, 
+      &.wdi_layout_th .wdi_shape_square .wdi_img{
+        width: 195px;
+        height: 195px;
+        object-fit: cover; 
+      }
+    }
+    // end WD Instagram Feed 
 
     .popup-gallery {
       display: flex;

@@ -1215,6 +1215,10 @@ require_once('header.php');
 
 		<div class="content-posts">
 			<?php echo do_shortcode("[blossomthemes_instagram_feed]"); ?>
+
+			<div class="hide">
+				<?php echo wdi_feed(array('id'=>'1')); ?>
+			</div>
 		</div>
 	</div>
 </section>
