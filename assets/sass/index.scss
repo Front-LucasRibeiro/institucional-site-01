@@ -4,6 +4,12 @@
 .wrapper-slider {
   position: relative;
 
+  #sliderTopoMob{
+    img{
+      max-height: 600px;
+    }
+  }
+
   .fundo {
     position: absolute;
     width: 100%;

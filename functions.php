@@ -113,11 +113,26 @@ function meus_posts_type(){
 	register_post_type('home_slide_principal',
 		array(
 			'labels'         => array(
-				'name'         => __('Home - Slide Principal'),
+				'name'         => __('Home - Slide Desk'),
 				'singular_name' => __('Slide')
 			),
 			'public'      => true,
 			'has_archive' => true,
+			'rewrite' => true,
+			'menu_icon'   => 'dashicons-buddicons-buddypress-logo',
+			'supports'    => array('title','editor', 'thumbnail'),
+		) 
+	);
+
+	register_post_type('home_slide_mob',
+		array(
+			'labels'         => array(
+				'name'         => __('Home - Slide Mob'),
+				'singular_name' => __('Slide Mob')
+			),
+			'public'      => true,
+			'has_archive' => true,
+			'rewrite' => true,
 			'menu_icon'   => 'dashicons-buddicons-buddypress-logo',
 			'supports'    => array('title','editor', 'thumbnail'),
 		) 
@@ -235,11 +250,9 @@ function pn_funcao_callback_box_app_mob(){
 	<?php
 }
 
-function pn_funcao_callback_slide_principal_mob(){
+function pn_funcao_callback_slide_principal_desk(){
 		$post = get_post();
 		$id_post = $post->ID;
-
-		$imageMob= get_post_meta( $id_post, 'image_slide_mob', true);
 		$linkBannerSlide= get_post_meta( $id_post, 'link_banner_slide', true);
 	?>
 
@@ -261,10 +274,6 @@ function pn_funcao_callback_slide_principal_mob(){
 
 	<div class="box">
 		<div class="field">
-			<label for="image_slide_mob">Link da imagem mobile(480x600)</label>
-			<input type="text" id="image_slide_mob" name="image_slide_mob" value="<?= $imageMob; ?>" />
-		</div>
-		<div class="field">
 			<label for="link_banner_slide">Link do banner</label>
 			<input type="text" id="link_banner_slide" name="link_banner_slide" value="<?= $linkBannerSlide; ?>" />
 		</div>
@@ -272,6 +281,39 @@ function pn_funcao_callback_slide_principal_mob(){
 
 	
 	<?php
+}
+
+function pn_funcao_callback_slide_principal_mobile(){
+	$post = get_post();
+	$id_post = $post->ID;
+	$linkBannerSlideMob= get_post_meta( $id_post, 'link_banner_slide_mob', true);
+?>
+
+<style>
+		textarea,
+		input{
+			width: 100%;
+			margin-top: 5px;
+		}
+
+		label{
+			font-weight: bold;
+		}
+
+		.field{
+			margin: 12px 0;
+		}
+	</style>
+
+<div class="box">
+	<div class="field">
+		<label for="link_banner_slide_mob">Link do banner</label>
+		<input type="text" id="link_banner_slide_mob" name="link_banner_slide_mob" value="<?= $linkBannerSlideMob; ?>" />
+	</div>
+</div>
+
+
+<?php
 }
 
 function pn_funcao_callback_category_color(){
@@ -1089,10 +1131,16 @@ function pitinews_registrando_metabox(){
 		'box_app_mob'
 	);
 	add_meta_box(
-		'pn_slide_principal_mob',
-		'Slide Principal Mob',
-		'pn_funcao_callback_slide_principal_mob',
+		'pn_slide_principal_desk',
+		'Slide Principal Desk',
+		'pn_funcao_callback_slide_principal_desk',
 		'home_slide_principal'
+	);
+	add_meta_box(
+		'pn_slide_principal_mobile',
+		'Slide Principal Mob',
+		'pn_funcao_callback_slide_principal_mobile',
+		'home_slide_mob'
 	);
 	add_meta_box(
 		'pn_cores_categorias',
@@ -1180,11 +1228,11 @@ function atualiza_meta_info() {
 
 
 	// start seção slide home
-	if( isset($_POST['image_slide_mob'])){
-		update_post_meta( $id_post, 'image_slide_mob', sanitize_text_field($_POST['image_slide_mob']) );
-	}
 	if( isset($_POST['link_banner_slide'])){
 		update_post_meta( $id_post, 'link_banner_slide', sanitize_text_field($_POST['link_banner_slide']) );
+	}
+	if( isset($_POST['link_banner_slide_mob'])){
+		update_post_meta( $id_post, 'link_banner_slide_mob', sanitize_text_field($_POST['link_banner_slide_mob']) );
 	}
 	// end seção slide home
 

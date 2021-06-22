@@ -69,7 +69,7 @@ require_once('header.php');
 		<ul id="sliderTopoMob" class="slider-topo mob">
 			<?php
 			$args = array(
-				'post_type' => 'home_slide_principal'
+				'post_type' => 'home_slide_mob'
 			);
 
 			$loop = new WP_Query($args);
@@ -81,8 +81,8 @@ require_once('header.php');
 			?>
 
 					<li class="slider-topo" data-thumb="">
-						<a class="link-full" href="<?= get_post_meta($id_post, 'link_banner_slide', true) ?>">
-							<img src="<?= get_post_meta($id_post, 'image_slide_mob', true) ?>	" alt="banner - pitinews">
+						<a class="link-full" href="<?= get_post_meta($id_post, 'link_banner_slide_mob', true) ?>">
+							<?php the_post_thumbnail('banner-slide-principal-mobile-480x600'); ?> 
 
 							<div class="box-legenda">
 								<?php the_content(); ?>
