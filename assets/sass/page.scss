@@ -63,6 +63,20 @@
   }
 
   &.fale-conosco {
+    .container{
+      p{
+        padding: 0 6px;
+      }
+    
+      a{
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 400;
+        color: $colorLink; 
+        text-decoration: underline;
+      }
+    }
+
     .box-top {
       background-image: url("/wp-content/uploads/2021/05/banner.png");
       max-width: 100%;
@@ -125,7 +139,7 @@
     }
 
     .screen-reader-response {
-      padding-top: 42px;
+      padding-top: 12px;
     }
 
     form {
@@ -231,6 +245,20 @@
   }
 
   &.autor {
+    .box-content{
+      p{
+        padding: 0 6px;
+      }
+    
+      a{
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 400;
+        color: $colorLink; 
+        text-decoration: underline;
+      }
+    }
+
     .box-top {
       background-image: url("data:image/svg+xml,%3Csvg width='1610' height='120' viewBox='0 0 1610 120' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1610' height='120' fill='%23F1EA6C'/%3E%3C/svg%3E%0A");
       max-width: 100%;
@@ -468,7 +496,6 @@
             font-weight: bold;
             font-size: 16px;
             line-height: 19px;
-            text-decoration: underline;
             margin: 10px 0 16px;
             overflow: hidden;
             display: -webkit-box;
