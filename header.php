@@ -7,7 +7,7 @@
 	<title>
 		<?php 		
 			if($has_title){
-				echo $categoryName;
+				echo $titlePage;
 		?>
 		<?php	}	else { ?>
 			<?php get_titulo(); ?>

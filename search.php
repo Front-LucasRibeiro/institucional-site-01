@@ -1,6 +1,9 @@
 <?php
+	$has_title = true;
 	$css_escolhido = 'search';
 	$has_reset_css = true;
+	$termo = $_GET["s"];
+	$titlePage = "Pitinews | $termo"; 
 	require_once('header.php');
 ?>
 
@@ -25,6 +28,8 @@
 			// the query
 			$the_query = new WP_Query( $args ); 
 		?>
+
+		
 			 
 		<?php if ( $the_query->have_posts() ) : ?>
 

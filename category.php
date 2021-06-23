@@ -4,25 +4,25 @@
 	$has_reset_css = true;
 
 	if(is_category('series')){ 
-		$categoryName = "Pitinews | Séries";
+		$titlePage = "Pitinews | Séries";
 	} elseif(is_category('filmes')){
-		$categoryName = "Pitinews | Filmes";
+		$titlePage = "Pitinews | Filmes";
 	}elseif(is_category('animes')){
-		$categoryName = "Pitinews | Animes";
+		$titlePage = "Pitinews | Animes";
 	}elseif(is_category('games')){
-		$categoryName = "Pitinews | Games";
+		$titlePage = "Pitinews | Games";
 	}elseif(is_category('diversidade')){
-		$categoryName = "Pitinews | Diversidade";
+		$titlePage = "Pitinews | Diversidade";
 	}elseif(is_category('colunas')){
-		$categoryName = "Pitinews | Colunas";
+		$titlePage = "Pitinews | Colunas";
 	}elseif(is_category('criticas')){
-		$categoryName = "Pitinews | Críticas";
+		$titlePage = "Pitinews | Críticas";
 	}elseif(is_category('piticas')){
-		$categoryName = "Pitinews | Piticas";
+		$titlePage = "Pitinews | Piticas";
 	}elseif(is_category('podcast')){
-		$categoryName = "Pitinews | Podcast";
+		$titlePage = "Pitinews | Podcast";
 	}else{
-		$categoryName = "Pitinews";
+		$titlePage = "Pitinews";
 	}
 
 
