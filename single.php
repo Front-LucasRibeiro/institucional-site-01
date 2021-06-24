@@ -57,21 +57,16 @@ require_once('header.php');
 										
 										<p class="title"><strong>Tags</strong></p>
 											
-										<ul class="list-tags">
+										<div class="list-tags">
 											<?php
-												$posttags = get_the_tags();
-												if ($posttags) {
-													foreach($posttags as $tag) {
+												$tags_list = get_the_tag_list();
+												echo $tags_list;
 											?>
-											<li><?= $tag->name?></li>
-											<?php
-													}
-												}
-											?>
-										</ul>
+										</div>
+
 									</div>
 								</div>
-			</article>
+							</article>
 
             <aside>
 								<div class="box-ultimas-noticias">

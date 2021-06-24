@@ -3261,7 +3261,7 @@ article {
       flex-wrap: wrap;
       margin: 0 !important;
 
-      li {
+      li,a {
         padding: 8px 20px;
         background-color: $white;
         display: flex;
@@ -3270,12 +3270,14 @@ article {
         box-sizing: border-box;
         font-weight: bold!important;
         font-size: 12px!important;
-        line-height: 14px;
+        line-height: 14px!important;
         margin-right: 10px;
         margin-bottom: 10px;
         border-radius: 6px;
         letter-spacing: 0.3px;
         cursor: pointer;
+        text-decoration: none!important;
+        color: $texto!important;
       }
     }
   }
