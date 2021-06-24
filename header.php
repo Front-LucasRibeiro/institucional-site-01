@@ -4,6 +4,18 @@
 	<?php $home = get_template_directory_uri(); ?>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta property="og:locale" content="pt_BR">
+	<meta property="og:url" content="https://www.pitinews.com.br">
+	<meta property="og:title" content="Pitinews">
+	<meta property="og:site_name" content="Pitinews">
+	<meta property="og:description" content="Somos um canal de notícias focado em entretenimento. Séries, filmes, anime, críticas, e muito conteúdo sobre o mundo de cultura pop.">
+	<meta property="og:image" content="https://www.pitinews.com.br/wp-content/uploads/2021/06/opengraph-pitinews.png">
+	<meta property="og:image:type" content="image/png">
+	<meta property="og:image:width" content="200">
+	<meta property="og:image:height" content="200">
+	<meta property="og:type" content="website">
+
 	<title>
 		<?php 		
 			if($has_title){

@@ -12,13 +12,16 @@ function setBannerPitiplay(){
 
 function setLoadMoreTxt(){
   setTimeout(function(){
-    let textoVideos = $('.yrc-video-list .yrc-load-more-button').html();
-    let textoPlaylist = $('.yrc-playlists .yrc-load-more-button').html();
-    let qtdItensVideos = textoVideos.split(' ')[0];
-    let qtdItensPlaylist = textoPlaylist.split(' ')[0];
+    if($('.yrc-video-list .yrc-load-more-button').length > 0 || $('.yrc-playlists .yrc-load-more-button').length > 0){
+      let textoVideos = $('.yrc-video-list .yrc-load-more-button').html();
+      let textoPlaylist = $('.yrc-playlists .yrc-load-more-button').html();
+      let qtdItensVideos = textoVideos.split(' ')[0];
+      let qtdItensPlaylist = textoPlaylist.split(' ')[0];
+  
+      $('.yrc-video-list .yrc-load-more-button').html(`carregar mais (${qtdItensVideos})`);
+      $('.yrc-playlists .yrc-load-more-button').html(`carregar mais (${qtdItensPlaylist})`);
+    }
 
-    $('.yrc-video-list .yrc-load-more-button').html(`carregar mais (${qtdItensVideos})`);
-    $('.yrc-playlists .yrc-load-more-button').html(`carregar mais (${qtdItensPlaylist})`);
   },1500);
 }
 
