@@ -237,6 +237,7 @@
 							</a>
 						</div>
 					</div>
+					<?php edit_post_link(); ?>
 				</li>
 
 				<?php } else if($cont == 7){ ?>
@@ -305,6 +306,7 @@
 
 							<a href="<?php the_permalink() ?>" class="ler-tudo"><?= get_post_meta( 141, 'texto-ler-mais-colunas', true) ?></a>
 						</div>
+						<?php edit_post_link(); ?>
 					</li>
 
 					<?php }else{ ?>
@@ -359,7 +361,7 @@
 
 							<a href="<?php the_permalink() ?>" class="ler-tudo"><?= get_post_meta( 141, 'texto-ler-mais-colunas', true) ?></a>
 						</div>
-
+						<?php edit_post_link(); ?>
 					</li>
 				</ul>
 				<!-- end lista acima carousel  -->
@@ -411,6 +413,7 @@
 								</h3>
 							</a>
 						</div>
+						<?php edit_post_link(); ?>
 					</li>
 			
 					<?php
@@ -481,7 +484,7 @@
 
 						<a href="<?php the_permalink() ?>" class="ler-tudo"><?= get_post_meta( 141, 'texto-ler-mais-colunas', true) ?></a>
 					</div>
-
+					<?php edit_post_link(); ?>
 				</li>
 			</ul>
 			<!-- end lista abaixo carousel  -->

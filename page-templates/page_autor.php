@@ -216,7 +216,7 @@ $sa_settings = get_option( 'sa_options', $sa_options );
               <a href="<?php the_permalink() ?>" class="ler-tudo">Ler mais</a>
 
             </div>
-
+            <?php edit_post_link(); ?>
           </li>
 
       

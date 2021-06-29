@@ -16,6 +16,21 @@ body {
 	padding: 0;
 }
 
+.post-edit-link{
+	text-decoration: underline;
+	
+	&:before{
+		content: "";
+		display: inline-block;
+		background-image: url("/wp-content/themes/pitinews/assets/imagens/edit.png");
+		width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    position: relative;
+    top: 2px;
+	}
+}
+
 .container {
 	position: relative;
 	max-width: 1170px;
@@ -227,8 +242,21 @@ button {
 			}
 			.nome-autor {
 				font-size: 16px;
-				line-height: 16px;
+				line-height: 19px;
 				text-decoration: underline;
+
+				a{
+					display: block;
+					overflow: hidden;
+					display: -webkit-box;
+					-webkit-line-clamp: 1;
+					-webkit-box-orient: vertical;
+					width: 260px;
+
+					@media (max-width: 1170px) {
+						width: 180px;
+					}
+				}
 
 				@media (max-width: 480px) {
 					text-decoration: none;

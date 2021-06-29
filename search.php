@@ -71,7 +71,7 @@
 						</div>	
 
 						<a href="<?php the_permalink() ?>" class="ler-tudo">Ler tudo</a>
-				
+						<?php edit_post_link(); ?>
 				</li>
 			<?php endwhile; ?>
 			<!-- end of the loop -->

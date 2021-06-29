@@ -164,6 +164,8 @@ require_once('header.php');
 										</a>
 									</div>
 								</div>
+
+								<?php edit_post_link(); ?>
 							</li>
 
 				<?php }
@@ -212,7 +214,7 @@ require_once('header.php');
 								</div>
 							</a>
 						</li>
-
+						<?php edit_post_link(); ?>
 				<?php
 					}
 				}
@@ -311,6 +313,8 @@ require_once('header.php');
 								<?php
 								}
 								?>
+
+									<?php edit_post_link(); ?>
 							</li>
 
 					<?php
@@ -369,6 +373,7 @@ require_once('header.php');
 										?>
 									</div>
 								</div>
+								<?php edit_post_link(); ?>
 							</li>
 
 					<?php
@@ -466,6 +471,8 @@ require_once('header.php');
 								<?php
 								}
 								?>
+
+								<?php edit_post_link(); ?>
 							</li>
 
 					<?php
@@ -514,6 +521,7 @@ require_once('header.php');
 										</a>
 									</div>
 								</div>
+								<?php edit_post_link(); ?>
 							</li>
 
 					<?php
@@ -613,6 +621,8 @@ require_once('header.php');
 								<?php
 								}
 								?>
+
+								<?php edit_post_link(); ?>
 							</li>
 
 					<?php
@@ -671,6 +681,7 @@ require_once('header.php');
 										?>
 									</div>
 								</div>
+								<?php edit_post_link(); ?>
 							</li>
 
 					<?php
@@ -768,6 +779,7 @@ require_once('header.php');
 								<?php
 								}
 								?>
+								<?php edit_post_link(); ?>
 							</li>
 
 					<?php
@@ -825,6 +837,7 @@ require_once('header.php');
 										?>
 									</div>
 								</div>
+								<?php edit_post_link(); ?>
 							</li>
 
 					<?php
@@ -932,6 +945,7 @@ require_once('header.php');
 								</div>
 								<a href="<?php the_permalink() ?>" class="ler-tudo"><?= get_post_meta(141, 'texto-ler-mais-colunas', true) ?></a>
 							</div>
+							<?php edit_post_link(); ?>
 						</li>
 
 				<?php
@@ -989,6 +1003,7 @@ require_once('header.php');
 									</h3>
 								</a>
 							</div>
+							<?php edit_post_link(); ?>
 						</li>
 
 				<?php
@@ -1089,6 +1104,7 @@ require_once('header.php');
 								</div>
 								<a href="<?php the_permalink() ?>" class="ler-tudo"><?= get_post_meta(156, 'texto-ler-mais-diversidade', true) ?></a>
 							</div>
+							<?php edit_post_link(); ?>
 						</li>
 
 				<?php
@@ -1129,6 +1145,7 @@ require_once('header.php');
 									</div>
 								</div>
 							</a>
+							<?php edit_post_link(); ?>
 						</li>
 
 				<?php
@@ -1276,6 +1293,7 @@ require_once('header.php');
 									</div>
 								</div>
 							</a>
+							<?php edit_post_link(); ?>
 						</li>
 
 				<?php
