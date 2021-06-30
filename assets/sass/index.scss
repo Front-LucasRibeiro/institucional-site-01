@@ -30,6 +30,10 @@
     padding: 10px;
     height: 800px;
 
+    @media (min-width: 768px) { 
+      margin-bottom: -100px;
+    };
+
     @media (max-width: 1024px) {
       height: auto;
     }
