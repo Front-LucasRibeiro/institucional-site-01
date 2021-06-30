@@ -1,4 +1,4 @@
-let tela = window.innerWidth
+var tela = window.innerWidth
 
 
 

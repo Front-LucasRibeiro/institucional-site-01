@@ -13,6 +13,10 @@ require_once('header.php');
 			</div>
 		</div>
 
+		<div class="hide wrapper-share-icons desk">
+			<?php echo do_shortcode("[social_share_button themes='theme1']"); ?>
+		</div>
+
 		<?php while ( have_posts() ) : the_post(); 
 			if( class_exists('Dynamic_Featured_Image') ) {
 				global $dynamic_featured_image;
@@ -49,6 +53,10 @@ require_once('header.php');
 											<?php the_category(); ?>
 										</div>
                 </div>
+
+								<div class="hide wrapper-share-icons mob">
+									<?php echo do_shortcode("[social_share_button themes='theme1']"); ?>
+								</div>
 
 								<div class="box-content">
 									<?php the_content(); ?>

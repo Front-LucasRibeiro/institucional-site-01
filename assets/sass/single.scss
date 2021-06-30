@@ -11,6 +11,74 @@
     padding-left: 0;
   }
 
+  .wrapper-share-icons{
+    &.mob{
+      display: none;
+    }
+    &.desk{
+      @media(max-width: 1261px){
+        display: none;
+      }
+    }
+  }
+
+  .wp-share-button{
+    width: 50px;
+    position: absolute;
+    top: 250px;
+    z-index: 99;
+    left: -46px;
+
+    @media(max-width: 1261px){
+      width: 100%;
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+
+
+    .share-button{
+      &:hover{
+        transform: scale(1.1);
+      }
+
+      &.facebook{
+        .button-icon{
+          display: inline-block;
+          background-image: url($facebook); 
+          width: 11px;
+          height: 18px;
+        }
+      }
+      &.whatsapp{
+        background-color: #52C04E;
+
+        .button-icon{
+          display: inline-block;
+          background-image: url($whatsapp); 
+          width: 18px;
+          height: 20px;
+        }
+      }
+      &.twitter{
+        .button-icon{
+          display: inline-block;
+          background-image: url($twitter); 
+          width: 18px;
+          height: 18px;
+        }
+      }
+      &.email{
+        .button-icon{
+          display: inline-block;
+          background-image: url($email); 
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+
   /* start estilos default single  */
   .box-content {
     h1,
