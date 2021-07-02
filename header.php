@@ -6,11 +6,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<meta property="og:locale" content="pt_BR">
-	<meta property="og:url" content="https://www.pitinews.com.br">
+	<meta property="og:url" content="https://www.pitinews.com.br<?php echo $_SERVER['REQUEST_URI']; ?>">
+	<?php 		
+	if(is_home()){?>
 	<meta property="og:title" content="Pitinews">
-	<meta property="og:site_name" content="Pitinews">
+	<?php }	else { ?>
+	<meta property="og:title" content="<?php the_title(); ?> | Pitinews"> 
+	<?php } ?>
+	<?php 
+	if($has_thumbnail){?>
+	<meta property="og:image" content="<?php echo $post_thumb_url ?>"> 
+	<meta property="og:description" content="<?php echo $post_resumo ?>"> 
+	<?php }
+	else { ?>
+	<meta property="og:image" content="https://www.pitinews.com.br/wp-content/uploads/2021/06/opengraph-pitinews.png"> 
 	<meta property="og:description" content="Somos um canal de notícias focado em entretenimento. Séries, filmes, anime, críticas, e muito conteúdo sobre o mundo de cultura pop.">
-	<meta property="og:image" content="https://www.pitinews.com.br/wp-content/uploads/2021/06/opengraph-pitinews.png">
+	<?php } ?>
+
+	<meta property="og:site_name" content="Pitinews">
+
+
 	<meta property="og:image:type" content="image/png">
 	<meta property="og:image:width" content="200">
 	<meta property="og:image:height" content="200">

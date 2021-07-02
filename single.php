@@ -1,6 +1,16 @@
+<?php 
+while ( have_posts() ) : the_post(); 
+
+$post_resumo = get_the_excerpt();
+$post_thumb_url = get_the_post_thumbnail_url(null,'medium_large');
+
+endwhile;
+?>
+
 <?php
 $css_escolhido = 'single';
 $has_reset_css = false;
+$has_thumbnail = true;
 require_once('header.php');
 ?>
 
@@ -23,7 +33,6 @@ require_once('header.php');
 				$featured_images = $dynamic_featured_image->get_featured_images();
 			}
 		?>
-
             <?php the_title( '<h1 class="title">', '</h1>' ); ?>
 
             <div class="info-post">
