@@ -280,7 +280,7 @@ header {
     form {
       position: relative;
 
-      input.search-field {
+      input.search-field,input.gsc-input {
         width: 100%;
         height: 60px;
         background: $white;
@@ -314,6 +314,73 @@ header {
         @media (max-width: 480px) {
           top: 16px;
         }
+      }
+    }
+    // SEARCH GOOGLE
+    input.search-field{
+      display: none;
+    }
+    .gsc-control-cse {
+      border: 0;
+      background-color: transparent!important;
+      &.gsc-control-cse-pt-BR {
+        padding: 0;
+      }
+    }
+    td.gsib_b{
+      display: none;
+    }
+    input#gsc-i-id1 {
+      padding: 20px 0 !important;
+      background-position: 30px 20px!important;
+      padding-left: 20px!important;
+      max-width: calc(100% - 20px);
+    }
+    .gsc-input-box{
+      border: 0!important;
+      background-color: transparent!important;
+    }
+    .gsib_a{
+      padding: 0!important;
+    }
+    table.gsc-search-box td.gsc-input{
+      padding-right: 0;
+      width: 100%;
+    }
+    button.gsc-search-button.gsc-search-button-v2,.gsc-clear-button{
+      position: absolute;
+      right: 0;
+      background: transparent;
+      border: 0;
+      top: 12px;
+      svg {
+        fill: #ef7b02;
+        width: 19px;
+        height: 19px;
+      }
+    }
+    .gsc-results-wrapper-visible{
+      border-radius: 25px;
+      @media (max-width: 768px) {
+        border-radius: 5px;
+        margin: 10px;
+      };
+      background-color: white;
+      overflow: hidden;
+      margin-top: 20px;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+      .gsc-wrapper{
+        position: relative;
+        display: block;
+        max-height: 55vh;
+        overflow-y: scroll;
+        padding: 20px;
+        overflow-x: hidden;
+        padding-bottom: 40px;
+
+      }
+      .gsc-result-info{
+        padding: 10px 10px;
       }
     }
   }

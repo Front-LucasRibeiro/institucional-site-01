@@ -89,6 +89,7 @@
 				<input type="search" class="search-field" placeholder="Faça sua busca" value="<?php echo get_search_query(); ?>" name="s" title="<?php echo esc_attr_x ( 'Search for:', 'label'); ?>" autocomplete="off" />
 					<button type="submit" class="search-submit"></button>
 			</form>
+			<div class="gcse-search"></div>
 		</div>
 
 	</div>

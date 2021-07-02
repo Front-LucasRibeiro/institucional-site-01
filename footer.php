@@ -114,6 +114,7 @@
 <script src="<?= $home; ?>/assets/js/lib/slick.min.js"></script>
 <script src="<?= $home; ?>/assets/js/lib/jquery.mask.min.js"></script>
 <script src="https://kit.fontawesome.com/76ba51fd1c.js" crossorigin="anonymous"></script>
+<script async src="https://cse.google.com/cse.js?cx=9801e0d31782c996e"></script>
 <!-- end libs  -->
 
 <!-- start scripts  -->
