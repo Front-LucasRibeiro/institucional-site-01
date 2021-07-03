@@ -1,7 +1,7 @@
-let tela = window.innerWidth
+let tela2 = window.innerWidth
 
 function carouselCriticas() {
-  if (tela > 1260) {
+  if (tela2 > 1260) {
     $('.section-criticas .list-posts').slick({
       arrows: true,
       dots: false,
