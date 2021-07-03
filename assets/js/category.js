@@ -1,1 +1,1 @@
-let tela=window.innerWidth;function carouselCriticas(){1260<tela&&$(".section-criticas .list-posts").slick({arrows:!0,dots:!1,autoplay:!1,autoplaySpeed:2e3,slidesToShow:3,slidesToScroll:2})}$(document).ready(function(){carouselCriticas()});
+let tela2=window.innerWidth;function carouselCriticas(){1260<tela2&&$(".section-criticas .list-posts").slick({arrows:!0,dots:!1,autoplay:!1,autoplaySpeed:2e3,slidesToShow:3,slidesToScroll:2})}$(document).ready(function(){carouselCriticas()});
