@@ -4,7 +4,7 @@
 	<?php $home = get_template_directory_uri(); ?>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+	<meta name="adopt-website-id" content="ec86716e-b974-4e95-9e02-f21d94088a56" />
 	<meta property="og:locale" content="pt_BR">
 	<meta property="og:url" content="https://www.pitinews.com.br<?php echo $_SERVER['REQUEST_URI']; ?>">
 	<?php 		
@@ -76,6 +76,8 @@
 
 	gtag('config', 'G-WKKJJZJT9D');
 	</script>
+	<script src="//tag.goadopt.io/injector.js?website_code=ec86716e-b974-4e95-9e02-f21d94088a56" class="adopt-injector"></script>
+	<script>window.adoptHideAfterConsent = true;</script>
 </head>
 <body>
 
