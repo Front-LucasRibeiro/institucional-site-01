@@ -1231,7 +1231,7 @@ require_once('header.php');
 		</div>
 
 		<div class="content-posts">
-			<?php echo wdi_feed(array('id'=>'1')); ?>
+		<iframe src="https://cdn.lightwidget.com/widgets/974c25e9c8c957fb8f659465655f6c5b.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;" loading="lazy"></iframe>
 		</div>
 	</div>
 </section>
