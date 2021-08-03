@@ -121,6 +121,8 @@
 <script src="<?= $home; ?>/assets/js/geral.js"></script>
 <script src="<?= $home; ?>/assets/js/page.js"></script>
 <script src="<?= $home; ?>/assets/js/<?= $js_escolhido; ?>.js"></script>
+<!-- LightWidget WIDGET -->
+<script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
 <!-- end scripts  -->
 
 <?php	wp_footer(); ?>
