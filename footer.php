@@ -110,7 +110,7 @@
 
 <!-- start libs  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script data-ad-client="ca-pub-6636390705016140" async src=https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6636390705016140" crossorigin="anonymous"></script>
 <script src="<?= $home; ?>/assets/js/lib/slick.min.js"></script>
 <script src="<?= $home; ?>/assets/js/lib/jquery.mask.min.js"></script>
 <script src="https://kit.fontawesome.com/76ba51fd1c.js" crossorigin="anonymous"></script>
