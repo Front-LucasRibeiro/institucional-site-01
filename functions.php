@@ -40,8 +40,21 @@ function get_titulo() {
 		the_title();
 	}
 }
-
-
+//registrando visitas
+function ed_set_post_views($postID) {
+    $count_key = 'ed_post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if ($count == '') {
+        $count = 0;
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+    } else {
+        $count++;
+        update_post_meta($postID, $count_key, $count);
+    }
+}
+//Removendo pré-buscas para melhorar a precisão dos dados
+remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 //Posts Type
 function meus_posts_type(){
 	

@@ -3,7 +3,7 @@ while ( have_posts() ) : the_post();
 
 $post_resumo = get_the_excerpt();
 $post_thumb_url = get_the_post_thumbnail_url(null,'medium_large');
-
+ed_set_post_views(get_the_ID());
 endwhile;
 ?>
 
