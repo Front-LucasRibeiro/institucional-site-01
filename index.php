@@ -128,6 +128,9 @@ require_once('header.php');
 					'orderby' => 'meta_value_num',
 					'order' => 'DESC', //Ou ASC
 					'hide_empty' => true,
+					'date_query' => array(
+						'after' => date('Y-m-d', strtotime('-30 days')) 
+					)
 				);
 
 				$cont = 1;
