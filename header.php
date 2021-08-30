@@ -78,9 +78,19 @@
 	</script>
 	<script src="//tag.goadopt.io/injector.js?website_code=ec86716e-b974-4e95-9e02-f21d94088a56" class="adopt-injector"></script>
 	<script>window.adoptHideAfterConsent = true;</script>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-T6RL6LC');</script>
+	<!-- End Google Tag Manager -->
 </head>
 <body>
-
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T6RL6LC"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 <header>
 	<div class="container">
 		<div class="content-header">
