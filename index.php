@@ -121,10 +121,16 @@ require_once('header.php');
 			<ul class="list-posts">
 				<?php
 				$args = array(
+					'post_type' => 'post',
 					'showposts' => 6,
 					'posts_per_page' => 6,
+					'meta_key' => 'ed_post_views_count',
+					'orderby' => 'meta_value_num',
 					'order' => 'DESC', //Ou ASC
 					'hide_empty' => true,
+					'date_query' => array(
+						'after' => date('Y-m-d', strtotime('-30 days')) 
+					)
 				);
 
 				$cont = 1;
