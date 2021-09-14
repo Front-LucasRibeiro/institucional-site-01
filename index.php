@@ -129,7 +129,7 @@ require_once('header.php');
 					'order' => 'DESC', //Ou ASC
 					'hide_empty' => true,
 					'date_query' => array(
-						'after' => date('Y-m-d', strtotime('-30 days')) 
+						'after' => date('Y-m-d', strtotime('-7 days')) 
 					)
 				);
 
