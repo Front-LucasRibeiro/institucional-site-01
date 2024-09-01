@@ -1,0 +1,22 @@
+{
+  "name": "single-page-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "node-sass": "^6.0.1"
+  },
+  "devDependencies": {
+    "gulp-bom": "^3.0.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-uglify": "^3.0.2"
+  }
+}
