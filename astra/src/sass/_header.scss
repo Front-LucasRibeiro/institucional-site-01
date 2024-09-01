@@ -1,0 +1,156 @@
+$sec_color: #54595F;
+
+.header {
+  background-color: #fff;
+
+  >.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 131px;
+  }
+
+  .logo {
+    img {
+      max-width: 205px;
+      height: auto;
+    }
+  }
+
+  .menu {
+    @media (max-width: 942px) {
+      display: none;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+
+      li {
+        margin-right: 30px;
+
+        a {
+          color: $sec_color;
+          font-weight: 500;
+          font-size: 15px;
+          text-transform: uppercase;
+
+          &:hover {
+            display: inline-block;
+            transform: scale(1.05);
+          }
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+    }
+  }
+
+  .redes-sociais {
+    @media (max-width: 942px) {
+      display: none;
+    }
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+      margin: 0;
+      gap: 22px;
+
+      li {
+        img {
+          width: 25px;
+          height: auto;
+
+          &:hover {
+            transform: scale(1.07);
+          }
+        }
+      }
+    }
+  }
+
+  .content-menu {
+    display: none;
+    position: absolute;
+    padding: 22px 14px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.07);
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 98px;
+
+    &.active {
+      display: flex;
+    }
+
+    .close {
+      position: absolute;
+      right: 7%;
+      top: 40px;
+
+      img {
+        width: 28px;
+        filter: invert(1);
+      }
+
+      @media (min-width: 768px) {
+        right: 5%;
+      }
+    }
+
+
+    >.menu,
+    >.redes-sociais {
+      display: flex;
+    }
+
+    >.redes-sociais {
+      margin-top: 32px;
+
+      img {
+        filter: invert(1);
+      }
+    }
+
+    >.menu {
+      ul {
+        flex-direction: column;
+
+        li {
+          margin-right: 0;
+        }
+
+        a {
+          color: #fff;
+          line-height: 34px;
+        }
+      }
+    }
+  }
+
+  .menu-mob {
+    display: none;
+
+    @media (max-width: 942px) {
+      display: flex;
+
+      .icon {
+        width: 30px;
+      }
+    }
+  }
+}
