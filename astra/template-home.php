@@ -26,4 +26,14 @@ Template Name: Home
   </div>
 </section>
 
+<section class="section-topo"></section>
+<section class="servicos"></section>
+<section class="portfolio"></section>
+<section class="empresa"></section>
+<section class="equipe"></section>
+<section class="clientes"></section>
+<section class="blog"></section>
+<section class="contato"></section>
+<section class="mapa-endereco"></section>
+
 <?php get_footer(); ?>
