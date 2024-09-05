@@ -26,7 +26,27 @@ Template Name: Home
   </div>
 </section>
 
-<section class="section-topo"></section>
+<section class="section-topo">
+  <ul class="carousel-top container">
+    <li>
+      <img src="<?= $home; ?>/src/images/Ativo-1.png" alt="Item 1">
+      <span class="text">Item 1</span>
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/Ativo-4.png" alt="Item 3">
+      <span class="text">Item 3</span>
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/Ativo-1.png" alt="Item 1">
+      <span class="text">Item 1</span>
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/Ativo-4.png" alt="Item 3">
+      <span class="text">Item 3</span>
+    </li>
+  </ul>
+</section>
+
 <section class="servicos"></section>
 <section class="portfolio"></section>
 <section class="empresa"></section>
