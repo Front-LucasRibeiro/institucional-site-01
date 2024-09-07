@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <?php $home = get_template_directory_uri(); ?>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <link rel="stylesheet" href="<?= $home; ?>/src/build/css/index.css?v=39" type="text/css" />
 <?php 
 if ( apply_filters( 'astra_header_profile_gmpg_link', true ) ) {
