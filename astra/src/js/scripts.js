@@ -122,6 +122,18 @@ function carouselSectionTop() {
   })
 }
 
+function carouselClients() {
+  $('.carousel-clientes').slick({
+    infinite: true,
+    slidesToShow:  5,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    speed: 500,
+  })
+}
+
 function portfolioCarousel() {
   $('.cards-portfolio li').on('click', function () {
     openModal(this)
@@ -136,4 +148,5 @@ $(document).ready(function () {
   portfolioCarousel()
   closeModal()
   carouselTeam()
+  carouselClients()
 })

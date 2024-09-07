@@ -19,11 +19,16 @@
 
 		</div><!-- #page -->
 
+		
+		<?php $home = get_template_directory_uri(); ?>
+
 		<footer>
-			meu footer
+			<div class="logo">
+				<img src="<?= $home; ?>/src/images/logo.png" alt="">
+			</div>
+			<p>&copy; 2024 Seu site - Todos os direitos reservados – Sistemas Flex</p>
 		</footer>
 
-		<?php $home = get_template_directory_uri(); ?>
 		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 		<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

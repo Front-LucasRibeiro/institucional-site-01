@@ -204,13 +204,124 @@ Template Name: Home
   <h2 class="title">Clientes</h2>
 
   <ul class="carousel-clientes">
-    <li></li>
+    <li>
+      <img src="<?= $home; ?>/src/images/logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
+    </li>
   </ul>
 </section>
 
-<section class="blog"></section>
-<section class="contato"></section>
-<section class="mapa-endereco"></section>
+<section class="blog container">
+  <h2 class="title">Blog</h2>
+
+  <ul class="grid-blog">
+    <li>
+      <article class="top">
+        <h3 class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo laborum consectetur repudiandae repellendus blibus rem.</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora sed modi eaque, molestiae similique adipisci commodi officiis, voluptatem odio inventore ullam voluptas vitae sint fuga quod aperiam esse repudiandae. Doloribus!</p>
+        <a href="" class="read-more">Leia mais</a>
+      </article>
+      <span class="date">10/12/2021</span>
+    </li>
+    <li>
+      <article class="top">
+        <h3 class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo laborum consectetur repudiandae repellendus blibus rem.</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora sed modi eaque, molestiae similique adipisci commodi officiis, voluptatem odio inventore ullam voluptas vitae sint fuga quod aperiam esse repudiandae. Doloribus!</p>
+        <a href="" class="read-more">Leia mais</a>
+      </article>
+      <span class="date">10/12/2021</span>
+    </li>
+  </ul>
+
+  <a href="" class="btn-more">Veja mais</a>
+</section>
+
+<section class="contato">
+  <h2 class="title">Contato</h2>
+
+  <div class="wrap-content">
+    <div class="information">
+      <h3 class="title-section">Informações</h3>
+
+      <ul>
+        <li>
+          <span class="icon"></span>
+          <div class="text">
+            <h4>Localização</h4>
+            <p>
+              <a href="">
+                Rua Lorem ipsum dolor sit amet consectetur 145 | São Paulo - SP | 00000-000
+              </a>
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="icon"></span>
+          <div class="text">
+            <h4>Telefone</h4>
+            <p>
+              <a href="">
+                +55 (11) 2368-3444
+              </a>
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="icon"></span>
+          <div class="text">
+            <h4>E-mail</h4>
+            <p>
+              <a href="mailto:lorem@lorem.com.br" target="_blank">
+                lorem@lorem.com.br
+              </a>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="form">
+      <h3 class="title-section">Contato</h3>
+
+      <form action="">
+        <input type="text" name="nome">
+        <input type="email" name="email">
+        <input type="tel" name="tel">
+        <textarea name="mensagem" id="mensagem"></textarea>
+        <button type="submit">Enviar Mensagem</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="mapa-endereco">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.385166593419!2d-46.666904713902895!3d-23.554606306678146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce582d97462095%3A0x6032d751c2103c1a!2zUi4gZGEgQ29uc29sYcOnw6NvLCAyMzAyIC0gQ29uc29sYcOnw6NvLCBTw6NvIFBhdWxvIC0gU1AsIDAxMzAyLTAwMQ!5e0!3m2!1spt-BR!2sbr!4v1725751089396!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
 
 <div class="modal" id="myModal">
   <span class="close" onclick="closeModal()">&times;</span>
