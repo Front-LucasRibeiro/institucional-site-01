@@ -42,7 +42,7 @@ if ( apply_filters( 'astra_header_profile_gmpg_link', true ) ) {
 	<header class="header">
 		<div class="container">
 			<div class="logo">
-				<img src="<?= $home; ?>/src/images/Logo_Site.png" alt="">
+				<img src="<?= $home; ?>/src/images/no-logo.png" alt="">
 			</div>
 			<div class="menu">
 				<ul>
@@ -68,6 +68,11 @@ if ( apply_filters( 'astra_header_profile_gmpg_link', true ) ) {
 					<li class="linkedin">
 						<a href="">
 							<img src="<?= $home; ?>/src/images/linkedin.svg" title="LinkedIn" alt="LinkedIn">
+						</a>
+					</li>
+					<li class="whats">
+						<a href="">
+							<img src="<?= $home; ?>/src/images/whatsapp.svg" title="WhatsApp" alt="WhatsApp">
 						</a>
 					</li>
 				</ul>

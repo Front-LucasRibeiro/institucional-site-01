@@ -140,6 +140,21 @@ function portfolioCarousel() {
   })
 }
 
+function scrollTop() {
+  
+  $('#scroll-top').on('click', function () {
+    $('html, body').animate({ scrollTop: $('.header').offset().top }, 500);
+  })
+
+  $(window).on('scroll', function () {
+    if ($(this).scrollTop() > $('.header').height()) {
+      $('#scroll-top').show()
+    } else {
+      $('#scroll-top').hide()
+    }
+  })
+}
+
 
 $(document).ready(function () {
   carouselTop()
@@ -149,4 +164,5 @@ $(document).ready(function () {
   closeModal()
   carouselTeam()
   carouselClients()
+  scrollTop()
 })
