@@ -308,13 +308,7 @@ Template Name: Home
     <div class="form">
       <h3 class="title-section">Contato</h3>
 
-      <form action="">
-        <input type="text" name="nome">
-        <input type="email" name="email">
-        <input type="tel" name="tel">
-        <textarea name="mensagem" id="mensagem"></textarea>
-        <button type="submit">Enviar Mensagem</button>
-      </form>
+      <?php echo do_shortcode('[wpforms id="12" title="false"]'); ?>
     </div>
   </div>
 </section>

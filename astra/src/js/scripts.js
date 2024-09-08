@@ -93,7 +93,7 @@ function carouselTeam() {
     infinite: true,
     slidesToShow:  3,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: true,
     autoplay: true,
     autoplaySpeed: 3000,
     speed: 500,
