@@ -186,3 +186,82 @@ require_once ASTRA_THEME_DIR . 'inc/core/markup/class-astra-markup.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-filters.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-hooks.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-functions.php';
+
+
+
+// start - POST TYPES 
+function create_portfolio_cpt() {
+    $args = array(
+        'labels' => array(
+            'name' => __('Portfólios'),
+            'singular_name' => __('Portfólio')
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'portfolio'),
+        'supports' => array('title', 'thumbnail'),
+        'menu_icon' => 'dashicons-portfolio',
+    );
+    register_post_type('portfolio', $args);
+}
+add_action('init', 'create_portfolio_cpt');
+// end - POST TYPES 
+
+
+// start - criando campos 
+function createFieldPortfolio(){
+		global $post;
+		$post = get_post();
+		$id_post = $post->ID;
+		$textLegendPortfolio= get_post_meta( $id_post, 'textLegendPortfolio', true);
+	?>
+
+	<style>
+			textarea,
+			input{
+				width: 100%;
+				margin-top: 5px;
+			}
+
+			label{
+				font-weight: bold;
+			}
+
+			.field{
+				margin: 12px 0;
+			}
+		</style>
+
+	<div class="box">
+		<div class="field">
+			<label for="textLegendPortfolio">Legenda para imagem:</label>
+			<input type="text" id="textLegendPortfolio" name="textLegendPortfolio" value="<?= $textLegendPortfolio; ?>" />
+		</div>
+	</div>
+
+	
+	<?php
+}
+
+function add_portfolio_meta_box() {
+    add_meta_box(
+			'portfolio_meta_box', // ID
+			'Informações do Portfólio', // Título
+			'createFieldPortfolio', // Callback
+			'portfolio', // CPT
+			'normal', // Contexto
+			'high' // Prioridade
+    );
+}
+add_action('add_meta_boxes', 'add_portfolio_meta_box');
+// end - criando campos 
+
+
+// start - funções atualizar campos 
+function save_portfolio_meta($post_id) {
+    if (isset($_POST['textLegendPortfolio'])) {
+        update_post_meta($post_id, 'textLegendPortfolio', sanitize_text_field($_POST['textLegendPortfolio']));
+    }
+}
+add_action('save_post', 'save_portfolio_meta');
+// end - funções atualizar campos
