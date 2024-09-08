@@ -97,6 +97,22 @@ function carouselTeam() {
     autoplay: true,
     autoplaySpeed: 3000,
     speed: 500,
+    responsive: [
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      },
+    ]
   })
 }
 
@@ -119,6 +135,24 @@ function carouselSectionTop() {
     autoplay: true,
     autoplaySpeed: 3000,
     speed: 500,
+    responsive: [
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          centerMode: true,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+        }
+      },
+    ]
   })
 }
 
@@ -131,6 +165,22 @@ function carouselClients() {
     autoplay: true,
     autoplaySpeed: 3000,
     speed: 500,
+      responsive: [
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+    ]
   })
 }
 

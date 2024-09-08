@@ -42,7 +42,7 @@ if ( apply_filters( 'astra_header_profile_gmpg_link', true ) ) {
 	<header class="header">
 		<div class="container">
 			<div class="logo">
-				<img src="<?= $home; ?>/src/images/no-logo.png" alt="">
+				<img src="<?= $home; ?>/src/images/logo-2.jpg" alt="">
 			</div>
 			<div class="menu">
 				<ul>

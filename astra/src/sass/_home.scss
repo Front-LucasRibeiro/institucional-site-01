@@ -7,6 +7,10 @@
     margin: 20px auto;
     gap: 14px;
 
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+
     li {
       display: flex;
       align-items: center;
@@ -36,16 +40,32 @@
 
 .servicos {
   margin-top: 76px;
+
+  @media (max-width: 480px) {
+    margin-top: 38px;
+  }
 }
 
 .cards-services {
   margin-bottom: 76px;
+
+  @media (max-width: 480px) {
+    margin-bottom: 38px;
+  }
 
   ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 18px;
     margin: 0 0 22px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
 
     li {
       display: flex;
@@ -77,6 +97,10 @@
       &:nth-child(2n) {
         background-color: #fff;
 
+        @media (max-width: 767px) {
+          border: 1px solid #dedede;
+        }
+
         .name {
           color: $main-color;
         }
@@ -96,11 +120,21 @@
     gap: 18px;
     margin: 0;
 
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px 0;
+    }
+
     li {
       display: flex;
       flex-direction: column;
       height: 260px;
       position: relative;
+      box-sizing: border-box;
+
+      @media (max-width: 620px) {
+        height: 160px;
+      }
 
       .legend {
         text-align: center;
@@ -114,6 +148,14 @@
         padding: 4px 8px;
         width: 100%;
         box-sizing: border-box;
+
+        @media (max-width: 620px) {
+          display: flex;
+          padding: 10px;
+          -webkit-line-clamp: 2;
+          justify-content: center;
+          align-items: center;
+        }
       }
 
       .image-container {
@@ -134,7 +176,6 @@
           }
         }
       }
-
     }
   }
 }
@@ -145,12 +186,20 @@
   .title {
     background: #fff;
     padding: 42px 0 28px;
+
+    @media (max-width: 620px) {
+      padding: 22px 0 28px;
+    }
   }
 
   .wrap {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 18px;
+
+    @media (max-width: 620px) {
+      grid-template-columns: 1fr;
+    }
 
     .card {
       display: flex;
@@ -167,7 +216,6 @@
 
       p {
         margin-top: 12px;
-        height: 132px;
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 5;
@@ -179,6 +227,10 @@
 
 .equipe {
   margin-top: 48px;
+
+  @media (max-width: 480px) {
+    margin-top: 22px;
+  }
 
   ul {
     display: flex;
@@ -221,6 +273,10 @@
 .clientes {
   margin: 76px auto;
 
+  @media (max-width: 620px) {
+    margin: 38px auto 18px;
+  }
+
   .title {
     margin-bottom: 22px;
   }
@@ -248,12 +304,20 @@
 .blog {
   margin-bottom: 76px;
 
+  @media (max-width: 620px) {
+    margin-bottom: 38px;
+  }
+
   .grid-blog {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 18px;
     margin: 0;
     list-style: none;
+
+    @media (max-width: 620px) {
+      grid-template-columns: 1fr;
+    }
 
     li {
       -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, .15);
@@ -321,8 +385,24 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
+
     >div {
       padding: 100px;
+
+      @media (max-width: 992px) {
+        padding: 58px;
+      }
+
+      @media (max-width: 767px) {
+        padding: 38px;
+      }
+
+      @media (max-width: 480px) {
+        padding: 32px 18px;
+      }
     }
 
     .title-section {
@@ -332,6 +412,11 @@
       line-height: 31px;
       text-transform: uppercase;
       color: #fff;
+
+      @media (max-width: 767px) {
+        font-size: 21px;
+        line-height: 25px;
+      }
 
       &:before {
         content: "";
@@ -360,6 +445,10 @@
           padding-bottom: 22px;
           gap: 24px;
 
+          @media (max-width: 767px) {
+            gap: 12px;
+          }
+
           &:last-child {
             padding-bottom: 0;
           }
@@ -369,9 +458,16 @@
             background-repeat: no-repeat;
             width: 42px;
             height: 42px;
+            min-width: 42px;
             filter: invert(1);
             position: relative;
             top: -18px;
+
+            @media (max-width: 767px) {
+              width: 22px;
+              height: 22px;
+              min-width: 22px;
+            }
           }
 
           &:nth-of-type(1) {
@@ -398,6 +494,10 @@
               color: #fff;
               font-weight: 500;
               margin-bottom: 18px;
+
+              @media (max-width: 767px) {
+                margin-bottom: 12px;
+              }
             }
 
             a {
@@ -414,8 +514,8 @@
       background-color: $main-color;
 
 
-      .wpforms-confirmation-scroll{
-        p{
+      .wpforms-confirmation-scroll {
+        p {
           color: #fff;
         }
       }
@@ -452,5 +552,21 @@
 
   iframe {
     width: 100%;
+  }
+}
+
+.banner-top {
+  display: block;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.banner-top-mob {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
   }
 }

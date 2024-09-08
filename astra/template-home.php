@@ -26,6 +26,25 @@ Template Name: Home
   </div>
 </section>
 
+<section class="banner-top-mob">
+  <div class="container-banner">
+    <div>
+      <img src="<?= $home; ?>/src/images/mob-1.jpg" alt="">
+      <div class="info-text">
+        <div class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum possimus aliquam assumenda fugit quaerat, praesentium quas dolores libero ratione commodi vero impedit optio blanditiis obcaecati hic adipisci cum odio illum.</div>
+      </div>
+    </div>
+    <div>
+      <img src="<?= $home; ?>/src/images/mob-2.jpg" alt="">
+      <div class="info-text">
+        <div class="text">
+          Texto Informativo 2
+        </div>  
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section-topo">
   <ul class="carousel-top container">
     <li>
@@ -128,7 +147,6 @@ Template Name: Home
 
   <a href="" class="btn-more">Veja mais</a>
 </section>
-
 
 <section class="empresa">
   <h2 class="title">Empresa</h2>
