@@ -1,130 +1,28 @@
-<footer>
-  <div class="container">
-    <div class="box-colunas desk">
-      
-
-      <div class="secao-pitinews">
-        <h3 class="title"><?= get_post_meta( 260, 'item1-footer', true) ?></h3>
-
-        <?php
-          $args = array( 'theme_location' => 'footer-menu-pitinews');
-          wp_nav_menu( $args ); 
-        ?>
-      </div>
-      <div class="secao-categorias">
-        <h3 class="title"><?= get_post_meta( 271, 'item5-footer', true) ?></h3>
-
-        <?php
-          $args = array( 'theme_location' => 'footer-menu-categorias');
-          wp_nav_menu( $args ); 
-        ?>
-      </div>
-      <div class="secao-outros-canais">
-        <h3 class="title"><?= get_post_meta( 262, 'item10-footer', true) ?></h3>
-
-        <?php
-          $args = array( 'theme_location' => 'footer-menu-outros-canais');
-          wp_nav_menu( $args ); 
-        ?>
-      </div>
-      <div class="secao-piticas">
-        <h3 class="title"><?= get_post_meta( 272, 'item13-footer', true) ?></h3>
-
-        <?php
-          $args = array( 'theme_location' => 'footer-menu-piticas');
-          wp_nav_menu( $args ); 
-        ?>
-      </div>
-    </div>
-
-    <div class="box-colunas mob">
-      <div class="col col-left">
-        <div class="secao-pitinews">
-          <h3 class="title"><?= get_post_meta( 260, 'item1-footer', true) ?></h3>
-
-          <?php
-            $args = array( 'theme_location' => 'footer-menu-pitinews');
-            wp_nav_menu( $args ); 
-          ?>
-        </div>
-        <div class="secao-outros-canais">
-          <h3 class="title"><?= get_post_meta( 262, 'item10-footer', true) ?></h3>
-
-          <?php
-            $args = array( 'theme_location' => 'footer-menu-outros-canais');
-            wp_nav_menu( $args ); 
-          ?>
-        </div>
-      </div>
-
-      <div class="col col-right">
-        <div class="secao-categorias">
-          <h3 class="title"><?= get_post_meta( 271, 'item5-footer', true) ?></h3>
-
-          <?php
-            $args = array( 'theme_location' => 'footer-menu-categorias');
-            wp_nav_menu( $args ); 
-          ?>
-        </div>
-
-        <div class="secao-piticas">
-          <h3 class="title"><?= get_post_meta( 272, 'item13-footer', true) ?></h3>
-
-          <?php
-            $args = array( 'theme_location' => 'footer-menu-piticas');
-            wp_nav_menu( $args ); 
-          ?>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="box-bottom">
-      <div class="copy">&copy; 2021 PitiNews</div>
-
-      <div class="redes-socias">
-        <ul>
-          <li class="facebook"><a href="<?= get_post_meta( 210, 'link_face', true) ?>" target="_blank"></a></li>
-          <li class="twitter"><a href="<?= get_post_meta( 208, 'link_twitter', true) ?>" target="_blank"></a></li>
-          <li class="instagram"><a href="<?= get_post_meta( 209, 'link_instagram', true) ?>" target="_blank"></a></li>
-        </ul>
-      </div>
-
-      <div class="developed">
-        <span class="text">Desenvolvimento</span>
-        <a href="https://seriedesign.com.br/" target="_blank">
-          <span class="logo-serie"></span>
-        </a>
-      </div>
-      
-    </div>
-  </div>
-</footer>
-
-
 <?php $home = get_template_directory_uri(); ?>
 
-<script>
-  var categoryJSON = <?= get_post_meta( 99, 'category-color', true) ?>
-</script>
+		<div class="whats-flutuante">
+			<a href="https://api.whatsapp.com/send?phone=5511964914546" target="_blank" title="WhatsApp">
+				<span class="icon"></span>
+			</a>
+		</div>
 
-<!-- start libs  -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6636390705016140" crossorigin="anonymous"></script>
-<script src="<?= $home; ?>/assets/js/lib/slick.min.js"></script>
-<script src="<?= $home; ?>/assets/js/lib/jquery.mask.min.js"></script>
-<script src="https://kit.fontawesome.com/76ba51fd1c.js" crossorigin="anonymous"></script>
-<script async src="https://cse.google.com/cse.js?cx=9801e0d31782c996e"></script>
-<!-- end libs  -->
+		<div id="scroll-top" title="voltar ao topo">
+			<svg class="ast-arrow-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="26px" height="16.043px" viewBox="57 35.171 26 16.043" enable-background="new 57 35.171 26 16.043" xml:space="preserve">
+				<path d="M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z"></path>
+			</svg>
+		</div>
 
-<!-- start scripts  -->
-<script src="<?= $home; ?>/assets/js/geral.js"></script>
-<script src="<?= $home; ?>/assets/js/page.js"></script>
-<script src="<?= $home; ?>/assets/js/<?= $js_escolhido; ?>.js"></script>
-<!-- LightWidget WIDGET -->
-<script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-<!-- end scripts  -->
+		<footer>
+			<div class="logo">
+				<img src="<?= $home; ?>/src/images/logo-3.jpg" alt="">
+			</div>
+			<p>&copy; 2024 Seu site - Todos os direitos reservados – Sistemas Flex</p>
+		</footer>
 
-<?php	wp_footer(); ?>
-</body>
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+		<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+		<script type="text/javascript" src="<?= $home; ?>/src/build/js/scripts.js?v=10"></script>
+	</body>
 </html>

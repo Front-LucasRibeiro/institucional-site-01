@@ -1,19 +1,22 @@
 {
-  "name": "pitinews",
+  "name": "institucional-site-01",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "gulp": "^4.0.2"
-  },
   "dependencies": {
-    "gulp-sass": "^4.1.0",
+    "gulp": "^4.0.2",
+    "sass": "^1.78.0"
+  },
+  "devDependencies": {
+    "gulp-bom": "^3.0.0",
+    "gulp-sass": "^5.0.0",
     "gulp-uglify": "^3.0.2"
   }
 }

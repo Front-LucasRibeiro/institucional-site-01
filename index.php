@@ -1,1348 +1,349 @@
 <?php
-$css_escolhido = 'index';
-$has_reset_css = true;
-require_once('header.php');
+/*
+Template Name: Home
+*/
 ?>
 
-<section class="wrapper-slider">
-	<?php
-	query_posts('post_type=bg_slide_principal');
-	while (have_posts()) : the_post();
-	?>
+<?php get_header(); ?>
+<?php $home = get_template_directory_uri(); ?>
 
-		<?php
-			if(get_post_meta(300, 'link-fundo-home-topo', true) !== ""){
-		?>
-			<a href="<?= get_post_meta(300, 'link-fundo-home-topo', true) ?>" target="_blank">
-				<div class="fundo">
-					<?php the_post_thumbnail(); ?>
-				</div>
-			</a>
-		<?php
-			} else {
-		?>
-			<div class="fundo">
-				<?php the_post_thumbnail(); ?>
-			</div>
-		<?php
-			}	
-		?>
-			
-
-	<?php
-	endwhile;
-	wp_reset_query();
-	?>
-
-	<div class="box-container">
-		<ul id="sliderTopo" class="slider-topo desk">
-
-			<?php
-			$args = array(
-				'post_type' => 'home_slide_principal'
-			);
-
-			$loop = new WP_Query($args);
-			if ($loop->have_posts()) {
-				while ($loop->have_posts()) {
-					$loop->the_post();
-					$post = get_post();
-					$id_post = $post->ID;
-			?>
-
-					<li class="slider-topo" data-thumb="">
-						<a class="link-full" href="<?= get_post_meta($id_post, 'link_banner_slide', true) ?>">
-							<?php the_post_thumbnail('banner-slide-principal-1170x500'); ?>
-
-							<div class="box-legenda">
-								<?php the_content(); ?>
-							</div>
-						</a>
-					</li>
-
-			<?php
-				}
-			}
-			?>
-		</ul>
-
-		<ul id="sliderTopoMob" class="slider-topo mob">
-			<?php
-			$args = array(
-				'post_type' => 'home_slide_principal'
-			);
-
-			$loop = new WP_Query($args);
-			if ($loop->have_posts()) {
-				while ($loop->have_posts()) {
-					$loop->the_post();
-					$post = get_post();
-					$id_post = $post->ID;
-			?>
-
-					<li class="slider-topo" data-thumb="">
-						<a class="link-full" href="<?= get_post_meta($id_post, 'link_banner_slide', true) ?>">
-							<?php the_post_thumbnail('banner-slide-principal-mobile-480x600'); ?> 
-
-							<div class="box-legenda">
-								<?php the_content(); ?>
-							</div>
-						</a>
-					</li>
-
-			<?php
-				}
-			}
-			?>
-		</ul>
-	</div>
+<section class="banner-top">
+  <div class="container-banner">
+    <div>
+      <img src="<?= $home; ?>/src/images/BANNER-HOME.png" alt="">
+      <div class="info-text">
+        <div class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum possimus aliquam assumenda fugit quaerat, praesentium quas dolores libero ratione commodi vero impedit optio blanditiis obcaecati hic adipisci cum odio illum.</div>
+      </div>
+    </div>
+    <div>
+      <img src="<?= $home; ?>/src/images/construction-cranes-and-concrete-structure-at-suns-PBLEVC8.jpg" alt="">
+      <div class="info-text">
+        <div class="text">
+          Texto Informativo 2
+        </div>  
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="banner-top-home box-adsense">
-	<?= get_post_meta(165, 'banner-adsense-home-topo', true) ?>
+<section class="banner-top-mob">
+  <div class="container-banner">
+    <div>
+      <img src="<?= $home; ?>/src/images/mob-1.jpg" alt="">
+      <div class="info-text">
+        <div class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum possimus aliquam assumenda fugit quaerat, praesentium quas dolores libero ratione commodi vero impedit optio blanditiis obcaecati hic adipisci cum odio illum.</div>
+      </div>
+    </div>
+    <div>
+      <img src="<?= $home; ?>/src/images/mob-2.jpg" alt="">
+      <div class="info-text">
+        <div class="text">
+          Texto Informativo 2
+        </div>  
+      </div>
+    </div>
+  </div>
 </section>
 
-<div class="wrapper-section">
-	<section class="box-ultimas-noticias">
-		<div class="container">
-			<h2 class="section-title">
-				<span class="title-desk">
-					<?= get_post_meta(100, 'title-ultimas-noticias', true) ?>
-				</span>
-				<span class="title-mob">
-					<?= get_post_meta(103, 'title-ultimas-noticias-mob', true) ?>
-				</span>
-				<span class="separator"></span>
-				<span class="veja-mais">
-					<a href="<?= get_post_meta(104, 'link-veja-mais', true) ?>">Veja mais</a>
-				</span>
-			</h2>
+<section class="section-topo">
+  <ul class="carousel-top container">
+    <li>
+      <img src="<?= $home; ?>/src/images/Ativo-1.png" alt="Item 1">
+      <span class="text">Item 1</span>
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/Ativo-4.png" alt="Item 3">
+      <span class="text">Item 3</span>
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/Ativo-1.png" alt="Item 1">
+      <span class="text">Item 1</span>
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/Ativo-4.png" alt="Item 3">
+      <span class="text">Item 3</span>
+    </li>
+  </ul>
+</section>
 
-			<ul class="list-posts">
-				<?php
-				$args = array(
-					'post_type' => 'post',
-					'showposts' => 6,
-					'posts_per_page' => 6,
-					'meta_key' => 'ed_post_views_count',
-					'orderby' => 'meta_value_num',
-					'order' => 'DESC', //Ou ASC
-					'hide_empty' => true,
-					'date_query' => array(
-						'after' => date('Y-m-d', strtotime('-7 days')) 
-					)
-				);
+<section class="servicos container">
+  <h2 class="title">Serviços</h2>
 
-				$cont = 1;
+  <h3 class="sub-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda quae officia voluptatibus facere repudiandae, rem rerum nostrum molestiae reprehenderit. Error, corporis molestias.</h3>
 
-				$loop = new WP_Query($args);
-				if ($loop->have_posts()) {
-					while ($loop->have_posts()) {
-						$loop->the_post();
-						$post = get_post();
-						$id_post = $post->ID;
+  <div class="cards-services">
+    <ul>
+      <li>
+        <span class="name">Projeto</span>
+        <img src="<?= $home; ?>/src/images/projeto.jpg" alt="Projeto" class="icon">
+      </li>
+      <li>
+        <span class="name">Consultoria</span>
+        <img src="<?= $home; ?>/src/images/consultoria.jpg" alt="Projeto" class="icon">
+      </li>
+       <li>
+        <span class="name">ASSISTÊNCIA À OBRA</span>
+        <img src="<?= $home; ?>/src/images/assistencia.jpg" alt="Projeto" class="icon">
+      </li>
+      <li>
+        <span class="name">Consultoria</span>
+        <img src="<?= $home; ?>/src/images/consultoria.jpg" alt="Projeto" class="icon">
+      </li>
+      <li>
+        <span class="name">Projeto</span>
+        <img src="<?= $home; ?>/src/images/projeto.jpg" alt="Projeto" class="icon">
+      </li>
+      <li>
+        <span class="name">Consultoria</span>
+        <img src="<?= $home; ?>/src/images/consultoria.jpg" alt="Projeto" class="icon">
+      </li>
+    </ul>
 
-						if ($cont < 7) {
-				?>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique alias autem delectus id cupiditate impedit. Nisi dolore sapiente eaque deleniti atque, alias omnis quis aperiam. Tempore consequatur nostrum fugiat magni? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias quis tempore nisi modi enim. Vitae veritatis hic amet distinctio dolorum tenetur saepe repudiandae dolorem, nobis eos consequatur quam quasi ipsum?</p>
+  </div>
+</section>
 
+<section id="portfolio" class="portfolio container swiper">
+  <h2 class="title">Portfólio</h2>
 
+  <ul class="cards-portfolio swiper-wrapper">
+    <li class="swiper-slide card" onclick="openModal(this)">
+      <div class="image-container">
+        <img src="<?= $home; ?>/src/images/83-FACHADA-CASA-TIPO-1-FRENTE-2-2000x1205-1.jpg" alt="Ekko - Live Aplha One">
+      </div>
+      <span class="legend">Ekko - Live Aplha One</span>
+    </li>
+    <li class="swiper-slide card" onclick="openModal(this)">
+      <div class="image-container">
+        <img src="<?= $home; ?>/src/images/Sem-t°tulo-2-e1641944435393.jpg" alt="Palme - Tempus">
+      </div>
+      <span class="legend">Palme - Tempus</span>
+    </li>
+    <li class="swiper-slide card" onclick="openModal(this)">
+      <div class="image-container">
+        <img src="<?= $home; ?>/src/images/foto-de-maquete-fisica-de-Edificios_Residenciais-em-SC-2.webp" alt="Procave - Fischer Dreams">
+      </div>
+      <span class="legend">Procave - Fischer Dreams</span>
+    </li>
+    <li class="swiper-slide card" onclick="openModal(this)">
+      <div class="image-container">
+        <img src="<?= $home; ?>/src/images/stefani_nogueira__20072021105848.jpg" alt="Stéfani Nogueira - Plaza La Coruña">
+      </div>
+      <span class="legend">Stéfani Nogueira - Plaza La Coruña</span>
+    </li>
+    <li class="swiper-slide card" onclick="openModal(this)">
+      <div class="image-container">
+        <img src="<?= $home; ?>/src/images/full-perspectiva-ilustrada-da-fachada.jpg" alt="Stéfani Nogueira - Resid. Atmosphere">
+      </div>
+      <span class="legend">Stéfani Nogueira - Resid. Atmosphere</span>
+    </li>
+    <li class="swiper-slide card" onclick="openModal(this)">
+      <div class="image-container">
+        <img src="<?= $home; ?>/src/images/5a09a5e5162f9400010f5c5b_cam2-scaled.jpg" alt="Stéfani Nogueira - Ribeirão Diesel">
+      </div>
+      <span class="legend">Stéfani Nogueira - Ribeirão Diesel</span>
+    </li>
+  </ul>
 
-							<li class="list-post-item">
-								<a href="<?php the_permalink() ?>">
-									<div class="image-desk">
-										<?php the_post_thumbnail('banner-370x370'); ?>
-									</div>
-									<div class="image-mob">
-										<?php the_post_thumbnail('banner-220x243'); ?>
-									</div>
-								</a>
+  <a href="" class="btn-more">Veja mais</a>
+</section>
 
-								<div class="wrapper-title">
-									<div class="box-category">
-										<?php the_category() ?>
-									</div>
+<section class="empresa">
+  <h2 class="title">Empresa</h2>
+  <div class="container">
+    <div class="wrap">
+      <div class="card">
+        <img src="<?= $home; ?>/src/images/bullseye-arrow.svg" alt="Missão">
+        <h3>Missão:</h3>
+        <p>Nossa missão é prestar o melhor serviço de projeto e consultoria voltados para a produção de vedações em edificações, oferecendo assessoria integral e eficiente para obter a confiança e satisfação de nossos clientes.</p>
+      </div>
+       <div class="card">
+        <img src="<?= $home; ?>/src/images/arrow-square-up.svg" alt="Visão">
+        <h3>Visão:</h3>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum reiciendis quaerat sed maiores. Impedit provident vitae repellendus similique quos aliquid, numquam voluptatem tempora fugiat ipsum doloremque, sint esse alias ratione.</p>
+      </div>
+       <div class="card">
+        <img src="<?= $home; ?>/src/images/handshake.svg" alt="Valores">
+        <h3>Valores:</h3>
+        <p>Competência, Confiança, Proximidade, Pessoalidade.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-									<div class="box-title">
-										<a href="<?php the_permalink() ?>">
-											<h3 class="title-post">
-												<?php the_title(); ?>
-											</h3>
-										</a>
-									</div>
-								</div>
+<section class="equipe container">
+  <h2 class="title">Equipe</h2>
 
-								<?php edit_post_link(); ?>
-							</li>
+  <ul>
+    <li>
+      <div class="col-left">
+        <img src="<?= $home; ?>/src/images/user.jpg" alt="" class="photo">
+        <span class="name">Lorem Ipsun</span>
+        <span class="cargo">Sócio</span>
+      </div>
+      <div class="col-right">
+        <span class="name">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio provident esse tenetur voluptate</span>
+      </div>
+    </li>
+    <li>
+      <div class="col-left">
+        <img src="<?= $home; ?>/src/images/user.jpg" alt="" class="photo">
+        <span class="name">Lorem Ipsun</span>
+        <span class="cargo">Sócio</span>
+      </div>
+      <div class="col-right">
+        <span class="name">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio provident esse tenetur voluptate</span>
+      </div>
+    </li>
+    <li>
+      <div class="col-left">
+        <img src="<?= $home; ?>/src/images/user.jpg" alt="" class="photo">
+        <span class="name">Lorem Ipsun</span>
+        <span class="cargo">Gerente</span>
+      </div>
+      <div class="col-right">
+        <span class="name">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio provident esse tenetur voluptate</span>
+      </div>
+    </li>
+    <li>
+      <div class="col-left">
+        <img src="<?= $home; ?>/src/images/user.jpg" alt="" class="photo">
+        <span class="name">Lorem Ipsun</span>
+        <span class="cargo">Sócio</span>
+      </div>
+      <div class="col-right">
+        <span class="name">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio provident esse tenetur voluptate</span>
+      </div>
+    </li>
+  </ul>
+</section>
 
-				<?php }
-						$cont++;
-						wp_reset_query();
-						wp_reset_postdata();
-					}
-				}
-				?>
-			</ul>
-		</div>
-	</section>
+<section class="clientes container">
+  <h2 class="title">Clientes</h2>
 
-	<section class="box-categorias">
-		<div class="container">
-			<h2 class="section-title">
-				<span class="title-desk">
-					<?= get_post_meta(101, 'title-categorias', true) ?>
-				</span>
-				<span class="title-mob">
-					<?= get_post_meta(101, 'title-categorias', true) ?>
-				</span>
-				<span class="separator"></span>
-			</h2>
+  <ul class="carousel-clientes">
+    <li>
+      <img src="<?= $home; ?>/src/images/logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/logo.png" alt="">
+    </li>
+    <li>
+      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
+    </li>
+  </ul>
+</section>
 
-			<ul class="list-category">
+<section class="blog container">
+  <h2 class="title">Blog</h2>
 
-				<?php
-				$args = array(
-					'post_type' => 'home_list_category'
-				);
+  <ul class="grid-blog">
+    <li>
+      <article class="top">
+        <h3 class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo laborum consectetur repudiandae repellendus blibus rem.</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora sed modi eaque, molestiae similique adipisci commodi officiis, voluptatem odio inventore ullam voluptas vitae sint fuga quod aperiam esse repudiandae. Doloribus!</p>
+        <a href="" class="read-more">Leia mais</a>
+      </article>
+      <span class="date">10/12/2021</span>
+    </li>
+    <li>
+      <article class="top">
+        <h3 class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo laborum consectetur repudiandae repellendus blibus rem.</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora sed modi eaque, molestiae similique adipisci commodi officiis, voluptatem odio inventore ullam voluptas vitae sint fuga quod aperiam esse repudiandae. Doloribus!</p>
+        <a href="" class="read-more">Leia mais</a>
+      </article>
+      <span class="date">10/12/2021</span>
+    </li>
+  </ul>
 
-				$loop = new WP_Query($args);
-				if ($loop->have_posts()) {
-					while ($loop->have_posts()) {
-						$loop->the_post();
-						$post = get_post();
-						$id_post = $post->ID;
-				?>
+  <a href="" class="btn-more">Veja mais</a>
+</section>
 
-						<li class="list-category-item" data-thumb="" style="border: 4px solid <?= get_post_meta($id_post, 'border-color-category', true) ?> ">
-							<a href="<?= get_post_meta($id_post, 'link-category', true) ?>">
-								<?php the_post_thumbnail(); ?>
-								<div class="box-legenda">
-									<?php the_title(); ?>
-								</div>
-							</a>
-						</li>
-						<?php edit_post_link(); ?>
-				<?php
-					}
-				}
-				?>
-			</ul>
-		</div>
-	</section>
+<section class="contato">
+  <h2 class="title">Contato</h2>
+
+  <div class="wrap-content">
+    <div class="information">
+      <h3 class="title-section">Informações</h3>
+
+      <ul>
+        <li>
+          <span class="icon"></span>
+          <div class="text">
+            <h4>Localização</h4>
+            <p>
+              <a href="">
+                Rua Lorem ipsum dolor sit amet consectetur 145 | São Paulo - SP | 00000-000
+              </a>
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="icon"></span>
+          <div class="text">
+            <h4>Telefone</h4>
+            <p>
+              <a href="">
+                +55 (11) 2368-3444
+              </a>
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="icon"></span>
+          <div class="text">
+            <h4>E-mail</h4>
+            <p>
+              <a href="mailto:lorem@lorem.com.br" target="_blank">
+                lorem@lorem.com.br
+              </a>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="form">
+      <h3 class="title-section">Contato</h3>
+
+      <?php echo do_shortcode('[wpforms id="12" title="false"]'); ?>
+    </div>
+  </div>
+</section>
+
+<section class="mapa-endereco">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.385166593419!2d-46.666904713902895!3d-23.554606306678146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce582d97462095%3A0x6032d751c2103c1a!2zUi4gZGEgQ29uc29sYcOnw6NvLCAyMzAyIC0gQ29uc29sYcOnw6NvLCBTw6NvIFBhdWxvIC0gU1AsIDAxMzAyLTAwMQ!5e0!3m2!1spt-BR!2sbr!4v1725751089396!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
+
+<div class="modal" id="myModal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <div class="modal-content">
+    <div class="swiper-container">
+      <div class="swiper-wrapper" id="modal-swiper-wrapper"></div>
+    </div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
 </div>
 
-<section class="ultimas-noticas-by-category">
-	<div class="container">
-		<div class="box-wrapper">
-			<div class="box-secao-category">
-				<h2 class="title-post-by-category title-item" style="color: <?= get_post_meta(107, 'cor-item-1', true) ?>">
-					<img class="icon" src="<?= get_post_meta(106, 'icon-item-1', true) ?>" />
-					<?= get_post_meta(105, 'title-item-1', true) ?>
-				</h2>
-				<div class="box-separator">
-					<span class="separator" style="border-bottom: 4px solid <?= get_post_meta(107, 'cor-item-1', true) ?>"></span>
-					<a href="<?= get_post_meta(108, 'link-veja-mais-item-1', true) ?>">
-						<span class="link" style="color: <?= get_post_meta(107, 'cor-item-1', true) ?>">Veja mais</span>
-						<img src="<?= get_post_meta(112, 'icone-veja-mais-item-1', true) ?>" alt="">
-					</a>
-				</div>
-
-				<ul class="list-posts desk">
-					<?php
-					$indexContent = 0;
-					$indexBoxCategory = 0;
-					$indexBoxImage = 0;
-
-					$args = array(
-						'posts_per_page' => 3,
-						'order' => 'DESC', //Ou ASC
-						'orderby' => 'date',
-						'hide_empty' => true,
-						'category_name' => get_post_meta(113, 'categoria-item-1', true)
-					);
-
-					$loop = new WP_Query($args);
-					if ($loop->have_posts()) {
-						while ($loop->have_posts()) {
-							$loop->the_post();
-							$post = get_post();
-							$id_post = $post->ID;
-					?>
-
-							<li class="list-post-item">
-								<a href="<?php the_permalink() ?>">
-									<div class="image-desk">
-										<?php
-										if ($indexBoxImage === 0) {
-											the_post_thumbnail('banner-570x400');
-											$indexBoxImage++;
-										} else {
-											the_post_thumbnail('banner-170x119');
-										}
-										?>
-									</div>
-								</a>
-
-								<?php
-								while ($indexBoxCategory === 0) {
-								?>
-									<div class="box-category">
-										<?php the_category(); ?>
-									</div>
-								<?php
-									$indexBoxCategory++;
-								}
-								?>
-
-								<div class="box-title">
-									<a href="<?php the_permalink() ?>">
-										<h3 class="title-post">
-											<?php the_title(); ?>
-										</h3>
-
-										<div class="data">
-											<?= get_the_date('d \d\e F Y'); ?>
-										</div>
-									</a>
-								</div>
-
-								<?php
-								while ($indexContent === 0) {
-								?>
-									<div class="box-content">
-										<?php
-										echo get_the_excerpt();
-										$indexContent++;
-										?>
-									</div>
-
-									<a href="<?php the_permalink() ?>" class="ler-tudo">Ler tudo</a>
-								<?php
-								}
-								?>
-
-									<?php edit_post_link(); ?>
-							</li>
-
-					<?php
-							wp_reset_query();
-							wp_reset_postdata();
-						}
-					}
-					?>
-				</ul>
-
-				<ul class="list-posts mob">
-					<?php
-					$indexContent = 0;
-					$indexBoxCategory = 0;
-					$indexBoxImage = 0;
-
-					$args = array(
-						'posts_per_page' => 3,
-						'order' => 'DESC', //Ou ASC
-						'orderby' => 'date',
-						'hide_empty' => true,
-						'category_name' => get_post_meta(113, 'categoria-item-1', true)
-					);
-
-					$loop = new WP_Query($args);
-					if ($loop->have_posts()) {
-						while ($loop->have_posts()) {
-							$loop->the_post();
-							$post = get_post();
-							$id_post = $post->ID;
-					?>
-
-							<li class="list-post-item">
-								<a href="<?php the_permalink() ?>">
-									<div class="image-mob">
-										<?php the_post_thumbnail('banner-67x67'); ?>
-									</div>
-								</a>
-
-								<div class="wrapper-content">
-									<div class="box-title">
-										<a href="<?php the_permalink() ?>">
-											<h3 class="title-post">
-												<?php the_title(); ?>
-											</h3>
-										</a>
-									</div>
-
-									<div class="box-content">
-										<?php
-										$limite = '200';
-										$descricao = get_the_content();
-										$descricao = strip_tags($descricao);
-										$descricao = mb_substr($descricao, 0, $limite);
-										echo $descricao . "...";
-										?>
-									</div>
-								</div>
-								<?php edit_post_link(); ?>
-							</li>
-
-					<?php
-							wp_reset_query();
-							wp_reset_postdata();
-						}
-					}
-					?>
-				</ul>
-
-			</div>
-			<div class="box-secao-category">
-				<h2 class="title-post-by-category title-item" style="color: <?= get_post_meta(115, 'cor-item-2', true) ?>">
-					<img class="icon" src="<?= get_post_meta(118, 'icon-item-2', true) ?>" />
-					<?= get_post_meta(114, 'title-item-2', true) ?>
-				</h2>
-				<div class="box-separator">
-					<span class="separator" style="border-bottom: 4px solid <?= get_post_meta(115, 'cor-item-2', true) ?>"></span>
-					<a href="<?= get_post_meta(116, 'link-veja-mais-item-2', true) ?>">
-						<span class="link" style="color: <?= get_post_meta(115, 'cor-item-2', true) ?>">Veja mais</span>
-						<img src="<?= get_post_meta(117, 'icone-veja-mais-item-2', true) ?>" alt="">
-					</a>
-				</div>
-
-				<ul class="list-posts desk">
-					<?php
-					$indexContent = 0;
-					$indexBoxCategory = 0;
-					$indexBoxImage = 0;
-
-					$args = array(
-						'posts_per_page' => 3,
-						'order' => 'DESC', //Ou ASC
-						'orderby' => 'date',
-						'hide_empty' => true,
-						'category_name' => get_post_meta(119, 'categoria-item-2', true)
-					);
-
-					$loop = new WP_Query($args);
-					if ($loop->have_posts()) {
-						while ($loop->have_posts()) {
-							$loop->the_post();
-							$post = get_post();
-							$id_post = $post->ID;
-					?>
-
-							<li class="list-post-item">
-								<a href="<?php the_permalink() ?>">
-									<div class="image-desk">
-										<?php
-										if ($indexBoxImage === 0) {
-											the_post_thumbnail('banner-570x400');
-											$indexBoxImage++;
-										} else {
-											the_post_thumbnail('banner-170x119');
-										}
-										?>
-									</div>
-								</a>
-
-								<?php
-								while ($indexBoxCategory === 0) {
-								?>
-									<div class="box-category">
-										<?php the_category(); ?>
-									</div>
-								<?php
-									$indexBoxCategory++;
-								}
-								?>
-
-								<div class="box-title">
-									<a href="<?php the_permalink() ?>">
-										<h3 class="title-post">
-											<?php the_title(); ?>
-										</h3>
-
-										<div class="data">
-											<?= get_the_date('d \d\e F Y'); ?>
-										</div>
-									</a>
-								</div>
-
-								<?php
-								while ($indexContent === 0) {
-								?>
-									<div class="box-content">
-										<?php
-										echo get_the_excerpt();
-										$indexContent++;
-										?>
-									</div>
-
-									<a href="<?php the_permalink() ?>" class="ler-tudo">Ler tudo</a>
-								<?php
-								}
-								?>
-
-								<?php edit_post_link(); ?>
-							</li>
-
-					<?php
-							wp_reset_query();
-							wp_reset_postdata();
-						}
-					}
-					?>
-				</ul>
-
-				<ul class="list-posts mob">
-					<?php
-					$indexContent = 0;
-					$indexBoxCategory = 0;
-					$indexBoxImage = 0;
-
-					$args = array(
-						'posts_per_page' => 4,
-						'order' => 'DESC', //Ou ASC
-						'orderby' => 'date',
-						'hide_empty' => true,
-						'category_name' => get_post_meta(119, 'categoria-item-2', true)
-					);
-
-					$loop = new WP_Query($args);
-					if ($loop->have_posts()) {
-						while ($loop->have_posts()) {
-							$loop->the_post();
-							$post = get_post();
-							$id_post = $post->ID;
-					?>
-
-							<li class="list-post-item">
-								<a href="<?php the_permalink() ?>">
-									<div class="image-mob">
-										<?php the_post_thumbnail('banner-220x243'); ?>
-									</div>
-								</a>
-
-								<div class="wrapper-content">
-									<div class="box-title">
-										<a href="<?php the_permalink() ?>">
-											<h3 class="title-post">
-												<?php the_title(); ?>
-											</h3>
-										</a>
-									</div>
-								</div>
-								<?php edit_post_link(); ?>
-							</li>
-
-					<?php
-							wp_reset_query();
-							wp_reset_postdata();
-						}
-					}
-					?>
-				</ul>
-
-			</div>
-		</div>
-		<div class="box-wrapper">
-			<div class="box-secao-category">
-				<h2 class="title-post-by-category title-item" style="color: <?= get_post_meta(120, 'cor-item-3', true) ?>">
-					<img class="icon" src="<?= get_post_meta(121, 'icon-item-3', true) ?>" />
-					<?= get_post_meta(122, 'title-item-3', true) ?>
-				</h2>
-				<div class="box-separator">
-					<span class="separator" style="border-bottom: 4px solid <?= get_post_meta(120, 'cor-item-3', true) ?>"></span>
-					<a href="<?= get_post_meta(123, 'link-veja-mais-item-3', true) ?>">
-						<span class="link" style="color: <?= get_post_meta(120, 'cor-item-3', true) ?>">Veja mais</span>
-						<img src="<?= get_post_meta(124, 'icone-veja-mais-item-3', true) ?>" alt="">
-					</a>
-				</div>
-
-				<ul class="list-posts desk">
-					<?php
-					$indexContent = 0;
-					$indexBoxCategory = 0;
-					$indexBoxImage = 0;
-
-					$args = array(
-						'posts_per_page' => 3,
-						'order' => 'DESC', //Ou ASC
-						'orderby' => 'date',
-						'hide_empty' => true,
-						'category_name' => get_post_meta(125, 'categoria-item-3', true)
-					);
-
-					$loop = new WP_Query($args);
-					if ($loop->have_posts()) {
-						while ($loop->have_posts()) {
-							$loop->the_post();
-							$post = get_post();
-							$id_post = $post->ID;
-					?>
-
-							<li class="list-post-item">
-								<a href="<?php the_permalink() ?>">
-									<div class="image-desk">
-										<?php
-										if ($indexBoxImage === 0) {
-											the_post_thumbnail('banner-570x400');
-											$indexBoxImage++;
-										} else {
-											the_post_thumbnail('banner-170x119');
-										}
-										?>
-									</div>
-								</a>
-
-								<?php
-								while ($indexBoxCategory === 0) {
-								?>
-									<div class="box-category">
-										<?php the_category(); ?>
-									</div>
-								<?php
-									$indexBoxCategory++;
-								}
-								?>
-
-								<div class="box-title">
-									<a href="<?php the_permalink() ?>">
-										<h3 class="title-post">
-											<?php the_title(); ?>
-										</h3>
-
-										<div class="data">
-											<?= get_the_date('d \d\e F Y'); ?>
-										</div>
-									</a>
-								</div>
-
-								<?php
-								while ($indexContent === 0) {
-								?>
-									<div class="box-content">
-										<?php
-										echo get_the_excerpt();
-										$indexContent++;
-										?>
-									</div>
-
-									<a href="<?php the_permalink() ?>" class="ler-tudo">Ler tudo</a>
-								<?php
-								}
-								?>
-
-								<?php edit_post_link(); ?>
-							</li>
-
-					<?php
-							wp_reset_query();
-							wp_reset_postdata();
-						}
-					}
-					?>
-				</ul>
-
-				<ul class="list-posts mob">
-					<?php
-					$indexContent = 0;
-					$indexBoxCategory = 0;
-					$indexBoxImage = 0;
-
-					$args = array(
-						'posts_per_page' => 3,
-						'order' => 'DESC', //Ou ASC
-						'orderby' => 'date',
-						'hide_empty' => true,
-						'category_name' => get_post_meta(125, 'categoria-item-3', true)
-					);
-
-					$loop = new WP_Query($args);
-					if ($loop->have_posts()) {
-						while ($loop->have_posts()) {
-							$loop->the_post();
-							$post = get_post();
-							$id_post = $post->ID;
-					?>
-
-							<li class="list-post-item">
-								<a href="<?php the_permalink() ?>">
-									<div class="image-mob">
-										<?php the_post_thumbnail('banner-67x67'); ?>
-									</div>
-								</a>
-
-								<div class="wrapper-content">
-									<div class="box-title">
-										<a href="<?php the_permalink() ?>">
-											<h3 class="title-post">
-												<?php the_title(); ?>
-											</h3>
-										</a>
-									</div>
-
-									<div class="box-content">
-										<?php
-										$limite = '200';
-										$descricao = get_the_content();
-										$descricao = strip_tags($descricao);
-										$descricao = mb_substr($descricao, 0, $limite);
-										echo $descricao . "...";
-										?>
-									</div>
-								</div>
-								<?php edit_post_link(); ?>
-							</li>
-
-					<?php
-							wp_reset_query();
-							wp_reset_postdata();
-						}
-					}
-					?>
-				</ul>
-
-			</div>
-			<div class="box-secao-category">
-				<h2 class="title-post-by-category title-item" style="color: <?= get_post_meta(126, 'cor-item-4', true) ?>">
-					<img class="icon" src="<?= get_post_meta(127, 'icon-item-4', true) ?>" />
-					<?= get_post_meta(131, 'title-item-4', true) ?>
-				</h2>
-				<div class="box-separator">
-					<span class="separator" style="border-bottom: 4px solid <?= get_post_meta(126, 'cor-item-4', true) ?>"></span>
-					<a href="<?= get_post_meta(128, 'link-veja-mais-item-4', true) ?>">
-						<span class="link" style="color: <?= get_post_meta(126, 'cor-item-4', true) ?>">Veja mais</span>
-						<img src="<?= get_post_meta(129, 'icone-veja-mais-item-4', true) ?>" alt="">
-					</a>
-				</div>
-
-				<ul class="list-posts desk">
-					<?php
-					$indexContent = 0;
-					$indexBoxCategory = 0;
-					$indexBoxImage = 0;
-
-					$args = array(
-						'posts_per_page' => 3,
-						'order' => 'DESC', //Ou ASC
-						'orderby' => 'date',
-						'hide_empty' => true,
-						'category_name' => get_post_meta(130, 'categoria-item-4', true)
-					);
-
-					$loop = new WP_Query($args);
-					if ($loop->have_posts()) {
-						while ($loop->have_posts()) {
-							$loop->the_post();
-							$post = get_post();
-							$id_post = $post->ID;
-					?>
-
-							<li class="list-post-item">
-								<a href="<?php the_permalink() ?>">
-									<div class="image-desk">
-										<?php
-										if ($indexBoxImage === 0) {
-											the_post_thumbnail('banner-570x400');
-											$indexBoxImage++;
-										} else {
-											the_post_thumbnail('banner-170x119');
-										}
-										?>
-									</div>
-								</a>
-
-								<?php
-								while ($indexBoxCategory === 0) {
-								?>
-									<div class="box-category">
-										<?php the_category(); ?>
-									</div>
-								<?php
-									$indexBoxCategory++;
-								}
-								?>
-
-								<div class="box-title">
-									<a href="<?php the_permalink() ?>">
-										<h3 class="title-post">
-											<?php the_title(); ?>
-										</h3>
-
-										<div class="data">
-											<?= get_the_date('d \d\e F Y'); ?>
-										</div>
-									</a>
-								</div>
-
-								<?php
-								while ($indexContent === 0) {
-								?>
-									<div class="box-content">
-										<?php
-										echo get_the_excerpt();
-										$indexContent++;
-										?>
-									</div>
-
-									<a href="<?php the_permalink() ?>" class="ler-tudo">Ler tudo</a>
-								<?php
-								}
-								?>
-								<?php edit_post_link(); ?>
-							</li>
-
-					<?php
-							wp_reset_query();
-							wp_reset_postdata();
-						}
-					}
-					?>
-				</ul>
-
-				<ul class="list-posts mob">
-					<?php
-					$indexContent = 0;
-					$indexBoxCategory = 0;
-					$indexBoxImage = 0;
-
-					$args = array(
-						'posts_per_page' => 2,
-						'order' => 'DESC', //Ou ASC
-						'orderby' => 'date',
-						'hide_empty' => true,
-						'category_name' => get_post_meta(130, 'categoria-item-4', true)
-					);
-
-					$loop = new WP_Query($args);
-					if ($loop->have_posts()) {
-						while ($loop->have_posts()) {
-							$loop->the_post();
-							$post = get_post();
-							$id_post = $post->ID;
-					?>
-
-							<li class="list-post-item">
-								<a href="<?php the_permalink() ?>">
-									<div class="image-mob">
-										<?php the_post_thumbnail('banner-220x243'); ?>
-									</div>
-								</a>
-
-								<div class="wrapper-content">
-									<div class="box-title">
-										<a href="<?php the_permalink() ?>">
-											<h3 class="title-post">
-												<?php the_title(); ?>
-											</h3>
-										</a>
-									</div>
-									<div class="box-content">
-										<?php
-										$limite = '200';
-										$descricao = get_the_content();
-										$descricao = strip_tags($descricao);
-										$descricao = mb_substr($descricao, 0, $limite);
-										echo $descricao . "...";
-										?>
-									</div>
-								</div>
-								<?php edit_post_link(); ?>
-							</li>
-
-					<?php
-							wp_reset_query();
-							wp_reset_postdata();
-						}
-					}
-					?>
-				</ul>
-
-
-			</div>
-		</div>
-	</div>
-</section>
-
-<section class="colunas-criticas">
-	<div class="container">
-		<div class="wrapper-colunas">
-			<h2 class="section-title">
-				<span class="title-desk">
-					<?= get_post_meta(134, 'title-colunas', true) ?>
-				</span>
-				<span class="title-mob">
-					<?= get_post_meta(135, 'title-colunas-mob', true) ?>
-				</span>
-				<span class="separator"></span>
-				<span class="veja-mais">
-					<a href="<?= get_post_meta(136, 'link-ver-tudo', true) ?>">
-						<span class="desk">
-							<?= get_post_meta(139, 'texto-ver-mais', true) ?>
-						</span>
-						<span class="mob">
-							<?= get_post_meta(138, 'texto-ver-mais-mob', true) ?>
-						</span>
-					</a>
-				</span>
-			</h2>
-
-			<ul class="list-posts desk">
-				<?php
-				$args = array(
-					'posts_per_page' => 6,
-					'order' => 'DESC', //Ou ASC
-					'orderby' => 'date',
-					'hide_empty' => true,
-					'category_name' => get_post_meta(601, 'categoria-colunas', true)
-				);
-
-				$loop = new WP_Query($args);
-				if ($loop->have_posts()) {
-					while ($loop->have_posts()) {
-						$loop->the_post();
-						$post = get_post();
-						$id_post = $post->ID;
-						$autor_id = $post->post_author;
-				?>
-
-						<li class="list-post-item">
-							<a href="<?php the_permalink() ?>">
-								<div class="image-desk">
-									<?php the_post_thumbnail('banner-370x260'); ?>
-								</div>
-							</a>
-
-							<div class="box-title">
-								<a href="<?php the_permalink() ?>">
-									<h3 class="title-post">
-										<?php the_title(); ?>
-									</h3>
-
-									<div class="data">
-										<?= get_the_date('d \d\e F Y'); ?>
-									</div>
-								</a>
-							</div>
-
-							<div class="box-bottom">
-								<div class="box-autor">
-									<?php
-									$user_info = get_userdata($autor_id);
-									$user_name = $user_info->display_name;
-									$user_email = $user_info->user_email;
-									?>
-
-									<div class="box-avatar">
-										<?= get_avatar($user_email, 24); ?>
-									</div>
-
-
-
-									<?php
-
-									$userName =  preg_replace(array("/(á|à|ã|â|ä)/", "/(Á|À|Ã|Â|Ä)/", "/(é|è|ê|ë)/", "/(É|È|Ê|Ë)/", "/(í|ì|î|ï)/", "/(Í|Ì|Î|Ï)/", "/(ó|ò|õ|ô|ö)/", "/(Ó|Ò|Õ|Ô|Ö)/", "/(ú|ù|û|ü)/", "/(Ú|Ù|Û|Ü)/", "/(ñ)/", "/(Ñ)/"), explode(" ", "a A e E i I o O u U n N"), $user_name);
-
-									$autor_formatted = str_replace(" ", "-", strtolower($userName));
-									?>
-
-									<p class="nome-autor">
-
-										<a href="<?= get_home_url() . '/' . $autor_formatted; ?>">
-											<?php the_author(); ?>
-										</a>
-									</p>
-								</div>
-								<a href="<?php the_permalink() ?>" class="ler-tudo"><?= get_post_meta(141, 'texto-ler-mais-colunas', true) ?></a>
-							</div>
-							<?php edit_post_link(); ?>
-						</li>
-
-				<?php
-						wp_reset_query();
-						wp_reset_postdata();
-					}
-				}
-				?>
-			</ul>
-		</div>
-		<div class="wrapper-criticas">
-			<h2 class="section-title">
-				<span class="title-desk">
-					<?= get_post_meta(142, 'title-criticas', true) ?>
-				</span>
-				<span class="separator"></span>
-				<span class="veja-mais">
-					<a href="<?= get_post_meta(143, 'link-ver-mais-criticas', true) ?>">
-						<span class="mob">
-							<?= get_post_meta(144, 'texto-ver-mais-mob-criticas', true) ?>
-						</span>
-					</a>
-				</span>
-			</h2>
-
-			<ul class="list-posts desk">
-				<?php
-				$args = array(
-					'posts_per_page' => 3,
-					'order' => 'DESC', //Ou ASC
-					'orderby' => 'date',
-					'hide_empty' => true,
-					'category_name' => get_post_meta(132, 'categoria-criticas', true)
-				);
-
-				$loop = new WP_Query($args);
-				if ($loop->have_posts()) {
-					while ($loop->have_posts()) {
-						$loop->the_post();
-						$post = get_post();
-						$id_post = $post->ID;
-				?>
-
-						<li class="list-post-item">
-							<a href="<?php the_permalink() ?>">
-								<div class="image-desk">
-									<?php the_post_thumbnail('banner-370x160'); ?>
-								</div>
-							</a>
-
-							<div class="box-title">
-								<a href="<?php the_permalink() ?>">
-									<h3 class="title-post">
-										<?php the_title(); ?>
-									</h3>
-								</a>
-							</div>
-							<?php edit_post_link(); ?>
-						</li>
-
-				<?php
-						wp_reset_query();
-						wp_reset_postdata();
-					}
-				}
-				?>
-			</ul>
-			<div class="banner-bottom box-adsense">
-				<?= get_post_meta(170, 'banner-adsense-home-bottom', true) ?>
-			</div>
-		</div>
-	</div>
-</section>
-
-<section class="box-diversidade">
-	<div class="container">
-		<div class="wrapper-diversidade">
-			<h2 class="section-title">
-				<span class="title-desk">
-					<?= get_post_meta(154, 'title-diversidade', true) ?>
-				</span>
-				<span class="separator"></span>
-				<span class="veja-mais">
-					<a href="<?= get_post_meta(146, 'link-ver-tudo-diversidade', true) ?>">
-						<span class="desk">
-							<?= get_post_meta(152, 'texto-ver-mais-desk-diversidade', true) ?>
-						</span>
-						<span class="mob">
-							<?= get_post_meta(155, 'texto-ver-mais-mob-diversidade', true) ?>
-						</span>
-					</a>
-				</span>
-			</h2>
-
-			<ul class="list-posts desk">
-				<?php
-				$args = array(
-					'posts_per_page' => 6,
-					'order' => 'DESC', //Ou ASC
-					'orderby' => 'date',
-					'hide_empty' => true,
-					'category_name' => get_post_meta(150, 'categoria-diversidade', true),
-				);
-
-				$loop = new WP_Query($args);
-				if ($loop->have_posts()) {
-					while ($loop->have_posts()) {
-						$loop->the_post();
-						$post = get_post();
-						$id_post = $post->ID;
-						$autor_id = $post->post_author;
-				?>
-
-						<li class="list-post-item">
-							<a href="<?php the_permalink() ?>">
-								<div class="image-desk">
-									<?php the_post_thumbnail('banner-370x260'); ?>
-								</div>
-							</a>
-
-							<div class="box-title">
-								<a href="<?php the_permalink() ?>">
-									<h3 class="title-post">
-										<?php the_title(); ?>
-									</h3>
-
-									<div class="data">
-										<?= get_the_date('d \d\e F Y'); ?>
-									</div>
-								</a>
-							</div>
-
-							<div class="box-bottom">
-								<div class="box-autor">
-									<?php
-									$user_info = get_userdata($autor_id);
-									$user_name = $user_info->display_name;
-									$user_email = $user_info->user_email;
-									?>
-
-									<div class="box-avatar">
-										<?= get_avatar($user_email, 24); ?>
-									</div>
-
-									<?php
-									$userName =  preg_replace(array("/(á|à|ã|â|ä)/", "/(Á|À|Ã|Â|Ä)/", "/(é|è|ê|ë)/", "/(É|È|Ê|Ë)/", "/(í|ì|î|ï)/", "/(Í|Ì|Î|Ï)/", "/(ó|ò|õ|ô|ö)/", "/(Ó|Ò|Õ|Ô|Ö)/", "/(ú|ù|û|ü)/", "/(Ú|Ù|Û|Ü)/", "/(ñ)/", "/(Ñ)/"), explode(" ", "a A e E i I o O u U n N"), $user_name);
-
-									$autor_formatted = str_replace(" ", "-", strtolower($userName));
-									?>
-
-									<p class="nome-autor">
-										<a href="<?= get_home_url() . '/' . $autor_formatted; ?>">
-											<?php the_author(); ?>
-										</a>
-									</p>
-								</div>
-								<a href="<?php the_permalink() ?>" class="ler-tudo"><?= get_post_meta(156, 'texto-ler-mais-diversidade', true) ?></a>
-							</div>
-							<?php edit_post_link(); ?>
-						</li>
-
-				<?php
-						wp_reset_query();
-						wp_reset_postdata();
-					}
-				}
-				?>
-			</ul>
-
-			<ul class="list-posts mob">
-				<?php
-				$args = array(
-					'posts_per_page' => 3,
-					'order' => 'DESC', //Ou ASC
-					'orderby' => 'date',
-					'hide_empty' => true,
-					'category_name' => get_post_meta(150, 'categoria-diversidade', true),
-				);
-
-				$loop = new WP_Query($args);
-				if ($loop->have_posts()) {
-					while ($loop->have_posts()) {
-						$loop->the_post();
-						$post = get_post();
-						$id_post = $post->ID;
-				?>
-
-						<li class="list-post-item">
-							<a href="<?php the_permalink() ?>">
-								<div class="image-mob">
-									<?php the_post_thumbnail('banner-370x160'); ?>
-
-									<div class="box-title">
-										<h3 class="title-post">
-											<?php the_title(); ?>
-										</h3>
-									</div>
-								</div>
-							</a>
-							<?php edit_post_link(); ?>
-						</li>
-
-				<?php
-						wp_reset_query();
-						wp_reset_postdata();
-					}
-				}
-				?>
-			</ul>
-		</div>
-	</div>
-</section>
-
-<section class="piticast">
-	<div class="container">
-		<div class="wrapper-piticast">
-			<h2 class="section-title">
-				<span class="title-desk">
-					<img src="<?= get_post_meta(172, 'title-piticast', true) ?>" alt="Piticast" />
-				</span>
-				<span class="separator"></span>
-				<span class="veja-mais">
-					<a href="<?= get_post_meta(176, 'link-ver-tudo-piticast', true) ?>">
-						<span class="desk">
-							<?= get_post_meta(174, 'texto-ver-mais-desk-piticast', true) ?>
-						</span>
-						<span class="mob">
-							<?= get_post_meta(178, 'texto-ver-mais-mob-piticast', true) ?>
-						</span>
-					</a>
-				</span>
-			</h2>
-
-			<div id='buzzsprout-large-player-1757249'></div>
-			<script type='text/javascript' charset='utf-8' src='https://www.buzzsprout.com/1757249.js?container_id=buzzsprout-large-player-1757249&player=large'></script>
-
-		</div>
-	</div>
-</section>
-
-<section class="pitiplay">
-	<div class="container">
-		<div class="wrapper-pitiplay">
-			<h2 class="section-title">
-				<span class="title-desk">
-					<img src="<?= get_post_meta(187, 'title-pitiplay', true) ?>" alt="Pitiplay" />
-				</span>
-				<span class="separator"></span>
-				<span class="veja-mais">
-					<a href="<?= get_post_meta(181, 'link-ver-tudo-pitiplay', true) ?>">
-						<span class="desk">
-							<?= get_post_meta(185, 'texto-ver-mais-desk-pitiplay', true) ?>
-						</span>
-						<span class="mob">
-							<?= get_post_meta(183, 'texto-ver-mais-mob-pitiplay', true) ?>
-						</span>
-					</a>
-				</span>
-			</h2>
-
-			<?php echo do_shortcode('[yourchannel user="Piticas"]'); ?>
-		</div>
-	</div>
-</section>
-
-<section class="instagram">
-	<div class="container">
-		<div class="wrapper-instagram">
-			<h2 class="section-title">
-				<span class="title-desk">
-					<a href="<?= get_post_meta(211, 'link-instagram', true) ?>" target="_blank">
-						<?= get_post_meta(189, 'title-instagram', true) ?>
-					</a>
-				</span>
-				<span class="separator"></span>
-				<span class="veja-mais">
-					<a href="https://www.instagram.com/piticasoficial" target="_blank">
-						<span class="desk">Ver mais</span>
-						<span class="mob">Ver tudo</span>
-					</a>
-				</span>
-			</h2>
-		</div>
-
-		<div class="content-posts">
-		<iframe src="https://cdn.lightwidget.com/widgets/974c25e9c8c957fb8f659465655f6c5b.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;" loading="lazy"></iframe>
-		</div>
-	</div>
-</section>
-
-
-<section class="loja-online">
-	<div class="container">
-		<div class="wrapper-loja-online">
-			<h2 class="section-title">
-				<span class="title-desk">
-					<a href="<?= get_post_meta(212, 'link-ver-tudo-loja-online', true) ?>" target="_blank">
-						<?= get_post_meta(230, 'title-loja-online', true) ?>
-					</a>
-				</span>
-				<span class="separator"></span>
-				<span class="veja-mais">
-					<a href="<?= get_post_meta(212, 'link-ver-tudo-loja-online', true) ?>" target="_blank">
-						<span class="desk">
-							<?= get_post_meta(281, 'texto-ver-mais-desk-loja-online', true) ?>
-						</span>
-						<span class="mob">
-							<?= get_post_meta(192, 'texto-ver-mais-mob-loja-online', true) ?>
-						</span>
-					</a>
-				</span>
-			</h2>
-
-			<ul class="list-posts desk">
-				<?php
-				$args = array(
-					'post_type' => 'loja_online',
-					'posts_per_page' => 4,
-				);
-
-				$loop = new WP_Query($args);
-				if ($loop->have_posts()) {
-					while ($loop->have_posts()) {
-						$loop->the_post();
-						$post = get_post();
-						$id_post = $post->ID;
-				?>
-
-						<li class="list-post-item">
-							<a href="<?= get_post_meta($id_post, 'link-comprar-agora', true) ?>" target="_blank">
-								<div class="card">
-									<div class="image-desk">
-										<?php the_post_thumbnail(); ?>
-									</div>
-									<div class="box-title">
-										<h3 class="title-post">
-											<?php the_title(); ?>
-										</h3>
-
-										<div class="content">
-											<?php the_content(); ?>
-										</div>
-
-										<a href="<?= get_post_meta($id_post, 'link-comprar-agora', true) ?>" target="_blank" class="btn-comprar">Comprar Agora</a>
-									</div>
-								</div>
-							</a>
-							<?php edit_post_link(); ?>
-						</li>
-
-				<?php
-					}
-				}
-				?>
-			</ul>
-
-		</div>
-	</div>
-</section>
-
-<!-- popup  home-->
-<?php
-$args = array(
-	'post_type' => 'popup'
-);
-
-$loop = new WP_Query($args);
-if ($loop->have_posts()) {
-	while ($loop->have_posts()) {
-		$loop->the_post();
-		$post = get_post();
-		$id_post = $post->ID;
-?>
-	<div class="overlay-popup <?= get_post_meta($id_post, 'ativar_popup', true); ?>">
-		<div class="popup-content">
-			<a href="#" class="btn-close">X</a>
-
-			<div class="box-content">
-				<div class="box-video" urlVideo="<?= get_post_meta($id_post, 'url_video', true) ?>">
-
-				</div>
-			</div>
-		</div>
-	</div>
-<?php
-	}
-}
-?>
-
-
-<?php
-$js_escolhido = 'home';
-require_once('footer.php');
-?>
+<?php get_footer(); ?>
