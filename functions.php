@@ -37,7 +37,6 @@ function createFieldBlog() {
     global $post;
     $id_post = $post->ID;
     $description = get_post_meta($id_post, 'blog_description', true);
-    $read_more = get_post_meta($id_post, 'blog_read_more', true);
     $blog_date = get_post_meta($id_post, 'blog_date', true);
     ?>
 
@@ -59,12 +58,8 @@ function createFieldBlog() {
 
     <div class="box">
         <div class="field">
-            <label for="blog_description">Descrição:</label>
+            <label for="blog_description">Descrição curta:</label>
             <textarea id="blog_description" name="blog_description"><?= esc_textarea($description); ?></textarea>
-        </div>
-        <div class="field">
-            <label for="blog_read_more">Leia Mais:</label>
-            <input type="text" id="blog_read_more" name="blog_read_more" value="<?= esc_attr($read_more); ?>" />
         </div>
         <div class="field">
             <label for="blog_date">Data:</label>
@@ -104,9 +99,6 @@ function save_blog_meta($post_id) {
     // Faz a atualização dos campos
     if (isset($_POST['blog_description'])) {
         update_post_meta($post_id, 'blog_description', sanitize_textarea_field($_POST['blog_description']));
-    }
-    if (isset($_POST['blog_read_more'])) {
-        update_post_meta($post_id, 'blog_read_more', sanitize_text_field($_POST['blog_read_more']));
     }
     if (isset($_POST['blog_date'])) {
         update_post_meta($post_id, 'blog_date', sanitize_text_field($_POST['blog_date']));
