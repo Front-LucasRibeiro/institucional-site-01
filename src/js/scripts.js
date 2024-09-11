@@ -206,7 +206,10 @@ function scrollTop() {
 }
 
 function scrollSection() {
-  $('header .menu li a').attr('href')
+  $('header .menu li a').on('click', function () {
+     const url = $(this).attr('href')
+    $('html, body').animate({ scrollTop: $(url).offset().top -50 }, 500);
+  })
 }
 
 

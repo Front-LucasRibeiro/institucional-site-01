@@ -1,4 +1,0 @@
-<?php
-
-?>
-<p>categoria</p>

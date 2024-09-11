@@ -1,0 +1,30 @@
+.portfolio-page {
+  min-height: 606px;
+  margin: 0 auto 32px;
+}
+
+.title-page-portfolio {
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Fallback */
+  background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+  border-bottom: 3px solid $main-color;
+  padding: 32px 14px;
+  text-align: center;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInUp 0.5s forwards;
+  margin: 0 0 32px;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    /* Torna visível */
+    transform: translateY(0);
+    /* Retorna à posição original */
+  }
+}

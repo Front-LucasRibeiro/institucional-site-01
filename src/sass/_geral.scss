@@ -183,7 +183,6 @@ body {
 
   @media (max-width: 480px) {
     max-width: 220px;
-    left: 30%;
   }
 }
 
@@ -236,6 +235,7 @@ body {
   }
 }
 
+.read-more,
 .btn-more {
   width: max-content;
   padding: 18px;
@@ -250,6 +250,10 @@ body {
   justify-content: center;
   margin: 38px auto 22px;
   border-radius: 8px;
+}
+
+.read-more {
+  margin: 0;
 }
 
 textarea {
@@ -329,5 +333,22 @@ button[type="submit"] {
     background-color: #363333 !important; // Cor de fundo ao passar o mouse
     transform: translateY(-2px); // Eleva o botão levemente
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); // Sombra mais pronunciada
+  }
+}
+
+.container-error {
+  min-height: 66vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  .error{
+    font-weight: 600;
+    font-size: 28px;
+
+    > span{
+      color: $main-color;
+    }
   }
 }

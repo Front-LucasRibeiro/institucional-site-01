@@ -2,47 +2,18 @@
 add_filter('show_admin_bar', '__return_false');
 
 add_theme_support('post-thumbnails');
-add_theme_support( 'custom-logo', array(
-    'height' => 38,
-    'width'  => 170,
-) );
 
-add_image_size('banner-370x370', 370, 370, true);
-add_image_size('imagem-autor-170x170', 170, 170, true);
-add_image_size('banner-post-770x400', 770, 400, true);
-add_image_size('banner-570x400', 570, 400, true);
-add_image_size('banner-220x243', 220, 243, true);
-add_image_size('banner-170x119', 170, 119, true);
-add_image_size('banner-370x260', 370, 260, true);
-add_image_size('banner-370x160', 370, 160, true);
-add_image_size('banner-270x270-piticast', 270, 270, true);
-add_image_size('banner-67x67', 67, 67, true);
-add_image_size('banner-slide-principal-mobile-480x600', 480, 600, true);
-add_image_size('banner-slide-principal-1170x500', 1170, 500, true);
-
-
-
-/* Registrando menu de navegação */
-function registrar_menu_navegacao() {
-	register_nav_menu('header-menu', 'Menu Header');
-	register_nav_menu('footer-menu-pitinews', 'Menu Footer Pitinews');
-	register_nav_menu('footer-menu-categorias', 'Menu Footer Categorias');
-	register_nav_menu('footer-menu-outros-canais', 'Menu Footer Outros-canais');
-	register_nav_menu('footer-menu-piticas', 'Menu Footer Piticas');
+// Ocultar abas do painel do WordPress
+function remove_admin_menu_items() {
+    remove_menu_page('index.php'); // Painel
+    remove_menu_page('edit.php'); // Posts
+    remove_menu_page('edit-comments.php'); // Comentários
+    remove_menu_page('wpforms-overview'); // WPForms
+    remove_menu_page('plugins.php'); // Plugins
+    remove_menu_page('themes.php'); // Aparência
+    remove_menu_page('tools.php'); // Ferramentas
 }
-add_action( 'init', 'registrar_menu_navegacao');
-
-function get_titulo() {
-	if( is_home() ) {
-		bloginfo('name');
-	} else {
-		bloginfo('name');
-		echo ' | ';
-		the_title();
-	}
-}
-
-
+add_action('admin_menu', 'remove_admin_menu_items');
 
 // start - POST TYPES 
 function create_portfolio_cpt() {
@@ -60,66 +31,102 @@ function create_portfolio_cpt() {
     register_post_type('list-portfolio', $args);
 }
 add_action('init', 'create_portfolio_cpt');
-// end - POST TYPES 
 
+// start - criando campos para o novo post type
+function createFieldBlog() {
+    global $post;
+    $id_post = $post->ID;
+    $description = get_post_meta($id_post, 'blog_description', true);
+    $read_more = get_post_meta($id_post, 'blog_read_more', true);
+    $blog_date = get_post_meta($id_post, 'blog_date', true);
+    ?>
 
-// start - criando campos 
-function createFieldPortfolio(){
-		global $post;
-		$post = get_post();
-		$id_post = $post->ID;
-		$textLegendPortfolio= get_post_meta( $id_post, 'textLegendPortfolio', true);
-	?>
+    <style>
+        textarea,
+        input {
+            width: 100%;
+            margin-top: 5px;
+        }
 
-	<style>
-			textarea,
-			input{
-				width: 100%;
-				margin-top: 5px;
-			}
+        label {
+            font-weight: bold;
+        }
 
-			label{
-				font-weight: bold;
-			}
+        .field {
+            margin: 12px 0;
+        }
+    </style>
 
-			.field{
-				margin: 12px 0;
-			}
-		</style>
+    <div class="box">
+        <div class="field">
+            <label for="blog_description">Descrição:</label>
+            <textarea id="blog_description" name="blog_description"><?= esc_textarea($description); ?></textarea>
+        </div>
+        <div class="field">
+            <label for="blog_read_more">Leia Mais:</label>
+            <input type="text" id="blog_read_more" name="blog_read_more" value="<?= esc_attr($read_more); ?>" />
+        </div>
+        <div class="field">
+            <label for="blog_date">Data:</label>
+            <input type="date" id="blog_date" name="blog_date" value="<?= esc_attr($blog_date); ?>" />
+        </div>
+    </div>
 
-	<div class="box">
-		<div class="field">
-			<label for="textLegendPortfolio">Legenda para imagem:</label>
-			<input type="text" id="textLegendPortfolio" name="textLegendPortfolio" value="<?= $textLegendPortfolio; ?>" />
-		</div>
-	</div>
-
-	
-	<?php
+    <?php
+    // Adicionando nonce para segurança
+    wp_nonce_field('save_blog_meta', 'blog_nonce');
 }
 
-function add_portfolio_meta_box() {
+function add_blog_meta_box() {
     add_meta_box(
-			'portfolio_meta_box', // ID
-			'Informações do Portfólio', // Título
-			'createFieldPortfolio', // Callback
-			'list-portfolio', // CPT
-			'normal', // Contexto
-			'high' // Prioridade
+        'blog_meta_box', // ID
+        'Informações do Blog', // Título
+        'createFieldBlog', // Callback
+        'list-blog', // Novo CPT
+        'normal', // Contexto
+        'high' // Prioridade
     );
 }
-add_action('add_meta_boxes', 'add_portfolio_meta_box');
-// end - criando campos 
+add_action('add_meta_boxes', 'add_blog_meta_box');
 
-
-// start - funções atualizar campos 
-function save_portfolio_meta($post_id) {
-    if (!isset($_POST['textLegendPortfolio_nonce']) || !wp_verify_nonce($_POST['textLegendPortfolio_nonce'], 'save_portfolio_meta')) {
+// end - funções atualizar campos 
+function save_blog_meta($post_id) {
+    // Verifica o nonce
+    if (!isset($_POST['blog_nonce']) || !wp_verify_nonce($_POST['blog_nonce'], 'save_blog_meta')) {
         return;
     }
 
-    if (isset($_POST['textLegendPortfolio'])) {
-        update_post_meta($post_id, 'textLegendPortfolio', sanitize_text_field($_POST['textLegendPortfolio']));
+    // Verifica se o post é do tipo correto
+    if (get_post_type($post_id) !== 'list-blog') {
+        return;
+    }
+
+    // Faz a atualização dos campos
+    if (isset($_POST['blog_description'])) {
+        update_post_meta($post_id, 'blog_description', sanitize_textarea_field($_POST['blog_description']));
+    }
+    if (isset($_POST['blog_read_more'])) {
+        update_post_meta($post_id, 'blog_read_more', sanitize_text_field($_POST['blog_read_more']));
+    }
+    if (isset($_POST['blog_date'])) {
+        update_post_meta($post_id, 'blog_date', sanitize_text_field($_POST['blog_date']));
     }
 }
-// end - funções atualizar campos
+add_action('save_post', 'save_blog_meta');
+
+// Criar o novo post type "Blog"
+function create_blog_cpt() {
+    $args = array(
+        'labels' => array(
+            'name' => __('Blogs'),
+            'singular_name' => __('Blog')
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'list-blog'),
+        'supports' => array('title', 'editor', 'thumbnail'), // 'editor' para o conteúdo
+        'menu_icon' => 'dashicons-admin-post',
+    );
+    register_post_type('list-blog', $args);
+}
+add_action('init', 'create_blog_cpt');

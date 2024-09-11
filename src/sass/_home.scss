@@ -113,6 +113,27 @@
   }
 }
 
+.blog-card {
+  box-shadow: 1px 3px 15px #ccc;
+  padding: 22px 14px;
+  border-radius: 3px;
+}
+
+.portfolio-title {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 46px;
+}
+
+.portfolio-description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 .portfolio {
   .cards-portfolio {
     display: grid;
@@ -128,13 +149,13 @@
     li {
       display: flex;
       flex-direction: column;
-      height: 260px;
+      // height: 260px;
       position: relative;
       box-sizing: border-box;
 
-      @media (max-width: 620px) {
-        height: 160px;
-      }
+      // @media (max-width: 620px) {
+      //   height: 160px;
+      // }
 
       .legend {
         text-align: center;
@@ -162,6 +183,10 @@
         overflow: hidden;
         width: 100%;
         height: 240px;
+
+        @media (max-width: 480px) {
+          height: 168px;
+        }
 
         img {
           width: 100%;
@@ -378,7 +403,7 @@
 
 
 
-      .read-more {
+      > .read-more {
         display: block;
         color: $main-color;
         font-weight: 500;

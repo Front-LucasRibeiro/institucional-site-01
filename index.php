@@ -66,7 +66,7 @@ Template Name: Home
   </ul>
 </section>
 
-<section class="servicos container">
+<section id="servicos" class="servicos container">
   <h2 class="title">Serviços</h2>
 
   <h3 class="sub-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda quae officia voluptatibus facere repudiandae, rem rerum nostrum molestiae reprehenderit. Error, corporis molestias.</h3>
@@ -145,10 +145,10 @@ Template Name: Home
     </li>
   </ul>
 
-  <a href="" class="btn-more">Veja mais</a>
+  <a href="/lista-portfolio" class="btn-more">Veja mais</a>
 </section>
 
-<section class="empresa">
+<section id="empresa" class="empresa">
   <h2 class="title">Empresa</h2>
   <div class="container">
     <div class="wrap">
@@ -171,7 +171,7 @@ Template Name: Home
   </div>
 </section>
 
-<section class="equipe container">
+<section id="equipe" class="equipe container">
   <h2 class="title">Equipe</h2>
 
   <ul>
@@ -218,7 +218,7 @@ Template Name: Home
   </ul>
 </section>
 
-<section class="clientes container">
+<section id="clientes" class="clientes container">
   <h2 class="title">Clientes</h2>
 
   <ul class="carousel-clientes">
@@ -255,7 +255,7 @@ Template Name: Home
   </ul>
 </section>
 
-<section class="blog container">
+<section id="blog" class="blog container">
   <h2 class="title">Blog</h2>
 
   <ul class="grid-blog">
@@ -277,10 +277,10 @@ Template Name: Home
     </li>
   </ul>
 
-  <a href="" class="btn-more">Veja mais</a>
+  <a href="/blog" class="btn-more">Veja mais</a>
 </section>
 
-<section class="contato">
+<section id="contato" class="contato">
   <h2 class="title">Contato</h2>
 
   <div class="wrap-content">

@@ -14,16 +14,18 @@
 <body>
 	<header class="header">
 		<div class="container">
-			<div class="logo">
-				<img src="<?= $home; ?>/src/images/logo-3.jpg" alt="">
-			</div>
+			<a href="/">
+				<div class="logo">
+					<img src="<?= $home; ?>/src/images/logo-3.jpg" alt="">
+				</div>
+			</a>
 			<div class="menu">
 				<ul>
-					<li><a href="#servicos">Serviços</a></li>
-					<li><a href="#portfolio">Portfólio</a></li>
-					<li><a href="#empresa">Empresa</a></li>
-					<li><a href="#blog">Blog</a></li>
-					<li><a href="#contato">Contato</a></li>
+					<li><a href="/#servicos">Serviços</a></li>
+					<li><a href="/#portfolio">Portfólio</a></li>
+					<li><a href="/#empresa">Empresa</a></li>
+					<li><a href="/#blog">Blog</a></li>
+					<li><a href="/#contato">Contato</a></li>
 				</ul>
 			</div>
 			<div class="redes-sociais">
