@@ -1,8 +1,8 @@
-# Environment
+## Environment
 Node v20.14.0
 
-# Install
+## Install
 yarn install
 
-# Run Project
+## Run Project
 yarn start
