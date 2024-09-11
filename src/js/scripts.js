@@ -207,8 +207,12 @@ function scrollTop() {
 
 function scrollSection() {
   $('header .menu li a').on('click', function () {
-     const url = $(this).attr('href')
-    $('html, body').animate({ scrollTop: $(url).offset().top -50 }, 500);
+    const url = $(this).attr('href').split('/')[1]    
+    $('html, body').animate({ scrollTop: $(url).offset().top - 50 }, 500);
+    
+    if (window.innerWidth <= 942) {
+      $('.content-menu').removeClass('active');
+    }
   })
 }
 

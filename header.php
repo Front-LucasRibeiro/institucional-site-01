@@ -62,11 +62,11 @@
 				</div>
 				<div class="menu">
 					<ul>
-						<li><a href="">Serviços</a></li>
-						<li><a href="">Portfólio</a></li>
-						<li><a href="">Empresa</a></li>
-						<li><a href="">Blog</a></li>
-						<li><a href="">Contato</a></li>
+						<li><a href="/#servicos">Serviços</a></li>
+						<li><a href="/#portfolio">Portfólio</a></li>
+						<li><a href="/#empresa">Empresa</a></li>
+						<li><a href="/#blog">Blog</a></li>
+						<li><a href="/#contato">Contato</a></li>
 					</ul>
 				</div>
 				<div class="redes-sociais">
