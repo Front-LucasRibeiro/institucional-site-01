@@ -26,9 +26,9 @@ get_header(); ?>
                 <li class="swiper-slide card blog-card">
                     <a href="<?php the_permalink(); ?>">
                       <div class="image-container">
-                          <?php if (has_post_thumbnail()) {
-                              echo get_the_post_thumbnail(get_the_ID(), 'full'); // Exibe a imagem original
-                          } ?>
+                          <?php  
+                              the_post_thumbnail('Blog - (Banner do topo) - 1100x418');
+                           ?>
                       </div>
                     </a>
                     <h3 class="portfolio-title"><?php the_title(); ?></h3>

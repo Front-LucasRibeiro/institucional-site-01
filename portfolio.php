@@ -30,7 +30,7 @@ get_header(); ?>
                         } ?>
                     </div>
                     <?php 
-                    $text_legend = get_post_meta(get_the_ID(), 'textLegendPortfolio', true); 
+                    $text_legend = get_post_meta(get_the_ID(), 'portfolio_description', true); 
                     if ($text_legend) {
                         echo '<span class="legend">' . esc_html($text_legend) . '</span>';
                     }

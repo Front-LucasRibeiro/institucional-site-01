@@ -16,6 +16,72 @@ function remove_admin_menu_items() {
 add_action('admin_menu', 'remove_admin_menu_items');
 
 // start - POST TYPES 
+// start - criando campos para o novo post type
+function createFieldPortfolio() {
+    global $post;
+    $id_post = $post->ID;
+    $portfolio_description = get_post_meta($id_post, 'portfolio_description', true);
+    ?>
+
+    <style>
+        textarea,
+        input {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .field {
+            margin: 12px 0;
+        }
+    </style>
+
+    <div class="box">
+        <div class="field">
+            <label for="portfolio_description">Legenda:</label>
+            <textarea id="portfolio_description" name="portfolio_description"><?= esc_textarea($portfolio_description); ?></textarea>
+        </div>
+    </div>
+
+    <?php
+    // Adicionando nonce para segurança
+    wp_nonce_field('save_portfolio_meta', 'portfolio_nonce');
+}
+
+function add_portfolio_meta_box() {
+	add_meta_box(
+			'portfolio_meta_box', // ID
+			'Informações do Portfólio', // Título
+			'createFieldPortfolio', // Callback
+			'list-portfolio', // Novo CPT
+			'normal', // Contexto
+			'high' // Prioridade
+	);
+}
+add_action('add_meta_boxes', 'add_portfolio_meta_box');
+
+// end - funções atualizar campos 
+function save_portfolio_meta($post_id) {
+    // Verifica o nonce
+    if (!isset($_POST['portfolio_nonce']) || !wp_verify_nonce($_POST['portfolio_nonce'], 'save_portfolio_meta')) {
+        return;
+    }
+
+    // Verifica se o post é do tipo correto
+    if (get_post_type($post_id) !== 'list-portfolio') {
+        return;
+    }
+
+    // Faz a atualização dos campos
+    if (isset($_POST['portfolio_description'])) {
+        update_post_meta($post_id, 'portfolio_description', sanitize_textarea_field($_POST['portfolio_description']));
+    }
+}
+add_action('save_post', 'save_portfolio_meta');
+
 function create_portfolio_cpt() {
     $args = array(
         'labels' => array(
@@ -31,6 +97,11 @@ function create_portfolio_cpt() {
     register_post_type('list-portfolio', $args);
 }
 add_action('init', 'create_portfolio_cpt');
+
+
+
+
+
 
 // start - criando campos para o novo post type
 function createFieldBlog() {

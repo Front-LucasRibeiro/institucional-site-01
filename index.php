@@ -145,7 +145,7 @@ Template Name: Home
     </li>
   </ul>
 
-  <a href="/lista-portfolio" class="btn-more">Veja mais</a>
+  <a href="/portfolio" class="btn-more">Veja mais</a>
 </section>
 
 <section id="empresa" class="empresa">
