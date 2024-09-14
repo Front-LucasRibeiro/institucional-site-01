@@ -88,16 +88,16 @@
                 $itemWhatsAppLinkInativar = get_post_meta($id_post, 'itemWhatsAppInativar', true);
 
                 if ($itemFacebookLinkInativar !== '1') {
-                    echo '<li class="face"><a href="' . esc_url($itemFacebookLink) . '"><img src="' . esc_url($home . '/src/images/facebook.svg') . '" title="Facebook" alt="Facebook"></a></li>';
+                    echo '<li class="face"><a href="' . esc_url($itemFacebookLink) . '" target="_blank"><img src="' . esc_url($home . '/src/images/facebook.svg') . '" title="Facebook" alt="Facebook"></a></li>';
                 }
                 if ($itemInstagramLinkInativar !== '1') {
-                    echo '<li class="insta"><a href="' . esc_url($itemInstagramLink) . '"><img src="' . esc_url($home . '/src/images/instagram.svg') . '" title="Instagram" alt="Instagram"></a></li>';
+                    echo '<li class="insta"><a href="' . esc_url($itemInstagramLink) . '" target="_blank"><img src="' . esc_url($home . '/src/images/instagram.svg') . '" title="Instagram" alt="Instagram"></a></li>';
                 }
                 if ($itemLinkedInLinkInativar !== '1') {
-                    echo '<li class="linkedin"><a href="' . esc_url($itemLinkedInLink) . '"><img src="' . esc_url($home . '/src/images/linkedin.svg') . '" title="LinkedIn" alt="LinkedIn"></a></li>';
+                    echo '<li class="linkedin"><a href="' . esc_url($itemLinkedInLink) . '" target="_blank"><img src="' . esc_url($home . '/src/images/linkedin.svg') . '" title="LinkedIn" alt="LinkedIn"></a></li>';
                 }
                 if ($itemWhatsAppLinkInativar !== '1') {
-                    echo '<li class="whats"><a href="' . esc_url($itemWhatsAppLink) . '"><img src="' . esc_url($home . '/src/images/whatsapp.svg') . '" title="WhatsApp" alt="WhatsApp"></a></li>';
+                    echo '<li class="whats"><a href="' . esc_url($itemWhatsAppLink) . '" target="_blank"><img src="' . esc_url($home . '/src/images/whatsapp.svg') . '" title="WhatsApp" alt="WhatsApp"></a></li>';
                 }
                 ?>
             </ul>
@@ -137,16 +137,16 @@
                     <?php
                     // Repetindo a lógica dos links das redes sociais no menu móvel
                     if ($itemFacebookLinkInativar !== '1') {
-                        echo '<li class="face"><a href="' . esc_url($itemFacebookLink) . '"><img src="' . esc_url($home . '/src/images/facebook.svg') . '" title="Facebook" alt="Facebook"></a></li>';
+                        echo '<li class="face"><a href="' . esc_url($itemFacebookLink) . '" target="_blank"><img src="' . esc_url($home . '/src/images/facebook.svg') . '" title="Facebook" alt="Facebook"></a></li>';
                     }
                     if ($itemInstagramLinkInativar !== '1') {
-                        echo '<li class="insta"><a href="' . esc_url($itemInstagramLink) . '"><img src="' . esc_url($home . '/src/images/instagram.svg') . '" title="Instagram" alt="Instagram"></a></li>';
+                        echo '<li class="insta"><a href="' . esc_url($itemInstagramLink) . '" target="_blank"><img src="' . esc_url($home . '/src/images/instagram.svg') . '" title="Instagram" alt="Instagram"></a></li>';
                     }
                     if ($itemLinkedInLinkInativar !== '1') {
-                        echo '<li class="linkedin"><a href="' . esc_url($itemLinkedInLink) . '"><img src="' . esc_url($home . '/src/images/linkedin.svg') . '" title="LinkedIn" alt="LinkedIn"></a></li>';
+                        echo '<li class="linkedin"><a href="' . esc_url($itemLinkedInLink) . '" target="_blank"><img src="' . esc_url($home . '/src/images/linkedin.svg') . '" title="LinkedIn" alt="LinkedIn"></a></li>';
                     }
                     if ($itemWhatsAppLinkInativar !== '1') {
-                        echo '<li class="whats"><a href="' . esc_url($itemWhatsAppLink) . '"><img src="' . esc_url($home . '/src/images/whatsapp.svg') . '" title="WhatsApp" alt="WhatsApp"></a></li>';
+                        echo '<li class="whats"><a href="' . esc_url($itemWhatsAppLink) . '" target="_blank"><img src="' . esc_url($home . '/src/images/whatsapp.svg') . '" title="WhatsApp" alt="WhatsApp"></a></li>';
                     }
                     ?>
                 </ul>
