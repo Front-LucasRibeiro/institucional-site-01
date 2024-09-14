@@ -9,60 +9,154 @@ Template Name: Home
 
 <section class="banner-top">
   <div class="container-banner">
-    <div>
-      <img src="<?= $home; ?>/src/images/BANNER-HOME.png" alt="">
-      <div class="info-text">
-        <div class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum possimus aliquam assumenda fugit quaerat, praesentium quas dolores libero ratione commodi vero impedit optio blanditiis obcaecati hic adipisci cum odio illum.</div>
-      </div>
-    </div>
-    <div>
-      <img src="<?= $home; ?>/src/images/construction-cranes-and-concrete-structure-at-suns-PBLEVC8.jpg" alt="">
-      <div class="info-text">
-        <div class="text">
-          Texto Informativo 2
-        </div>  
-      </div>
-    </div>
+    <?php
+    // Query para pegar o post de configurações
+    $config_args = array(
+        'post_type' => 'config_secoes',
+        'posts_per_page' => 1, // Pega apenas um post
+    );
+    $config_query = new WP_Query($config_args);
+    
+    $disable_banners = '0'; // Valor padrão
+    if ($config_query->have_posts()) {
+        while ($config_query->have_posts()) : $config_query->the_post();
+            $disable_banners = get_post_meta(get_the_ID(), 'disable_banners', true);
+        endwhile;
+        wp_reset_postdata(); // Reseta a query
+    }
+
+    if ($disable_banners !== '1') {
+        // Query para pegar os banners do tipo 'banner-topo'
+        $args = array(
+            'post_type' => 'banner-topo',
+            'posts_per_page' => -1, // Pega todos os banners
+        );
+        $banners = new WP_Query($args);
+
+        if ($banners->have_posts()) :
+            while ($banners->have_posts()) : $banners->the_post(); ?>
+                <div>
+                    <?php
+                    // Obter URLs das imagens
+                    $banner_image_desktop = get_post_meta(get_the_ID(), 'banner_image_desktop', true);
+                    $banner_image_mobile = get_post_meta(get_the_ID(), 'banner_image_mobile', true);
+                    ?>
+                    
+                    <!-- Imagem para computador -->
+                    <?php if ($banner_image_desktop) : ?>
+                        <img 
+                            src="<?php echo wp_get_attachment_url($banner_image_desktop); ?>" 
+                            alt="<?php the_title(); ?>" 
+                            class="banner-desktop"
+                        >
+                    <?php endif; ?>
+
+                    <!-- Imagem para dispositivo móvel -->
+                    <?php if ($banner_image_mobile) : ?>
+                        <img 
+                            src="<?php echo wp_get_attachment_url($banner_image_mobile); ?>" 
+                            alt="<?php the_title(); ?>" 
+                            class="banner-mobile"
+                            style="display: none;"
+                        >
+                    <?php endif; ?>
+
+                    <div class="info-text">
+                        <div class="text">
+                            <?php echo esc_html(get_post_meta(get_the_ID(), 'banner_description', true)); ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endwhile;
+            wp_reset_postdata(); // Reseta a query
+        else : ?>
+            <div>
+                <p>Nenhum banner encontrado.</p>
+            </div>
+        <?php endif;
+    }
+    ?>
   </div>
 </section>
 
-<section class="banner-top-mob">
-  <div class="container-banner">
-    <div>
-      <img src="<?= $home; ?>/src/images/mob-1.jpg" alt="">
-      <div class="info-text">
-        <div class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum possimus aliquam assumenda fugit quaerat, praesentium quas dolores libero ratione commodi vero impedit optio blanditiis obcaecati hic adipisci cum odio illum.</div>
-      </div>
-    </div>
-    <div>
-      <img src="<?= $home; ?>/src/images/mob-2.jpg" alt="">
-      <div class="info-text">
-        <div class="text">
-          Texto Informativo 2
-        </div>  
-      </div>
-    </div>
-  </div>
-</section>
+<script>
+    // Script para alternar entre imagens de desktop e móvel
+    function updateBannerVisibility() {
+        var width = window.innerWidth;
+        var desktopBanners = document.querySelectorAll('.banner-desktop');
+        var mobileBanners = document.querySelectorAll('.banner-mobile');
+
+        if (width < 768) { // Ajuste de acordo com seu design responsivo
+            desktopBanners.forEach(function(banner) {
+                banner.style.display = 'none';
+            });
+            mobileBanners.forEach(function(banner) {
+                banner.style.display = 'block';
+            });
+        } else {
+            desktopBanners.forEach(function(banner) {
+                banner.style.display = 'block';
+            });
+            mobileBanners.forEach(function(banner) {
+                banner.style.display = 'none';
+            });
+        }
+    }
+
+    window.onload = updateBannerVisibility;
+    window.onresize = updateBannerVisibility;
+</script>
 
 <section class="section-topo">
   <ul class="carousel-top container">
-    <li>
-      <img src="<?= $home; ?>/src/images/Ativo-1.png" alt="Item 1">
-      <span class="text">Item 1</span>
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/Ativo-4.png" alt="Item 3">
-      <span class="text">Item 3</span>
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/Ativo-1.png" alt="Item 1">
-      <span class="text">Item 1</span>
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/Ativo-4.png" alt="Item 3">
-      <span class="text">Item 3</span>
-    </li>
+    <?php
+    // Query para pegar o post de configurações
+    $config_args = array(
+        'post_type' => 'config_secoes',
+        'posts_per_page' => 1, // Pega apenas um post
+    );
+    $config_query = new WP_Query($config_args);
+    
+    $disable_sections = '0'; // Valor padrão
+    if ($config_query->have_posts()) {
+        while ($config_query->have_posts()) : $config_query->the_post();
+            $disable_sections = get_post_meta(get_the_ID(), 'disable_sections', true);
+        endwhile;
+        wp_reset_postdata(); // Reseta a query
+    }
+
+    if ($disable_sections !== '1') {
+        // Query para pegar os sections do tipo 'section-topo'
+        $args = array(
+            'post_type' => 'section-topo',
+            'posts_per_page' => -1, // Pega todos os sections
+        );
+        $sections = new WP_Query($args);
+
+        if ($sections->have_posts()) :
+            while ($sections->have_posts()) : $sections->the_post(); ?>
+                <li>
+                    <?php
+                    // Obter URLs das imagens e textos
+                    $section_image = get_post_meta(get_the_ID(), 'section_image', true);
+                    $section_text = get_post_meta(get_the_ID(), 'section_text', true);
+                    ?>
+                    <?php if ($section_image) : ?>
+                        <img 
+                            src="<?php echo wp_get_attachment_url($section_image); ?>" 
+                            alt="<?php the_title(); ?>">
+                    <?php endif; ?>
+                    <span class="text"><?php echo esc_html($section_text); ?></span>
+                </li>
+            <?php endwhile;
+            wp_reset_postdata(); // Reseta a query
+        else : ?>
+            <li>
+                <span class="text">Nenhum item encontrado.</span>
+            </li>
+        <?php endif;
+    }
+    ?>
   </ul>
 </section>
 

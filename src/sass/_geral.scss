@@ -343,11 +343,11 @@ button[type="submit"] {
   justify-content: center;
   text-align: center;
 
-  .error{
+  .error {
     font-weight: 600;
     font-size: 28px;
 
-    > span{
+    >span {
       color: $main-color;
     }
   }

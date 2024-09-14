@@ -14,10 +14,11 @@
     li {
       display: flex;
       align-items: center;
-      padding: 30px;
+      padding: 28px 18px;
       border-radius: 30px;
       background-color: #cecece;
       margin: 0 12px;
+      width: 310px;
 
       &:nth-child(even) {
         background-color: $main-color;
@@ -25,14 +26,19 @@
 
       img {
         width: 68px;
-        height: auto;
+        height: 68px;
         margin-right: 12px;
       }
 
       .text {
         text-transform: uppercase;
-        font-size: 17px;
-        line-height: 21px;
+        font-size: 16px;
+        line-height: 20px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        color: #fff;
       }
     }
   }
@@ -403,7 +409,7 @@
 
 
 
-      > .read-more {
+      >.read-more {
         display: block;
         color: $main-color;
         font-weight: 500;
@@ -584,21 +590,5 @@
 
   iframe {
     width: 100%;
-  }
-}
-
-.banner-top {
-  display: block;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-}
-
-.banner-top-mob {
-  display: none;
-
-  @media (max-width: 768px) {
-    display: block;
   }
 }

@@ -127,33 +127,35 @@ function openMenuMob() {
 }
 
 function carouselSectionTop() {
-  $('.carousel-top').slick({
-    infinite: true,
-    slidesToShow:  3,
-    slidesToScroll: 1,
-    arrows: false,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    speed: 500,
-    responsive: [
-      {
-        breakpoint: 769,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          centerMode: true,
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerMode: true,
-        }
-      },
-    ]
-  })
+  if ($('.carousel-top li').length >= 3) {
+    $('.carousel-top').slick({
+      infinite: true,
+      slidesToShow:  3,
+      slidesToScroll: 1,
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      speed: 500,
+      responsive: [
+        {
+          breakpoint: 769,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            centerMode: true,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            centerMode: true,
+          }
+        },
+      ]
+    })
+  }
 }
 
 function carouselClients() {

@@ -3,15 +3,6 @@ add_filter('show_admin_bar', '__return_false');
 
 add_theme_support('post-thumbnails');
 
-add_filter('wp_cache_disable', '__return_true');
-
-global $wpdb;
-$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_%'" );
-
-wp_cache_flush();
-
-define('WP_CACHE', false);
-
 function enqueue_media_uploader() {
     // Verifica se estamos na tela de edição de post
     if (is_admin()) {
@@ -26,11 +17,30 @@ function remove_admin_menu_items() {
     remove_menu_page('edit.php'); // Posts
     remove_menu_page('edit-comments.php'); // Comentários
     remove_menu_page('wpforms-overview'); // WPForms
-    // remove_menu_page('plugins.php'); // Plugins
+    remove_menu_page('plugins.php'); // Plugins
     remove_menu_page('themes.php'); // Aparência
     remove_menu_page('tools.php'); // Ferramentas
+    remove_menu_page('options-general.php'); // Configurações
 }
 add_action('admin_menu', 'remove_admin_menu_items');
+
+add_action('admin_menu', 'remove_litespeed_cache_menu', 99);
+
+function remove_litespeed_cache_menu() {
+    global $submenu;
+    // Remove o menu principal
+    remove_menu_page('litespeed');
+    remove_menu_page('litespeed-cache-options');
+
+    if (isset($submenu['litespeed-cache-options'])) {
+        unset($submenu['litespeed-cache-options']);
+    }
+    // Remove submenus
+    if (isset($submenu['litespeed'])) {
+        unset($submenu['litespeed']);
+    }
+}
+
 
 // start - PORTFOLIO 
 // start - criando campos para o novo post type
@@ -280,7 +290,7 @@ function createFieldMenu() {
 <div class="box">
     <!-- Campo de Upload de Logo -->
     <div class="field">
-        <label for="itemLogo">Logo:</label>
+        <label for="itemLogo">Logo: (Tamanho de imagem: 172px92px)</label>
         <input type="hidden" id="itemLogo" name="itemLogo" value="<?php echo esc_attr($itemLogo); ?>" />
         <button type="button" class="button" id="uploadLogoButton">Selecionar Logo</button>
 
@@ -358,6 +368,9 @@ function createFieldMenu() {
         ?>
         <div class="social-field">
             <label for="<?= esc_attr($name); ?>"><?= esc_html($label); ?>:</label>
+            <?php if($name === 'itemWhatsAppLink'): ?>
+                <span>(Ex: https://api.whatsapp.com/send?phone=5511988888888)</span>
+            <?php endif; ?>
             <input type="text" id="<?= esc_attr($name); ?>" name="<?= esc_attr($name); ?>" value="<?= esc_attr($value); ?>" />
             <div class="field">
                 Desativar <input type="checkbox" id="<?= esc_attr($inactivateName); ?>" name="<?= esc_attr($inactivateName); ?>" value="1" <?= checked($inactivateValue, '1', false); ?> />
@@ -465,3 +478,417 @@ function create_menu_cpt() {
 }
 add_action('init', 'create_menu_cpt');
 // end - MENU 
+
+
+
+// start - BANNER TOPO
+// Criar o novo post type "Banner Topo"
+function create_banner_topo_cpt() {
+    $args = array(
+        'labels' => array(
+            'name' => __('Banners Topo'),
+            'singular_name' => __('Banner Topo')
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'banners-topo'),
+        'supports' => array('title'), // Removido 'thumbnail'
+        'menu_icon' => 'dashicons-format-image',
+    );
+    register_post_type('banner-topo', $args);
+}
+add_action('init', 'create_banner_topo_cpt');
+
+// Criar campos personalizados para o Banner Topo
+function createFieldBannerTopo() {
+    global $post;
+    $id_post = $post->ID;
+    $banner_description = get_post_meta($id_post, 'banner_description', true);
+    $banner_image_desktop = get_post_meta($id_post, 'banner_image_desktop', true);
+    $banner_image_mobile = get_post_meta($id_post, 'banner_image_mobile', true);
+    ?>
+
+    <style>
+        textarea,
+        input[type="text"],
+        input[type="hidden"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .field {
+            margin: 12px 0;
+        }
+
+        .banner-preview img{
+          width: 310px!important;
+          height: 310px!important;
+          object-fit: cover;
+          margin-top: 18px;
+        }
+
+        .label {
+          position: relative;
+          top: 5px;
+        }
+    </style>
+
+    <div>
+      <strong>Imagens (largura x altura):</strong><br><br>
+      Tamanho de imagem para computador: 1920x705<br>
+      Tamanho de imagem para dispositivo móvel: 564x705
+    </div>
+
+    <div class="field">
+        <label for="banner_image_desktop" class="label">Imagem para Computador:</label>
+        <input type="hidden" id="banner_image_desktop" name="banner_image_desktop" value="<?php echo esc_attr($banner_image_desktop); ?>" />
+        <button type="button" class="button" id="uploadDesktopButton">Selecionar Imagem</button>
+        <div class="banner-preview">
+            <?php if ($banner_image_desktop) : ?>
+                <img src="<?php echo wp_get_attachment_url($banner_image_desktop); ?>" alt="Banner Desktop" style="max-width: 100%; height: auto;" />
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="banner_image_mobile" class="label">Imagem para Dispositivo Móvel:</label>
+        <input type="hidden" id="banner_image_mobile" name="banner_image_mobile" value="<?php echo esc_attr($banner_image_mobile); ?>" />
+        <button type="button" class="button" id="uploadMobileButton">Selecionar Imagem</button>
+        <div class="banner-preview">
+            <?php if ($banner_image_mobile) : ?>
+                <img src="<?php echo wp_get_attachment_url($banner_image_mobile); ?>" alt="Banner Mobile" style="max-width: 100%; height: auto;" />
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="banner_description"><strong>Descrição:</strong></label>
+        <textarea rows="4" id="banner_description" name="banner_description"><?php echo esc_textarea($banner_description); ?></textarea>
+    </div>
+
+    <script>
+        jQuery(document).ready(function($) {
+            var mediaUploaderDesktop, mediaUploaderMobile;
+
+            $('#uploadDesktopButton').click(function(e) {
+                e.preventDefault();
+                if (mediaUploaderDesktop) {
+                    mediaUploaderDesktop.open();
+                    return;
+                }
+
+                mediaUploaderDesktop = wp.media.frames.file_frame = wp.media({
+                    title: 'Escolher Imagem para Computador',
+                    button: {
+                        text: 'Escolher Imagem'
+                    },
+                    multiple: false
+                });
+
+                mediaUploaderDesktop.on('select', function() {
+                    var attachment = mediaUploaderDesktop.state().get('selection').first().toJSON();
+                    $('#banner_image_desktop').val(attachment.id);
+                    $('.banner-preview').first().html('<img src="' + attachment.url + '" alt="Banner Desktop" style="max-width: 100%; height: auto;" />');
+                });
+
+                mediaUploaderDesktop.open();
+            });
+
+            $('#uploadMobileButton').click(function(e) {
+                e.preventDefault();
+                if (mediaUploaderMobile) {
+                    mediaUploaderMobile.open();
+                    return;
+                }
+
+                mediaUploaderMobile = wp.media.frames.file_frame = wp.media({
+                    title: 'Escolher Imagem para Dispositivo Móvel',
+                    button: {
+                        text: 'Escolher Imagem'
+                    },
+                    multiple: false
+                });
+
+                mediaUploaderMobile.on('select', function() {
+                    var attachment = mediaUploaderMobile.state().get('selection').first().toJSON();
+                    $('#banner_image_mobile').val(attachment.id);
+                    $('.banner-preview').last().html('<img src="' + attachment.url + '" alt="Banner Mobile" style="max-width: 100%; height: auto;" />');
+                });
+
+                mediaUploaderMobile.open();
+            });
+        });
+    </script>
+
+    <?php
+    // Adicionando nonce para segurança
+    wp_nonce_field('save_banner_meta', 'banner_nonce');
+
+     if (defined('WP_CACHE') && WP_CACHE) {
+        wp_cache_flush();
+    }
+}
+
+function add_banner_meta_box() {
+    add_meta_box(
+        'banner_meta_box', // ID
+        'Informações do Banner Topo', // Título
+        'createFieldBannerTopo', // Callback
+        'banner-topo', // Novo CPT
+        'normal', // Contexto
+        'high' // Prioridade
+    );
+}
+add_action('add_meta_boxes', 'add_banner_meta_box');
+
+// Função para salvar os campos personalizados
+function save_banner_meta($post_id) {
+    // Verifica o nonce
+    if (!isset($_POST['banner_nonce']) || !wp_verify_nonce($_POST['banner_nonce'], 'save_banner_meta')) {
+        return;
+    }
+
+    // Verifica se o post é do tipo correto
+    if (get_post_type($post_id) !== 'banner-topo') {
+        return;
+    }
+
+    // Salva a descrição do banner
+    if (isset($_POST['banner_description'])) {
+        update_post_meta($post_id, 'banner_description', sanitize_textarea_field($_POST['banner_description']));
+    }
+
+    // Salva as imagens
+    if (isset($_POST['banner_image_desktop'])) {
+        update_post_meta($post_id, 'banner_image_desktop', sanitize_text_field($_POST['banner_image_desktop']));
+    }
+    if (isset($_POST['banner_image_mobile'])) {
+        update_post_meta($post_id, 'banner_image_mobile', sanitize_text_field($_POST['banner_image_mobile']));
+    }
+
+    if (defined('WP_CACHE') && WP_CACHE) {
+        wp_cache_flush();
+    }
+}
+add_action('save_post', 'save_banner_meta');
+// end - BANNER TOPO
+
+
+
+// start - SECTION TOPO
+// Criar o novo post type "Section Topo"
+function create_section_topo_cpt() {
+    $args = array(
+        'labels' => array(
+            'name' => __('Sections Topo'),
+            'singular_name' => __('Section Topo')
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'sections-topo'),
+        'supports' => array('title'), // Apenas título
+        'menu_icon' => 'dashicons-format-image',
+    );
+    register_post_type('section-topo', $args);
+}
+add_action('init', 'create_section_topo_cpt');
+
+// Criar campos personalizados para o Section Topo
+function createFieldSectionTopo() {
+    global $post;
+    $id_post = $post->ID;
+    $section_text = get_post_meta($id_post, 'section_text', true);
+    $section_image = get_post_meta($id_post, 'section_image', true);
+    ?>
+
+    <style>
+        textarea,
+        input[type="text"],
+        input[type="hidden"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .field {
+            margin: 12px 0;
+        }
+
+        .section-preview img{
+          width: 68px;
+          height: 68px;
+          object-fit: cover;
+          margin-top: 18px;
+        }
+    </style>
+
+    <div>
+      <strong>Imagens (largura x altura):</strong><br>
+      Tamanho de imagem: 68px68px
+    </div>
+
+    <div class="field">
+        <label for="section_image">Imagem:</label>
+        <input type="hidden" id="section_image" name="section_image" value="<?php echo esc_attr($section_image); ?>" />
+        <button type="button" class="button" id="uploadSectionButton">Selecionar Imagem</button>
+        <div class="section-preview">
+            <?php if ($section_image) : ?>
+                <img src="<?php echo wp_get_attachment_url($section_image); ?>" alt="Section Image" style="max-width: 100%; height: auto;" />
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="section_text">Texto:</label>
+        <textarea rows="4" id="section_text" name="section_text"><?php echo esc_textarea($section_text); ?></textarea>
+    </div>
+
+    <script>
+        jQuery(document).ready(function($) {
+            var mediaUploader;
+
+            $('#uploadSectionButton').click(function(e) {
+                e.preventDefault();
+                if (mediaUploader) {
+                    mediaUploader.open();
+                    return;
+                }
+
+                mediaUploader = wp.media.frames.file_frame = wp.media({
+                    title: 'Escolher Imagem para Section Topo',
+                    button: {
+                        text: 'Escolher Imagem'
+                    },
+                    multiple: false
+                });
+
+                mediaUploader.on('select', function() {
+                    var attachment = mediaUploader.state().get('selection').first().toJSON();
+                    $('#section_image').val(attachment.id);
+                    $('.section-preview').html('<img src="' + attachment.url + '" alt="Section Image" style="max-width: 100%; height: auto;" />');
+                });
+
+                mediaUploader.open();
+            });
+        });
+    </script>
+
+    <?php
+    // Adicionando nonce para segurança
+    wp_nonce_field('save_section_meta', 'section_nonce');
+}
+
+function add_section_meta_box() {
+    add_meta_box(
+        'section_meta_box', // ID
+        'Informações da Section Topo', // Título
+        'createFieldSectionTopo', // Callback
+        'section-topo', // Novo CPT
+        'normal', // Contexto
+        'high' // Prioridade
+    );
+}
+add_action('add_meta_boxes', 'add_section_meta_box');
+
+// Função para salvar os campos personalizados
+function save_section_meta($post_id) {
+    // Verifica o nonce
+    if (!isset($_POST['section_nonce']) || !wp_verify_nonce($_POST['section_nonce'], 'save_section_meta')) {
+        return;
+    }
+
+    // Verifica se o post é do tipo correto
+    if (get_post_type($post_id) !== 'section-topo') {
+        return;
+    }
+
+    // Salva a imagem da seção
+    if (isset($_POST['section_image'])) {
+        update_post_meta($post_id, 'section_image', sanitize_text_field($_POST['section_image']));
+    }
+
+    // Salva o texto da seção
+    if (isset($_POST['section_text'])) {
+        update_post_meta($post_id, 'section_text', sanitize_textarea_field($_POST['section_text']));
+    }
+}
+add_action('save_post', 'save_section_meta');
+// end - SECTION TOPO
+
+
+// start - CONFIGURAÇÕES DE SEÇÕES
+// Criar o novo post type "Configurações de Seções"
+function create_config_secoes_cpt() {
+    $args = array(
+        'labels' => array(
+            'name' => __('Configurações de Seções'),
+            'singular_name' => __('Configuração de Seção')
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'rewrite' => array('slug' => 'config-secoes'),
+        'supports' => array('title'), // Apenas título
+        'menu_icon' => 'dashicons-admin-generic',
+    );
+    register_post_type('config_secoes', $args);
+}
+add_action('init', 'create_config_secoes_cpt');
+
+// Criar campos personalizados para desativar seções
+function createFieldConfigSecoes() {
+    global $post;
+    $disable_banners = get_post_meta($post->ID, 'disable_banners', true);
+    $disable_sections = get_post_meta($post->ID, 'disable_sections', true);
+    ?>
+
+    <div class="field">
+        <label for="disable_banners">
+            <input type="checkbox" id="disable_banners" name="disable_banners" value="1" <?php checked($disable_banners, '1'); ?>>
+            Desativar Banners Topo
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="disable_sections">
+            <input type="checkbox" id="disable_sections" name="disable_sections" value="1" <?php checked($disable_sections, '1'); ?>>
+            Desativar Seção Topo
+        </label>
+    </div>
+
+    <?php
+    // Adicionando nonce para segurança
+    wp_nonce_field('save_config_meta', 'config_nonce');
+}
+
+function add_config_meta_box() {
+    add_meta_box(
+        'config_meta_box', // ID
+        'Configurações de Seções', // Título
+        'createFieldConfigSecoes', // Callback
+        'config_secoes', // Novo CPT
+        'normal', // Contexto
+        'high' // Prioridade
+    );
+}
+add_action('add_meta_boxes', 'add_config_meta_box');
+
+// Função para salvar os campos personalizados
+function save_config_meta($post_id) {
+    // Verifica o nonce
+    if (!isset($_POST['config_nonce']) || !wp_verify_nonce($_POST['config_nonce'], 'save_config_meta')) {
+        return;
+    }
+
+    // Verifica se o post é do tipo correto
+    if (get_post_type($post_id) !== 'config_secoes') {
+        return;
+    }
+
+    // Salva as configurações
+    $disable_banners = isset($_POST['disable_banners']) ? '1' : '0';
+    update_post_meta($post_id, 'disable_banners', $disable_banners);
+
+    $disable_sections = isset($_POST['disable_sections']) ? '1' : '0';
+    update_post_meta($post_id, 'disable_sections', $disable_sections);
+}
+add_action('save_post', 'save_config_meta');
+// end - CONFIGURAÇÕES DE SEÇÕES
