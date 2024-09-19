@@ -161,53 +161,91 @@ Template Name: Home
 </section>
 
 <section class="section-servicos container">
-  <h2 class="title">Serviços</h2>
+  
 
   <?php
   // Query para pegar o post de configurações
   $config_args = array(
-      'post_type' => 'servicos',
+      'post_type' => 'config_secoes',
       'posts_per_page' => 1, // Pega apenas um post
   );
   $config_query = new WP_Query($config_args);
   
+  $disable_services = '0'; // Valor padrão
   if ($config_query->have_posts()) {
-      while ($config_query->have_posts()) : $config_query->the_post();
-          $subtitulo = esc_html(get_post_meta(get_the_ID(), 'servico_subtitle', true));
-          $paragrafo = esc_html(get_post_meta(get_the_ID(), 'servico_paragraph', true));
-          $servicos = get_post_meta(get_the_ID(), 'servicos', true) ?: array();
+    while ($config_query->have_posts()) : $config_query->the_post();
+          $disable_services = get_post_meta(get_the_ID(), 'disable_services', true);
       endwhile;
       wp_reset_postdata();
   }
 
+  // Verifica se a seção de serviços está desativada
+  if ($disable_services !== '1') {
+    // Query para pegar os serviços
+    $args = array(
+        'post_type' => 'servicos',
+        'posts_per_page' => -1, // Pega todos os serviços
+    );
+    $services_query = new WP_Query($args);
 
-  ?>
-  
-  <h3 class="sub-title"><?php echo $subtitulo; ?></h3>
+    if ($services_query->have_posts()) : ?>
+      <h2 class="title">Serviços</h2>
+      <h3 class="sub-title">
+        <?php 
+        // Coloca o subtítulo da primeira postagem de serviços
+        $first_service = $services_query->posts[0]; // Pega o primeiro serviço
+        $subtitulo = esc_html(get_post_meta($first_service->ID, 'servico_subtitle', true));
+        echo $subtitulo; 
+        ?>
+      </h3>
 
-  <div class="cards-services">
-    
-    <ul class="carousel-servicos">
-      <?php
-  
-      if (!empty($servicos)) :
-          foreach ($servicos as $servico): ?>
-              <li>
-                  <span class="name"><?php echo esc_html($servico['name']); ?></span>
-                  <?php if (!empty($servico['image'])): ?>
-                      <img src="<?php echo esc_url($servico['image']); ?>" alt="<?php echo esc_attr($servico['name']); ?>" class="icon">
-                  <?php endif; ?>
-              </li>
-          <?php endforeach;
-      else : ?>
-          <li>
-              <span class="text">Nenhum serviço encontrado.</span>
-          </li>
-      <?php endif; ?>
+      <div class="cards-services">
+                 <ul class="carousel-servicos">
+        <?php
+        while ($services_query->have_posts()) : $services_query->the_post();
+            // Obter dados do serviço
+            $servicos = get_post_meta(get_the_ID(), 'servicos', true) ?: array(); // Corrigido
+
+            // Verifica se há serviços
+            if (!empty($servicos)) {
+                foreach ($servicos as $servico) {
+                    // Armazena o nome e a imagem do serviço
+                    $service_image = !empty($servico['image']) ? $servico['image'] : '';
+                    $service_name = !empty($servico['name']) ? $servico['name'] : '';
+
+                    // Exibição do serviço
+                    ?>
+                    <li>
+                        <?php if (!empty($service_name)): ?>
+                            <span class="name"><?php echo esc_html($service_name); ?></span>
+                        <?php endif; ?>
+                        <?php if (!empty($service_image)): ?>
+                            <img src="<?php echo esc_url($service_image); ?>" alt="<?php echo esc_attr($service_name); ?>" class="icon">
+                        <?php endif; ?>
+                    </li>
+                    <?php
+                }
+            }
+        endwhile;
+        ?>
     </ul>
 
-    <p><?php echo $paragrafo; ?></p>
-  </div>
+        <p>
+          <?php 
+          // Coloca o parágrafo da primeira postagem de serviços
+          echo $paragrafo; 
+          ?>
+        </p>
+      </div>
+    <?php else : ?>
+      <div class="cards-services">
+        <p>Nenhum serviço encontrado.</p>
+      </div>
+    <?php endif;
+
+    wp_reset_postdata(); // Reseta a query dos serviços
+  }
+  ?>
 </section>
 
 <section id="portfolio" class="portfolio container swiper">

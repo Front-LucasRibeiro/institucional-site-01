@@ -837,6 +837,7 @@ function createFieldConfigSecoes() {
     global $post;
     $disable_banners = get_post_meta($post->ID, 'disable_banners', true);
     $disable_sections = get_post_meta($post->ID, 'disable_sections', true);
+    $disable_services = get_post_meta($post->ID, 'disable_services', true);
     ?>
 
     <div class="field">
@@ -850,6 +851,13 @@ function createFieldConfigSecoes() {
         <label for="disable_sections">
             <input type="checkbox" id="disable_sections" name="disable_sections" value="1" <?php checked($disable_sections, '1'); ?>>
             Desativar Seção Topo
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="disable_services">
+            <input type="checkbox" id="disable_services" name="disable_services" value="1" <?php checked($disable_services, '1'); ?>>
+            Desativar Seção Serviços
         </label>
     </div>
 
@@ -888,6 +896,9 @@ function save_config_meta($post_id) {
 
     $disable_sections = isset($_POST['disable_sections']) ? '1' : '0';
     update_post_meta($post_id, 'disable_sections', $disable_sections);
+
+    $disable_services = isset($_POST['disable_services']) ? '1' : '0';
+    update_post_meta($post_id, 'disable_services', $disable_services);
 }
 add_action('save_post', 'save_config_meta');
 // end - CONFIGURAÇÕES DE SEÇÕES
