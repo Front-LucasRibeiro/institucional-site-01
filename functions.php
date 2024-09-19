@@ -41,7 +41,6 @@ function remove_litespeed_cache_menu() {
     }
 }
 
-
 // start - PORTFOLIO 
 // start - criando campos para o novo post type
 function createFieldPortfolio() {
@@ -161,7 +160,7 @@ function createFieldBlog() {
         </div>
         <div class="field">
             <label for="blog_date">Data:</label>
-            <input type="date" id="blog_date" name="blog_date" value="<?= esc_attr($blog_date); ?>" />
+            <input type="date" placeholder="dd/mm/aaaa" id="blog_date" name="blog_date" value="<?= esc_attr($blog_date); ?>" />
         </div>
     </div>
 
@@ -680,8 +679,8 @@ add_action('save_post', 'save_banner_meta');
 function create_section_topo_cpt() {
     $args = array(
         'labels' => array(
-            'name' => __('Sections Topo'),
-            'singular_name' => __('Section Topo')
+            'name' => __('Seção Topo'),
+            'singular_name' => __('Seção Topo')
         ),
         'public' => true,
         'has_archive' => true,
@@ -892,3 +891,222 @@ function save_config_meta($post_id) {
 }
 add_action('save_post', 'save_config_meta');
 // end - CONFIGURAÇÕES DE SEÇÕES
+
+
+// start - CONFIGURAÇÕES DE SERVIÇOS
+// Criar o novo post type "Serviços"
+function create_servicos_cpt() {
+    $args = array(
+        'labels' => array(
+            'name' => __('Serviços'),
+            'singular_name' => __('Serviço')
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'rewrite' => array('slug' => 'servicos'),
+        'supports' => array('title'),
+        'menu_icon' => 'dashicons-hammer', // Ícone do menu
+    );
+    register_post_type('servicos', $args);
+}
+add_action('init', 'create_servicos_cpt');
+
+// Criar campos personalizados para serviços
+function createFieldServicos() {
+    global $post;
+    $servicos = get_post_meta($post->ID, 'servicos', true) ?: array();
+    $servico_subtitle = get_post_meta($post->ID, 'servico_subtitle', true);
+    $servico_paragraph = get_post_meta($post->ID, 'servico_paragraph', true);
+    ?>
+
+    <style>
+        textarea,
+        input[type="text"],
+        input[type="hidden"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .field {
+            margin: 12px 0;
+        }
+
+        .section-preview img {
+            width: 68px;
+            height: 68px;
+            object-fit: cover;
+            margin-top: 18px;
+        }
+
+        .servico-item {
+            margin-top: 22px;
+        }
+
+        #add-servico {
+            width: 100%;
+            max-width: 310px;
+            margin: 42px auto 22px;
+            display: block;
+        }
+
+
+        .upload-image-button,
+        #add-servico,
+        .remove-servico {
+            background: rgb(21, 101, 192);
+            color: #fff;
+            border: 1px solid;
+            padding: 10px 12px;
+            border-radius: 4px;
+            margin-top: 14px;
+            min-width: 180px;
+            cursor: pointer;
+        }
+
+        .upload-image-button{
+            padding: 6px 12px;
+        }
+        
+        .image-preview {
+            margin-top: 10px;
+        }
+    </style>
+
+    <div class="field">
+        <label for="servico_subtitle">
+            Subtítulo:
+            <input type="text" id="servico_subtitle" name="servico_subtitle" value="<?php echo esc_attr($servico_subtitle); ?>">
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="servico_paragraph">
+            Parágrafo Descritivo:
+            <textarea id="servico_paragraph" name="servico_paragraph"><?php echo esc_textarea($servico_paragraph); ?></textarea>
+        </label>
+    </div>
+
+    <div class="field">
+        <h4>Serviços</h4>
+        <div id="servicos-container">
+            <?php foreach ($servicos as $index => $servico): ?>
+                <div class="servico-item">
+                    <label>
+                        Nome do Serviço:
+                        <input type="text" name="servicos[<?php echo $index; ?>][name]" value="<?php echo esc_attr($servico['name']); ?>">
+                    </label>
+                    <label>
+                        Imagem do Serviço:
+                        <input type="hidden" name="servicos[<?php echo $index; ?>][image]" class="image-url" value="<?php echo esc_attr($servico['image']); ?>">
+                        <button type="button" class="upload-image-button">Upload Imagem</button>
+                        <div class="image-preview">
+                            <?php if (!empty($servico['image'])): ?>
+                                <img src="<?php echo esc_url($servico['image']); ?>" style="max-width: 100%; height: auto;">
+                            <?php endif; ?>
+                        </div>
+                    </label>
+                    <button type="button" class="remove-servico">Remover</button>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <button type="button" id="add-servico">Adicionar Serviço</button>
+    </div>
+
+    <script>
+    document.getElementById('add-servico').addEventListener('click', function() {
+        const container = document.getElementById('servicos-container');
+        const index = container.children.length;
+        const newServico = `
+            <div class="servico-item">
+                <label>
+                    Nome do Serviço:
+                    <input type="text" name="servicos[${index}][name]" value="">
+                </label>
+                <label>
+                    Imagem do Serviço:
+                    <input type="hidden" name="servicos[${index}][image]" class="image-url" value="">
+                    <button type="button" class="upload-image-button">Upload Imagem</button>
+                    <div class="image-preview"></div>
+                </label>
+                <button type="button" class="remove-servico">Remover</button>
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', newServico);
+    });
+
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove-servico')) {
+            event.target.parentElement.remove();
+        }
+        
+        if (event.target.classList.contains('upload-image-button')) {
+            const imageInput = event.target.previousElementSibling;
+            const previewContainer = event.target.nextElementSibling;
+
+            // Open the media uploader
+            const frame = wp.media({
+                title: 'Escolher Imagem',
+                button: {
+                    text: 'Usar esta imagem'
+                },
+                multiple: false
+            });
+
+            frame.on('select', function() {
+                const attachment = frame.state().get('selection').first().toJSON();
+                imageInput.value = attachment.url;
+                previewContainer.innerHTML = '<img src="' + attachment.url + '" style="max-width: 100%; height: auto;">';
+            });
+
+            frame.open();
+        }
+    });
+    </script>
+
+    <?php
+    // Adicionando nonce para segurança
+    wp_nonce_field('save_servico_meta', 'servico_nonce');
+}
+
+function add_servico_meta_box() {
+    add_meta_box(
+        'servico_meta_box', // ID
+        'Configurações de Serviço', // Título
+        'createFieldServicos', // Callback
+        'servicos', // Novo CPT
+        'normal', // Contexto
+        'high' // Prioridade
+    );
+}
+add_action('add_meta_boxes', 'add_servico_meta_box');
+
+// Função para salvar os campos personalizados
+function save_servico_meta($post_id) {
+    // Verifica o nonce
+    if (!isset($_POST['servico_nonce']) || !wp_verify_nonce($_POST['servico_nonce'], 'save_servico_meta')) {
+        return;
+    }
+
+    // Verifica se o post é do tipo correto
+    if (get_post_type($post_id) !== 'servicos') {
+        return;
+    }
+
+    // Salva as configurações
+    $servicos = isset($_POST['servicos']) ? $_POST['servicos'] : array();
+    $servicos = array_map(function($servico) {
+        return array(
+            'name' => sanitize_text_field($servico['name']),
+            'image' => sanitize_text_field($servico['image']),
+        );
+    }, $servicos);
+
+    $servico_subtitle = sanitize_text_field($_POST['servico_subtitle']);
+    $servico_paragraph = sanitize_textarea_field($_POST['servico_paragraph']);
+
+    update_post_meta($post_id, 'servicos', $servicos);
+    update_post_meta($post_id, 'servico_subtitle', $servico_subtitle);
+    update_post_meta($post_id, 'servico_paragraph', $servico_paragraph);
+}
+add_action('save_post', 'save_servico_meta');
+// end - CONFIGURAÇÕES DE SERVIÇOS

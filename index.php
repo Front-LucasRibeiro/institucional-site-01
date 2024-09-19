@@ -160,40 +160,53 @@ Template Name: Home
   </ul>
 </section>
 
-<section id="servicos" class="servicos container">
+<section class="section-servicos container">
   <h2 class="title">Serviços</h2>
 
-  <h3 class="sub-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda quae officia voluptatibus facere repudiandae, rem rerum nostrum molestiae reprehenderit. Error, corporis molestias.</h3>
+  <?php
+  // Query para pegar o post de configurações
+  $config_args = array(
+      'post_type' => 'servicos',
+      'posts_per_page' => 1, // Pega apenas um post
+  );
+  $config_query = new WP_Query($config_args);
+  
+  if ($config_query->have_posts()) {
+      while ($config_query->have_posts()) : $config_query->the_post();
+          $subtitulo = esc_html(get_post_meta(get_the_ID(), 'servico_subtitle', true));
+          $paragrafo = esc_html(get_post_meta(get_the_ID(), 'servico_paragraph', true));
+          $servicos = get_post_meta(get_the_ID(), 'servicos', true) ?: array();
+      endwhile;
+      wp_reset_postdata();
+  }
+
+
+  ?>
+  
+  <h3 class="sub-title"><?php echo $subtitulo; ?></h3>
 
   <div class="cards-services">
-    <ul>
-      <li>
-        <span class="name">Projeto</span>
-        <img src="<?= $home; ?>/src/images/projeto.jpg" alt="Projeto" class="icon">
-      </li>
-      <li>
-        <span class="name">Consultoria</span>
-        <img src="<?= $home; ?>/src/images/consultoria.jpg" alt="Projeto" class="icon">
-      </li>
-       <li>
-        <span class="name">ASSISTÊNCIA À OBRA</span>
-        <img src="<?= $home; ?>/src/images/assistencia.jpg" alt="Projeto" class="icon">
-      </li>
-      <li>
-        <span class="name">Consultoria</span>
-        <img src="<?= $home; ?>/src/images/consultoria.jpg" alt="Projeto" class="icon">
-      </li>
-      <li>
-        <span class="name">Projeto</span>
-        <img src="<?= $home; ?>/src/images/projeto.jpg" alt="Projeto" class="icon">
-      </li>
-      <li>
-        <span class="name">Consultoria</span>
-        <img src="<?= $home; ?>/src/images/consultoria.jpg" alt="Projeto" class="icon">
-      </li>
+    
+    <ul class="carousel-servicos">
+      <?php
+  
+      if (!empty($servicos)) :
+          foreach ($servicos as $servico): ?>
+              <li>
+                  <span class="name"><?php echo esc_html($servico['name']); ?></span>
+                  <?php if (!empty($servico['image'])): ?>
+                      <img src="<?php echo esc_url($servico['image']); ?>" alt="<?php echo esc_attr($servico['name']); ?>" class="icon">
+                  <?php endif; ?>
+              </li>
+          <?php endforeach;
+      else : ?>
+          <li>
+              <span class="text">Nenhum serviço encontrado.</span>
+          </li>
+      <?php endif; ?>
     </ul>
 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique alias autem delectus id cupiditate impedit. Nisi dolore sapiente eaque deleniti atque, alias omnis quis aperiam. Tempore consequatur nostrum fugiat magni? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias quis tempore nisi modi enim. Vitae veritatis hic amet distinctio dolorum tenetur saepe repudiandae dolorem, nobis eos consequatur quam quasi ipsum?</p>
+    <p><?php echo $paragrafo; ?></p>
   </div>
 </section>
 
