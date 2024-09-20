@@ -1121,3 +1121,25 @@ function save_servico_meta($post_id) {
 }
 add_action('save_post', 'save_servico_meta');
 // end - CONFIGURAÇÕES DE SERVIÇOS
+
+
+
+// start - OCULTANDO BOTÔES DENTRO DOS POST TYPES
+function hide_add_new_button() {
+    global $pagenow;
+    if ($pagenow === 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] === 'servicos' || $_GET['post'] === '92' ) {
+        echo '<style type="text/css">.page-title-action { display: none!important; }</style>';
+        echo '<style type="text/css">.submitdelete.deletion, .submitdelete, .trash { display: none!important; }</style>';
+    }
+}
+add_action('admin_head', 'hide_add_new_button');
+
+// Remover submenus
+function remove_menu_items() {
+    global $submenu;
+    if (isset($submenu['edit.php?post_type=servicos'])) {
+        unset($submenu['edit.php?post_type=servicos'][10]); // Remove o "Adicionar Novo"
+    }
+}
+add_action('admin_menu', 'remove_menu_items');
+// end - OCULTANDO BOTÔES DENTRO DOS POST TYPES
