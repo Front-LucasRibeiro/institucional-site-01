@@ -21,6 +21,7 @@ function remove_admin_menu_items() {
     remove_menu_page('themes.php'); // Aparência
     remove_menu_page('tools.php'); // Ferramentas
     remove_menu_page('options-general.php'); // Configurações
+    remove_menu_page('edit.php?post_type=page'); // Páginas
 }
 add_action('admin_menu', 'remove_admin_menu_items');
 
@@ -838,6 +839,10 @@ function createFieldConfigSecoes() {
     $disable_banners = get_post_meta($post->ID, 'disable_banners', true);
     $disable_sections = get_post_meta($post->ID, 'disable_sections', true);
     $disable_services = get_post_meta($post->ID, 'disable_services', true);
+    $disable_portfolio = get_post_meta($post->ID, 'disable_portfolio', true);
+    $disable_empresa = get_post_meta($post->ID, 'disable_empresa', true);
+    $disable_equipe = get_post_meta($post->ID, 'disable_equipe', true);
+    $disable_clientes = get_post_meta($post->ID, 'disable_clientes', true);
     ?>
 
     <div class="field">
@@ -858,6 +863,34 @@ function createFieldConfigSecoes() {
         <label for="disable_services">
             <input type="checkbox" id="disable_services" name="disable_services" value="1" <?php checked($disable_services, '1'); ?>>
             Desativar Seção Serviços
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="disable_portfolio">
+            <input type="checkbox" id="disable_portfolio" name="disable_portfolio" value="1" <?php checked($disable_portfolio, '1'); ?>>
+            Desativar Seção Portfólio
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="disable_empresa">
+            <input type="checkbox" id="disable_empresa" name="disable_empresa" value="1" <?php checked($disable_empresa, '1'); ?>>
+            Desativar Seção Empresa
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="disable_equipe">
+            <input type="checkbox" id="disable_equipe" name="disable_equipe" value="1" <?php checked($disable_equipe, '1'); ?>>
+            Desativar Seção Equipe
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="disable_clientes">
+            <input type="checkbox" id="disable_clientes" name="disable_clientes" value="1" <?php checked($disable_clientes, '1'); ?>>
+            Desativar Seção Clientes
         </label>
     </div>
 
@@ -899,6 +932,18 @@ function save_config_meta($post_id) {
 
     $disable_services = isset($_POST['disable_services']) ? '1' : '0';
     update_post_meta($post_id, 'disable_services', $disable_services);
+
+    $disable_portfolio = isset($_POST['disable_portfolio']) ? '1' : '0';
+    update_post_meta($post_id, 'disable_portfolio', $disable_portfolio);
+
+    $disable_empresa = isset($_POST['disable_empresa']) ? '1' : '0';
+    update_post_meta($post_id, 'disable_empresa', $disable_empresa);
+
+    $disable_equipe = isset($_POST['disable_equipe']) ? '1' : '0';
+    update_post_meta($post_id, 'disable_equipe', $disable_equipe);
+
+    $disable_clientes = isset($_POST['disable_clientes']) ? '1' : '0';
+    update_post_meta($post_id, 'disable_clientes', $disable_clientes);
 }
 add_action('save_post', 'save_config_meta');
 // end - CONFIGURAÇÕES DE SEÇÕES
@@ -993,7 +1038,7 @@ function createFieldServicos() {
     <div class="field">
         <label for="servico_paragraph">
             Parágrafo Descritivo:
-            <textarea id="servico_paragraph" name="servico_paragraph"><?php echo esc_textarea($servico_paragraph); ?></textarea>
+            <textarea id="servico_paragraph" name="servico_paragraph" rows="8"><?php echo esc_textarea($servico_paragraph); ?></textarea>
         </label>
     </div>
 
@@ -1124,10 +1169,397 @@ add_action('save_post', 'save_servico_meta');
 
 
 
+// start - CONFIGURAÇÕES DE EMPRESA
+// Criar o novo post type "Empresa"
+function create_empresa_cpt() {
+    $args = array(
+        'labels' => array(
+            'name' => __('Empresa'),
+            'singular_name' => __('Empresa')
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'rewrite' => array('slug' => 'empresa'),
+        'supports' => array('title'),
+        'menu_icon' => 'dashicons-building', // Ícone do menu
+    );
+    register_post_type('empresa', $args);
+}
+add_action('init', 'create_empresa_cpt');
+
+// Criar campos personalizados para empresa
+function createFieldEmpresa() {
+    global $post;
+    $missao = get_post_meta($post->ID, 'missao', true);
+    $visao = get_post_meta($post->ID, 'visao', true);
+    $valores = get_post_meta($post->ID, 'valores', true);
+    ?>
+
+    <style>
+        textarea,
+        input[type="text"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .field {
+            margin: 12px 0;
+        }
+    </style>
+
+    <div class="field">
+        <label for="missao">
+            Missão:
+            <textarea id="missao" name="missao" rows="4"><?php echo esc_textarea($missao); ?></textarea>
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="visao">
+            Visão:
+            <textarea id="visao" name="visao" rows="4"><?php echo esc_textarea($visao); ?></textarea>
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="valores">
+            Valores:
+            <textarea id="valores" name="valores" rows="4"><?php echo esc_textarea($valores); ?></textarea>
+        </label>
+    </div>
+
+    <?php
+    // Adicionando nonce para segurança
+    wp_nonce_field('save_empresa_meta', 'empresa_nonce');
+}
+
+function add_empresa_meta_box() {
+    add_meta_box(
+        'empresa_meta_box', // ID
+        'Configurações de Empresa', // Título
+        'createFieldEmpresa', // Callback
+        'empresa', // Novo CPT
+        'normal', // Contexto
+        'high' // Prioridade
+    );
+}
+add_action('add_meta_boxes', 'add_empresa_meta_box');
+
+// Função para salvar os campos personalizados
+function save_empresa_meta($post_id) {
+    // Verifica o nonce
+    if (!isset($_POST['empresa_nonce']) || !wp_verify_nonce($_POST['empresa_nonce'], 'save_empresa_meta')) {
+        return;
+    }
+
+    // Verifica se o post é do tipo correto
+    if (get_post_type($post_id) !== 'empresa') {
+        return;
+    }
+
+    // Faz a atualização dos campos
+    $missao = sanitize_textarea_field($_POST['missao']);
+    $visao = sanitize_textarea_field($_POST['visao']);
+    $valores = sanitize_textarea_field($_POST['valores']);
+
+    update_post_meta($post_id, 'missao', $missao);
+    update_post_meta($post_id, 'visao', $visao);
+    update_post_meta($post_id, 'valores', $valores);
+}
+add_action('save_post', 'save_empresa_meta');
+// end - CONFIGURAÇÕES DE EMPRESA
+
+
+// start - CONFIGURAÇÕES DE EQUIPE
+// Criar o novo post type "Equipe"
+function create_equipe_cpt() {
+    $args = array(
+        'labels' => array(
+            'name' => __('Equipe'),
+            'singular_name' => __('Membro da Equipe')
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'rewrite' => array('slug' => 'equipe'),
+        'supports' => array('title'),
+        'menu_icon' => 'dashicons-groups', // Ícone do menu
+    );
+    register_post_type('equipe', $args);
+}
+add_action('init', 'create_equipe_cpt');
+
+// Criar campos personalizados para equipe
+function createFieldEquipe() {
+    global $post;
+    $foto = get_post_meta($post->ID, 'foto', true);
+    $cargo = get_post_meta($post->ID, 'cargo', true);
+    $descricao = get_post_meta($post->ID, 'descricao', true);
+    ?>
+
+    <style>
+        textarea,
+        input[type="text"],
+        input[type="hidden"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .field {
+            margin: 12px 0;
+        }
+
+        .image-preview img {
+            max-width: 150px;
+            height: auto;
+            object-fit: cover;
+            margin-top: 10px;
+        }
+
+        .upload-image-button {
+            background: rgb(21, 101, 192);
+            color: #fff;
+            border: 1px solid;
+            padding: 10px 12px;
+            border-radius: 4px;
+            margin-top: 14px;
+            cursor: pointer;
+            min-width: 180px;
+        }
+    </style>
+
+    <div class="field">
+        <label for="foto">
+            Foto:
+            <input type="hidden" id="foto" name="foto" value="<?php echo esc_attr($foto); ?>" />
+            <button type="button" class="upload-image-button">Upload Imagem</button>
+            <div class="image-preview">
+                <?php if ($foto): ?>
+                    <img src="<?php echo esc_url($foto); ?>" alt="Prévia da foto" />
+                <?php endif; ?>
+            </div>
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="cargo">
+            Cargo:
+            <input type="text" id="cargo" name="cargo" value="<?php echo esc_attr($cargo); ?>" />
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="descricao">
+            Descrição:
+            <textarea id="descricao" name="descricao" rows="4"><?php echo esc_textarea($descricao); ?></textarea>
+        </label>
+    </div>
+
+    <script>
+        document.querySelector('.upload-image-button').addEventListener('click', function(event) {
+            const input = document.getElementById('foto');
+            const preview = document.querySelector('.image-preview');
+            const frame = wp.media({
+                title: 'Escolher Imagem',
+                button: {
+                    text: 'Usar esta imagem'
+                },
+                multiple: false
+            });
+
+            frame.on('select', function() {
+                const attachment = frame.state().get('selection').first().toJSON();
+                input.value = attachment.url;
+                preview.innerHTML = '<img src="' + attachment.url + '" alt="Prévia da foto" />';
+            });
+
+            frame.open();
+        });
+    </script>
+
+    <?php
+    // Adicionando nonce para segurança
+    wp_nonce_field('save_equipe_meta', 'equipe_nonce');
+}
+
+function add_equipe_meta_box() {
+    add_meta_box(
+        'equipe_meta_box', // ID
+        'Configurações de Membro da Equipe', // Título
+        'createFieldEquipe', // Callback
+        'equipe', // Novo CPT
+        'normal', // Contexto
+        'high' // Prioridade
+    );
+}
+add_action('add_meta_boxes', 'add_equipe_meta_box');
+
+// Função para salvar os campos personalizados
+function save_equipe_meta($post_id) {
+    // Verifica o nonce
+    if (!isset($_POST['equipe_nonce']) || !wp_verify_nonce($_POST['equipe_nonce'], 'save_equipe_meta')) {
+        return;
+    }
+
+    // Verifica se o post é do tipo correto
+    if (get_post_type($post_id) !== 'equipe') {
+        return;
+    }
+
+    // Faz a atualização dos campos
+    $foto = sanitize_text_field($_POST['foto']);
+    $cargo = sanitize_text_field($_POST['cargo']);
+    $descricao = sanitize_textarea_field($_POST['descricao']);
+
+    update_post_meta($post_id, 'foto', $foto);
+    update_post_meta($post_id, 'cargo', $cargo);
+    update_post_meta($post_id, 'descricao', $descricao);
+}
+add_action('save_post', 'save_equipe_meta');
+// end - CONFIGURAÇÕES DE EQUIPE
+
+
+
+// start - CONFIGURAÇÕES DE CLIENTES
+// Criar o novo post type "Clientes"
+function create_clientes_cpt() {
+    $args = array(
+        'labels' => array(
+            'name' => __('Clientes'),
+            'singular_name' => __('Cliente')
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'rewrite' => array('slug' => 'clientes'),
+        'supports' => array('title'),
+        'menu_icon' => 'dashicons-businessman', // Ícone do menu
+    );
+    register_post_type('clientes', $args);
+}
+add_action('init', 'create_clientes_cpt');
+
+// Criar campos personalizados para clientes
+function createFieldClientes() {
+    global $post;
+    $logo = get_post_meta($post->ID, 'logo', true);
+    ?>
+
+    <style>
+        .field {
+            margin: 12px 0;
+        }
+        .image-preview img {
+            max-width: 150px;
+            height: auto;
+            object-fit: cover;
+            margin-top: 10px;
+        }
+        .upload-image-button {
+            background: rgb(21, 101, 192);
+            color: #fff;
+            border: 1px solid;
+            padding: 10px 12px;
+            border-radius: 4px;
+            margin-top: 14px;
+            cursor: pointer;
+            min-width: 180px;
+        }
+    </style>
+
+    <div class="field">
+        <label for="logo">
+            Logo:
+            <input type="hidden" id="logo" name="logo" value="<?php echo esc_attr($logo); ?>" />
+            <button type="button" class="upload-image-button">Upload Imagem</button>
+            <div class="image-preview">
+                <?php if ($logo): ?>
+                    <img src="<?php echo esc_url($logo); ?>" alt="Prévia do logo" />
+                <?php endif; ?>
+            </div>
+        </label>
+    </div>
+
+    <script>
+        document.querySelector('.upload-image-button').addEventListener('click', function(event) {
+            const input = document.getElementById('logo');
+            const preview = document.querySelector('.image-preview');
+            const frame = wp.media({
+                title: 'Escolher Imagem',
+                button: {
+                    text: 'Usar esta imagem'
+                },
+                multiple: false
+            });
+
+            frame.on('select', function() {
+                const attachment = frame.state().get('selection').first().toJSON();
+                input.value = attachment.url;
+                preview.innerHTML = '<img src="' + attachment.url + '" alt="Prévia do logo" />';
+            });
+
+            frame.open();
+        });
+    </script>
+
+    <?php
+    // Adicionando nonce para segurança
+    wp_nonce_field('save_clientes_meta', 'clientes_nonce');
+}
+
+function add_clientes_meta_box() {
+    add_meta_box(
+        'clientes_meta_box', // ID
+        'Configurações de Cliente', // Título
+        'createFieldClientes', // Callback
+        'clientes', // Novo CPT
+        'normal', // Contexto
+        'high' // Prioridade
+    );
+}
+add_action('add_meta_boxes', 'add_clientes_meta_box');
+
+// Função para salvar os campos personalizados
+function save_clientes_meta($post_id) {
+    // Verifica o nonce
+    if (!isset($_POST['clientes_nonce']) || !wp_verify_nonce($_POST['clientes_nonce'], 'save_clientes_meta')) {
+        return;
+    }
+
+    // Verifica se o post é do tipo correto
+    if (get_post_type($post_id) !== 'clientes') {
+        return;
+    }
+
+    // Faz a atualização dos campos
+    $logo = sanitize_text_field($_POST['logo']);
+    update_post_meta($post_id, 'logo', $logo);
+}
+add_action('save_post', 'save_clientes_meta');
+// end - CONFIGURAÇÕES DE CLIENTES
+
+
+
+
 // start - OCULTANDO BOTÔES DENTRO DOS POST TYPES
 function hide_add_new_button() {
     global $pagenow;
     if ($pagenow === 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] === 'servicos' || $_GET['post'] === '92' ) {
+        echo '<style type="text/css">.page-title-action { display: none!important; }</style>';
+        echo '<style type="text/css">.submitdelete.deletion, .submitdelete, .trash { display: none!important; }</style>';
+    }
+
+    // ocutando botão deletar post menu
+    if ($pagenow === 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] === 'list-menu' || $_GET['post'] === '66' ) {
+        echo '<style type="text/css">.page-title-action { display: none!important; }</style>';
+        echo '<style type="text/css">.submitdelete.deletion, .submitdelete, .trash { display: none!important; }</style>';
+    }
+
+    // ocutando botão deletar
+    if ($pagenow === 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] === 'config_secoes' || $_GET['post'] === '84' ) {
+        echo '<style type="text/css">.page-title-action { display: none!important; }</style>';
+        echo '<style type="text/css">.submitdelete.deletion, .submitdelete, .trash { display: none!important; }</style>';
+    }
+
+    if ($pagenow === 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] === 'empresa' || $_GET['post'] === '120' ) {
         echo '<style type="text/css">.page-title-action { display: none!important; }</style>';
         echo '<style type="text/css">.submitdelete.deletion, .submitdelete, .trash { display: none!important; }</style>';
     }
@@ -1139,6 +1571,18 @@ function remove_menu_items() {
     global $submenu;
     if (isset($submenu['edit.php?post_type=servicos'])) {
         unset($submenu['edit.php?post_type=servicos'][10]); // Remove o "Adicionar Novo"
+    }
+
+    if (isset($submenu['edit.php?post_type=list-menu'])) {
+        unset($submenu['edit.php?post_type=list-menu'][10]); // Remove o "Adicionar Novo"
+    }
+
+    if (isset($submenu['edit.php?post_type=config_secoes'])) {
+        unset($submenu['edit.php?post_type=config_secoes'][10]); // Remove o "Adicionar Novo"
+    }
+
+    if (isset($submenu['edit.php?post_type=empresa'])) {
+        unset($submenu['edit.php?post_type=empresa'][10]); // Remove o "Adicionar Novo"
     }
 }
 add_action('admin_menu', 'remove_menu_items');

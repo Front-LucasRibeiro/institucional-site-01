@@ -89,31 +89,34 @@ function carouselTop() {
 }
 
 function carouselTeam() {
-  $('.equipe > ul').slick({
-    infinite: true,
-    slidesToShow:  3,
-    slidesToScroll: 1,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    speed: 500,
-    responsive: [
-      {
-        breakpoint: 769,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      },
-    ]
-  })
+  if ($('.equipe > ul').length >= 3) { 
+
+    $('.equipe > ul').slick({
+      infinite: true,
+      slidesToShow:  3,
+      slidesToScroll: 1,
+      arrows: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      speed: 500,
+      responsive: [
+        {
+          breakpoint: 769,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          }
+        },
+      ]
+    })
+  }
 }
 
 function openMenuMob() {
@@ -159,31 +162,34 @@ function carouselSectionTop() {
 }
 
 function carouselClients() {
-  $('.carousel-clientes').slick({
-    infinite: true,
-    slidesToShow:  5,
-    slidesToScroll: 1,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    speed: 500,
-      responsive: [
-      {
-        breakpoint: 769,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
-      },
-    ]
-  })
+  if ($('.carousel-clientes li').length >= 5) { 
+
+    $('.carousel-clientes').slick({
+      infinite: true,
+      slidesToShow:  5,
+      slidesToScroll: 1,
+      arrows: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      speed: 500,
+        responsive: [
+        {
+          breakpoint: 769,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          }
+        },
+      ]
+    })
+  }
 }
 
 function portfolioCarousel() {

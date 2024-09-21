@@ -160,9 +160,7 @@ Template Name: Home
   </ul>
 </section>
 
-<section class="section-servicos container">
-  
-
+<section class="section-servicos servicos container">
   <?php
   // Query para pegar o post de configurações
   $config_args = array(
@@ -184,7 +182,7 @@ Template Name: Home
     // Query para pegar os serviços
     $args = array(
         'post_type' => 'servicos',
-        'posts_per_page' => -1, // Pega todos os serviços
+        'posts_per_page' => 6, // Pega todos os serviços
     );
     $services_query = new WP_Query($args);
 
@@ -195,6 +193,7 @@ Template Name: Home
         // Coloca o subtítulo da primeira postagem de serviços
         $first_service = $services_query->posts[0]; // Pega o primeiro serviço
         $subtitulo = esc_html(get_post_meta($first_service->ID, 'servico_subtitle', true));
+        $servico_paragraph = esc_html(get_post_meta($first_service->ID, 'servico_paragraph', true));
         echo $subtitulo; 
         ?>
       </h3>
@@ -233,7 +232,7 @@ Template Name: Home
         <p>
           <?php 
           // Coloca o parágrafo da primeira postagem de serviços
-          echo $paragrafo; 
+          echo $servico_paragraph; 
           ?>
         </p>
       </div>
@@ -249,155 +248,223 @@ Template Name: Home
 </section>
 
 <section id="portfolio" class="portfolio container swiper">
-  <h2 class="title">Portfólio</h2>
+  <?php
+  // Query para pegar o post de configurações
+  $config_args = array(
+      'post_type' => 'config_secoes',
+      'posts_per_page' => 1, // Pega apenas um post
+  );
+  $config_query = new WP_Query($config_args);
+  
+  $disable_portfolio = '0'; // Valor padrão
+  if ($config_query->have_posts()) {
+    while ($config_query->have_posts()) : $config_query->the_post();
+          $disable_portfolio = get_post_meta(get_the_ID(), 'disable_portfolio', true);
+      endwhile;
+      wp_reset_postdata();
+  }
 
-  <ul class="cards-portfolio swiper-wrapper">
-    <li class="swiper-slide card" onclick="openModal(this)">
-      <div class="image-container">
-        <img src="<?= $home; ?>/src/images/83-FACHADA-CASA-TIPO-1-FRENTE-2-2000x1205-1.jpg" alt="Ekko - Live Aplha One">
-      </div>
-      <span class="legend">Ekko - Live Aplha One</span>
-    </li>
-    <li class="swiper-slide card" onclick="openModal(this)">
-      <div class="image-container">
-        <img src="<?= $home; ?>/src/images/Sem-t°tulo-2-e1641944435393.jpg" alt="Palme - Tempus">
-      </div>
-      <span class="legend">Palme - Tempus</span>
-    </li>
-    <li class="swiper-slide card" onclick="openModal(this)">
-      <div class="image-container">
-        <img src="<?= $home; ?>/src/images/foto-de-maquete-fisica-de-Edificios_Residenciais-em-SC-2.webp" alt="Procave - Fischer Dreams">
-      </div>
-      <span class="legend">Procave - Fischer Dreams</span>
-    </li>
-    <li class="swiper-slide card" onclick="openModal(this)">
-      <div class="image-container">
-        <img src="<?= $home; ?>/src/images/stefani_nogueira__20072021105848.jpg" alt="Stéfani Nogueira - Plaza La Coruña">
-      </div>
-      <span class="legend">Stéfani Nogueira - Plaza La Coruña</span>
-    </li>
-    <li class="swiper-slide card" onclick="openModal(this)">
-      <div class="image-container">
-        <img src="<?= $home; ?>/src/images/full-perspectiva-ilustrada-da-fachada.jpg" alt="Stéfani Nogueira - Resid. Atmosphere">
-      </div>
-      <span class="legend">Stéfani Nogueira - Resid. Atmosphere</span>
-    </li>
-    <li class="swiper-slide card" onclick="openModal(this)">
-      <div class="image-container">
-        <img src="<?= $home; ?>/src/images/5a09a5e5162f9400010f5c5b_cam2-scaled.jpg" alt="Stéfani Nogueira - Ribeirão Diesel">
-      </div>
-      <span class="legend">Stéfani Nogueira - Ribeirão Diesel</span>
-    </li>
-  </ul>
+  // Verifica se a seção de portfólio está desativada
+  if ($disable_portfolio !== '1') {
+    // Query para buscar os posts do tipo "list-portfolio"
+    $args = array(
+        'post_type' => 'list-portfolio',
+        'posts_per_page' => 6, // Limita a 6 posts
+    );
+    $portfolio_query = new WP_Query($args);
 
-  <a href="/portfolio" class="btn-more">Veja mais</a>
+    if ($portfolio_query->have_posts()) : ?>
+      <h2 class="title">Portfólio</h2>
+
+      <ul class="cards-portfolio swiper-wrapper">
+        <?php
+        while ($portfolio_query->have_posts()) : $portfolio_query->the_post();
+          $portfolio_description = get_post_meta(get_the_ID(), 'portfolio_description', true);
+          ?>
+          <li class="swiper-slide card" onclick="openModal(this)">
+            <div class="image-container">
+              <?php if (has_post_thumbnail()) : ?>
+                <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+              <?php else : ?>
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/path/to/default-image.jpg'); ?>" alt="Imagem padrão">
+              <?php endif; ?>
+            </div>
+            <span class="legend"><?php echo esc_html($portfolio_description); ?></span>
+          </li>
+        <?php endwhile; ?>
+      </ul>
+
+      <a href="/portfolio" class="btn-more">Veja mais</a>
+    <?php else : ?>
+      <li class="swiper-slide card">Nenhum portfólio encontrado.</li>
+    <?php endif;
+
+    wp_reset_postdata(); // Reseta a consulta
+  }
+  ?>
 </section>
 
 <section id="empresa" class="empresa">
-  <h2 class="title">Empresa</h2>
-  <div class="container">
-    <div class="wrap">
-      <div class="card">
-        <img src="<?= $home; ?>/src/images/bullseye-arrow.svg" alt="Missão">
-        <h3>Missão:</h3>
-        <p>Nossa missão é prestar o melhor serviço de projeto e consultoria voltados para a produção de vedações em edificações, oferecendo assessoria integral e eficiente para obter a confiança e satisfação de nossos clientes.</p>
-      </div>
-       <div class="card">
-        <img src="<?= $home; ?>/src/images/arrow-square-up.svg" alt="Visão">
-        <h3>Visão:</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum reiciendis quaerat sed maiores. Impedit provident vitae repellendus similique quos aliquid, numquam voluptatem tempora fugiat ipsum doloremque, sint esse alias ratione.</p>
-      </div>
-       <div class="card">
-        <img src="<?= $home; ?>/src/images/handshake.svg" alt="Valores">
-        <h3>Valores:</h3>
-        <p>Competência, Confiança, Proximidade, Pessoalidade.</p>
-      </div>
-    </div>
-  </div>
+  <?php
+  // Query para pegar o post de configurações
+  $config_args = array(
+      'post_type' => 'config_secoes',
+      'posts_per_page' => 1, // Pega apenas um post
+  );
+  $config_query = new WP_Query($config_args);
+  
+  $disable_empresa = '0'; // Valor padrão
+  if ($config_query->have_posts()) {
+    while ($config_query->have_posts()) : $config_query->the_post();
+          $disable_empresa = get_post_meta(get_the_ID(), 'disable_empresa', true);
+      endwhile;
+      wp_reset_postdata();
+  }
+
+  // Verifica se a seção de empresa está desativada
+  if ($disable_empresa !== '1') :
+    // Query para pegar o post da empresa
+    $empresa_args = array(
+        'post_type' => 'empresa',
+        'posts_per_page' => 1, // Pega apenas um post
+    );
+    $empresa_query = new WP_Query($empresa_args);
+
+    if ($empresa_query->have_posts()) :
+      while ($empresa_query->have_posts()) : $empresa_query->the_post();
+        $missao = get_post_meta(get_the_ID(), 'missao', true);
+        $visao = get_post_meta(get_the_ID(), 'visao', true);
+        $valores = get_post_meta(get_the_ID(), 'valores', true);
+        ?>
+        <h2 class="title">Empresa</h2>
+        <div class="container">
+          <div class="wrap">
+            <div class="card">
+              <img src="<?= esc_url($home); ?>/src/images/bullseye-arrow.svg" alt="Missão">
+              <h3>Missão:</h3>
+              <p><?php echo esc_html($missao); ?></p>
+            </div>
+            <div class="card">
+              <img src="<?= esc_url($home); ?>/src/images/arrow-square-up.svg" alt="Visão">
+              <h3>Visão:</h3>
+              <p><?php echo esc_html($visao); ?></p>
+            </div>
+            <div class="card">
+              <img src="<?= esc_url($home); ?>/src/images/handshake.svg" alt="Valores">
+              <h3>Valores:</h3>
+              <p><?php echo esc_html($valores); ?></p>
+            </div>
+          </div>
+        </div>
+      <?php endwhile;
+      wp_reset_postdata(); // Reseta a consulta da empresa
+    endif;
+  endif; ?>
 </section>
 
 <section id="equipe" class="equipe container">
-  <h2 class="title">Equipe</h2>
+  <?php
+  // Query para pegar o post de configurações
+  $config_args = array(
+      'post_type' => 'config_secoes',
+      'posts_per_page' => 1, // Pega apenas um post
+  );
+  $config_query = new WP_Query($config_args);
+  
+  $disable_equipe = '0'; // Valor padrão
+  if ($config_query->have_posts()) {
+    while ($config_query->have_posts()) : $config_query->the_post();
+          $disable_equipe = get_post_meta(get_the_ID(), 'disable_equipe', true);
+      endwhile;
+      wp_reset_postdata();
+  }
 
-  <ul>
-    <li>
-      <div class="col-left">
-        <img src="<?= $home; ?>/src/images/user.jpg" alt="" class="photo">
-        <span class="name">Lorem Ipsun</span>
-        <span class="cargo">Sócio</span>
-      </div>
-      <div class="col-right">
-        <span class="name">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio provident esse tenetur voluptate</span>
-      </div>
-    </li>
-    <li>
-      <div class="col-left">
-        <img src="<?= $home; ?>/src/images/user.jpg" alt="" class="photo">
-        <span class="name">Lorem Ipsun</span>
-        <span class="cargo">Sócio</span>
-      </div>
-      <div class="col-right">
-        <span class="name">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio provident esse tenetur voluptate</span>
-      </div>
-    </li>
-    <li>
-      <div class="col-left">
-        <img src="<?= $home; ?>/src/images/user.jpg" alt="" class="photo">
-        <span class="name">Lorem Ipsun</span>
-        <span class="cargo">Gerente</span>
-      </div>
-      <div class="col-right">
-        <span class="name">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio provident esse tenetur voluptate</span>
-      </div>
-    </li>
-    <li>
-      <div class="col-left">
-        <img src="<?= $home; ?>/src/images/user.jpg" alt="" class="photo">
-        <span class="name">Lorem Ipsun</span>
-        <span class="cargo">Sócio</span>
-      </div>
-      <div class="col-right">
-        <span class="name">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio provident esse tenetur voluptate</span>
-      </div>
-    </li>
-  </ul>
+  // Verifica se a seção de equipe está desativada
+  if ($disable_equipe !== '1') :
+    // Query para pegar os posts da equipe
+    $equipe_args = array(
+        'post_type' => 'equipe',
+        'posts_per_page' => -1, // Pega todos os posts
+    );
+    $equipe_query = new WP_Query($equipe_args);
+
+    if ($equipe_query->have_posts()) : ?>
+      <h2 class="title">Equipe</h2>
+      <ul>
+        <?php while ($equipe_query->have_posts()) : $equipe_query->the_post();
+          $foto = get_post_meta(get_the_ID(), 'foto', true);
+          $cargo = get_post_meta(get_the_ID(), 'cargo', true);
+          $descricao = get_post_meta(get_the_ID(), 'descricao', true);
+          ?>
+          <li>
+            <div class="col-left">
+              <img src="<?php echo esc_url($foto); ?>" alt="<?php the_title(); ?>" class="photo">
+              <span class="name"><?php the_title(); ?></span>
+              <span class="cargo"><?php echo esc_html($cargo); ?></span>
+            </div>
+            <div class="col-right">
+              <span class="name"><?php echo esc_html($descricao); ?></span>
+            </div>
+          </li>
+        <?php endwhile; ?>
+      </ul>
+    <?php else : ?>
+      <p>Nenhum membro da equipe encontrado.</p>
+    <?php endif;
+
+    wp_reset_postdata(); // Reseta a consulta da equipe
+  endif; ?>
 </section>
 
 <section id="clientes" class="clientes container">
-  <h2 class="title">Clientes</h2>
+  <?php
+  // Query para pegar o post de configurações
+  $config_args = array(
+      'post_type' => 'config_secoes',
+      'posts_per_page' => 1, // Pega apenas um post
+  );
+  $config_query = new WP_Query($config_args);
+  
+  $disable_clientes = '0'; // Valor padrão
+  if ($config_query->have_posts()) {
+      while ($config_query->have_posts()) : $config_query->the_post();
+          $disable_clientes = get_post_meta(get_the_ID(), 'disable_clientes', true);
+      endwhile;
+      wp_reset_postdata();
+  }
 
-  <ul class="carousel-clientes">
-    <li>
-      <img src="<?= $home; ?>/src/images/logo.png" alt="">
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/logo.png" alt="">
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/logo.png" alt="">
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/logo.png" alt="">
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/logo.png" alt="">
-    </li>
-    <li>
-      <img src="<?= $home; ?>/src/images/no-logo.png" alt="">
-    </li>
-  </ul>
+  // Query para pegar os clientes
+  $clientes_query = new WP_Query(array(
+      'post_type' => 'clientes',
+      'posts_per_page' => -1 // Para exibir todos os clientes
+  ));
+
+  // Verifica se não há clientes e desativa a seção automaticamente
+  if (!$clientes_query->have_posts()) {
+      $disable_clientes = '1'; // Desativa a seção se não houver clientes
+  }
+
+  // Exibe a seção de clientes se não estiver desativada
+  if ($disable_clientes !== '1') {
+  ?>
+      <h2 class="title">Clientes</h2>
+
+      <ul class="carousel-clientes">
+        <?php
+        if ($clientes_query->have_posts()) {
+            while ($clientes_query->have_posts()) : $clientes_query->the_post();
+                $logo = get_post_meta(get_the_ID(), 'logo', true);
+        ?>
+                <li>
+                  <img src="<?php echo esc_url($logo); ?>" alt="<?php the_title(); ?>">
+                </li>
+        <?php
+            endwhile;
+            wp_reset_postdata();
+        } 
+        ?>
+      </ul>
+  <?php } ?>
 </section>
 
 <section id="blog" class="blog container">
