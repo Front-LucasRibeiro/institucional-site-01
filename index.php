@@ -583,9 +583,7 @@ Template Name: Home
                     <div class="text">
                       <h4>Telefone</h4>
                       <p>
-                          <a href="tel:<?php echo esc_attr($telefone); ?>">
-                            <?php echo esc_html($telefone); ?>
-                          </a>
+                        <?php echo esc_html($telefone); ?>
                       </p>
                     </div>
                   </li>
