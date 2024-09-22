@@ -3,6 +3,7 @@ add_filter('show_admin_bar', '__return_false');
 
 add_theme_support('post-thumbnails');
 
+
 function enqueue_media_uploader() {
     // Verifica se estamos na tela de edição de post
     if (is_admin()) {
@@ -235,6 +236,7 @@ function createFieldMenu() {
     $itemBlogInativar = get_post_meta($id_post, 'itemBlogInativar', true);
     $itemContatoInativar = get_post_meta($id_post, 'itemContatoInativar', true);
     $itemLogo = get_post_meta($id_post, 'itemLogo', true); 
+    $mainColor = get_post_meta($id_post, 'mainColor', true); 
     ?>
 
 <style>
@@ -299,6 +301,11 @@ function createFieldMenu() {
                 <img src="<?php echo wp_get_attachment_url($itemLogo); ?>" alt="Logo" />
             <?php endif; ?>
         </div>
+    </div>
+    <br>
+    <div class="field">
+        <label for="mainColor">Cor Padrão (hexadecimal):</label>
+        <input type="text" id="mainColor" name="mainColor" value="<?= $mainColor ?>" placeholder="#FF0000" />
     </div>
     <br>
                  
@@ -420,6 +427,12 @@ function save_menu_meta($post_id) {
     if (isset($_POST['itemLogo'])) {
         update_post_meta($post_id, 'itemLogo', sanitize_text_field($_POST['itemLogo']));
     }
+
+    // Dentro da função save_menu_meta
+    if (isset($_POST['mainColor'])) {
+        update_post_meta($post_id, 'mainColor', sanitize_text_field($_POST['mainColor']));
+    }
+    
 
     // Atualiza os campos de inativar
     $fields = [
@@ -843,6 +856,9 @@ function createFieldConfigSecoes() {
     $disable_empresa = get_post_meta($post->ID, 'disable_empresa', true);
     $disable_equipe = get_post_meta($post->ID, 'disable_equipe', true);
     $disable_clientes = get_post_meta($post->ID, 'disable_clientes', true);
+    $disable_blog = get_post_meta($post->ID, 'disable_blog', true);
+    $disable_contato = get_post_meta($post->ID, 'disable_contato', true);
+    $disable_mapa = get_post_meta($post->ID, 'disable_mapa', true);
     ?>
 
     <div class="field">
@@ -869,7 +885,7 @@ function createFieldConfigSecoes() {
     <div class="field">
         <label for="disable_portfolio">
             <input type="checkbox" id="disable_portfolio" name="disable_portfolio" value="1" <?php checked($disable_portfolio, '1'); ?>>
-            Desativar Seção Portfólio
+            Desativar Seção Portfólios
         </label>
     </div>
 
@@ -891,6 +907,27 @@ function createFieldConfigSecoes() {
         <label for="disable_clientes">
             <input type="checkbox" id="disable_clientes" name="disable_clientes" value="1" <?php checked($disable_clientes, '1'); ?>>
             Desativar Seção Clientes
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="disable_blog">
+            <input type="checkbox" id="disable_blog" name="disable_blog" value="1" <?php checked($disable_blog, '1'); ?>>
+            Desativar Seção Blogs
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="disable_contato">
+            <input type="checkbox" id="disable_contato" name="disable_contato" value="1" <?php checked($disable_contato, '1'); ?>>
+            Desativar Seção Contato
+        </label>
+    </div>
+
+    <div class="field">
+        <label for="disable_mapa">
+            <input type="checkbox" id="disable_mapa" name="disable_mapa" value="1" <?php checked($disable_mapa, '1'); ?>>
+            Desativar Seção Mapa
         </label>
     </div>
 
@@ -944,6 +981,15 @@ function save_config_meta($post_id) {
 
     $disable_clientes = isset($_POST['disable_clientes']) ? '1' : '0';
     update_post_meta($post_id, 'disable_clientes', $disable_clientes);
+
+    $disable_blog = isset($_POST['disable_blog']) ? '1' : '0';
+    update_post_meta($post_id, 'disable_blog', $disable_blog);
+
+    $disable_contato = isset($_POST['disable_contato']) ? '1' : '0';
+    update_post_meta($post_id, 'disable_contato', $disable_contato);
+
+    $disable_mapa = isset($_POST['disable_mapa']) ? '1' : '0';
+    update_post_meta($post_id, 'disable_mapa', $disable_mapa);
 }
 add_action('save_post', 'save_config_meta');
 // end - CONFIGURAÇÕES DE SEÇÕES
@@ -1538,6 +1584,159 @@ add_action('save_post', 'save_clientes_meta');
 
 
 
+// start - CONTATO
+// Criar o novo post type "Configurações de Contato"
+function create_contato_cpt() {
+    $args = array(
+        'labels' => array(
+            'name' => __('Contato'),
+            'singular_name' => __('Contato')
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'rewrite' => array('slug' => 'config-contato'),
+        'supports' => array('title'),
+        'menu_icon' => 'dashicons-email-alt', // Ícone do menu
+    );
+    register_post_type('config_contato', $args);
+}
+add_action('init', 'create_contato_cpt');
+
+// Criar campos personalizados para contato
+function createFieldContato() {
+    global $post;
+    $localizacao = get_post_meta($post->ID, 'contato_localizacao', true);
+    $telefone = get_post_meta($post->ID, 'contato_telefone', true);
+    $email = get_post_meta($post->ID, 'contato_email', true);
+    ?>
+
+    <style>
+        .field {
+            margin: 12px 0;
+              display: flex;
+  flex-direction: column;
+        }
+    </style>
+
+    <div class="field">
+        <label for="contato_localizacao">Localização:</label>
+        <textarea id="contato_localizacao" name="contato_localizacao"><?php echo esc_textarea($localizacao); ?></textarea>
+    </div>
+    <div class="field">
+        <label for="contato_telefone">Telefone:</label>
+        <input type="text" id="contato_telefone" name="contato_telefone" value="<?php echo esc_attr($telefone); ?>" />
+    </div>
+    <div class="field">
+        <label for="contato_email">E-mail:</label>
+        <input type="email" id="contato_email" name="contato_email" value="<?php echo esc_attr($email); ?>" />
+    </div>
+
+    <?php
+    // Adicionando nonce para segurança
+    wp_nonce_field('save_contato_meta', 'contato_nonce');
+}
+
+// Adiciona o meta box ao post type
+function add_contato_meta_box() {
+    add_meta_box(
+        'contato_meta_box', // ID
+        'Contato', // Título
+        'createFieldContato', // Callback
+        'config_contato', // Novo CPT
+        'normal', // Contexto
+        'high' // Prioridade
+    );
+}
+add_action('add_meta_boxes', 'add_contato_meta_box');
+
+// Função para salvar os campos personalizados
+function save_contato_meta($post_id) {
+    // Verifica o nonce
+    if (!isset($_POST['contato_nonce']) || !wp_verify_nonce($_POST['contato_nonce'], 'save_contato_meta')) {
+        return;
+    }
+
+    // Verifica se o post é do tipo correto
+    if (get_post_type($post_id) !== 'config_contato') {
+        return;
+    }
+
+    // Faz a atualização dos campos
+    if (isset($_POST['contato_localizacao'])) {
+        update_post_meta($post_id, 'contato_localizacao', sanitize_textarea_field($_POST['contato_localizacao']));
+    }
+    if (isset($_POST['contato_telefone'])) {
+        update_post_meta($post_id, 'contato_telefone', sanitize_text_field($_POST['contato_telefone']));
+    }
+    if (isset($_POST['contato_email'])) {
+        update_post_meta($post_id, 'contato_email', sanitize_email($_POST['contato_email']));
+    }
+}
+add_action('save_post', 'save_contato_meta');
+// end CONTATO
+
+
+
+// start - MAPA
+// Criar o post type "Configurações de Mapa"
+function create_mapa_cpt() {
+    $args = array(
+        'labels' => array(
+            'name' => __('Mapa'),
+            'singular_name' => __('Mapa')
+        ),
+        'public' => true,
+        'has_archive' => false,
+        'rewrite' => array('slug' => 'config-mapa'),
+        'supports' => array('title'),
+        'menu_icon' => 'dashicons-location-alt', // Ícone do menu
+    );
+    register_post_type('config_mapa', $args);
+}
+add_action('init', 'create_mapa_cpt');
+
+// Criar campos personalizados para o mapa
+function createFieldMapa() {
+    global $post;
+    $map_iframe = get_post_meta($post->ID, 'map_iframe', true);
+    ?>
+
+    <div class="field">
+        <label for="map_iframe">Código do Mapa (Iframe):</label>
+        <textarea id="map_iframe" name="map_iframe" rows="5" style="width: 100%;"><?= $map_iframe ?></textarea>
+    </div>
+
+    <?php
+}
+
+// Adiciona o meta box ao post type
+function add_mapa_meta_box() {
+    add_meta_box(
+        'mapa_meta_box', // ID
+        'Configurações de Mapa', // Título
+        'createFieldMapa', // Callback
+        'config_mapa', // Novo CPT
+        'normal', // Contexto
+        'high' // Prioridade
+    );
+}
+add_action('add_meta_boxes', 'add_mapa_meta_box');
+
+// Função para salvar os campos personalizados
+function save_mapa_meta($post_id) {
+    // Verifica se o post é do tipo correto
+    if (get_post_type($post_id) !== 'config_mapa') {
+        return;
+    }
+
+    if (isset($_POST['map_iframe'])) {
+        update_post_meta($post_id, 'map_iframe', $_POST['map_iframe']);
+    }
+}
+add_action('save_post', 'save_mapa_meta');
+// end - MAPA
+
+
 
 // start - OCULTANDO BOTÔES DENTRO DOS POST TYPES
 function hide_add_new_button() {
@@ -1563,6 +1762,16 @@ function hide_add_new_button() {
         echo '<style type="text/css">.page-title-action { display: none!important; }</style>';
         echo '<style type="text/css">.submitdelete.deletion, .submitdelete, .trash { display: none!important; }</style>';
     }
+
+    if ($pagenow === 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] === 'config_contato' || $_GET['post'] === '144' ) {
+        echo '<style type="text/css">.page-title-action { display: none!important; }</style>';
+        echo '<style type="text/css">.submitdelete.deletion, .submitdelete, .trash { display: none!important; }</style>';
+    }
+
+    if ($pagenow === 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] === 'config_mapa' || $_GET['post'] === '150' ) {
+        echo '<style type="text/css">.page-title-action { display: none!important; }</style>';
+        echo '<style type="text/css">.submitdelete.deletion, .submitdelete, .trash { display: none!important; }</style>';
+    }
 }
 add_action('admin_head', 'hide_add_new_button');
 
@@ -1583,6 +1792,14 @@ function remove_menu_items() {
 
     if (isset($submenu['edit.php?post_type=empresa'])) {
         unset($submenu['edit.php?post_type=empresa'][10]); // Remove o "Adicionar Novo"
+    }
+
+    if (isset($submenu['edit.php?post_type=config_contato'])) {
+        unset($submenu['edit.php?post_type=config_contato'][10]); // Remove o "Adicionar Novo"
+    }
+
+    if (isset($submenu['edit.php?post_type=config_mapa'])) {
+        unset($submenu['edit.php?post_type=config_mapa'][10]); // Remove o "Adicionar Novo"
     }
 }
 add_action('admin_menu', 'remove_menu_items');

@@ -160,7 +160,7 @@ Template Name: Home
   </ul>
 </section>
 
-<section class="section-servicos servicos container">
+<section id="servicos" class="section-servicos servicos container">
   <?php
   // Query para pegar o post de configurações
   $config_args = array(
@@ -468,83 +468,191 @@ Template Name: Home
 </section>
 
 <section id="blog" class="blog container">
-  <h2 class="title">Blog</h2>
+  <?php
+  // Query para pegar o post de configurações
+  $config_args = array(
+      'post_type' => 'config_secoes',
+      'posts_per_page' => 1, // Pega apenas um post
+  );
+  $config_query = new WP_Query($config_args);
+  
+  $disable_blog = '0'; // Valor padrão
+  if ($config_query->have_posts()) {
+      while ($config_query->have_posts()) : $config_query->the_post();
+          $disable_blog = get_post_meta(get_the_ID(), 'disable_blog', true);
+      endwhile;
+      wp_reset_postdata();
+  }
 
-  <ul class="grid-blog">
-    <li>
-      <article class="top">
-        <h3 class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo laborum consectetur repudiandae repellendus blibus rem.</h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora sed modi eaque, molestiae similique adipisci commodi officiis, voluptatem odio inventore ullam voluptas vitae sint fuga quod aperiam esse repudiandae. Doloribus!</p>
-        <a href="" class="read-more">Leia mais</a>
-      </article>
-      <span class="date">10/12/2021</span>
-    </li>
-    <li>
-      <article class="top">
-        <h3 class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo laborum consectetur repudiandae repellendus blibus rem.</h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora sed modi eaque, molestiae similique adipisci commodi officiis, voluptatem odio inventore ullam voluptas vitae sint fuga quod aperiam esse repudiandae. Doloribus!</p>
-        <a href="" class="read-more">Leia mais</a>
-      </article>
-      <span class="date">10/12/2021</span>
-    </li>
-  </ul>
+  // Query para pegar os posts do blog
+  $blog_args = array(
+      'post_type' => 'list-blog',
+      'posts_per_page' => 2, // Limitar a 2 posts
+  );
+  $blog_query = new WP_Query($blog_args);
 
+  // Verifica se não há posts e desativa a seção automaticamente
+  if (!$blog_query->have_posts()) {
+      $disable_blog = '1'; // Desativa a seção se não houver posts
+  }
+
+  // Exibe a seção de blog se não estiver desativada
+  if ($disable_blog !== '1') {
+  ?>
+      <h2 class="title">Blog</h2>
+
+      <ul class="grid-blog">
+          <?php
+          while ($blog_query->have_posts()) : $blog_query->the_post();
+              $description = get_post_meta(get_the_ID(), 'blog_description', true);
+              $blog_date = get_post_meta(get_the_ID(), 'blog_date', true);
+          ?>
+              <li>
+                  <article class="top">
+                      <h3 class="title"><?php the_title(); ?></h3>
+                      <p><?php echo esc_html($description); ?></p>
+                      <a href="<?php the_permalink(); ?>" class="read-more">Leia mais</a>
+                  </article>
+                  <span class="date"><?php echo esc_html($blog_date); ?></span>
+              </li>
+          <?php endwhile; ?>
+      </ul>
+  <?php } ?>
   <a href="/blog" class="btn-more">Veja mais</a>
 </section>
 
 <section id="contato" class="contato">
-  <h2 class="title">Contato</h2>
+  <?php
+    // Query para pegar o post de configurações
+    $config_args = array(
+        'post_type' => 'config_secoes',
+        'posts_per_page' => 1, // Pega apenas um post
+    );
+    $config_query = new WP_Query($config_args);
+    
+    $disable_contato = '0'; // Valor padrão
+    if ($config_query->have_posts()) {
+        while ($config_query->have_posts()) : $config_query->the_post();
+            $disable_contato = get_post_meta(get_the_ID(), 'disable_contato', true);
+        endwhile;
+        wp_reset_postdata();
+    }
 
-  <div class="wrap-content">
-    <div class="information">
-      <h3 class="title-section">Informações</h3>
+    // Consulta para pegar o post de configurações de contato
+    $contato_args = array(
+        'post_type' => 'config_contato',
+        'posts_per_page' => 1, // Pega apenas um post
+    );
+    $contato_query = new WP_Query($contato_args);
 
-      <ul>
-        <li>
-          <span class="icon"></span>
-          <div class="text">
-            <h4>Localização</h4>
-            <p>
-              <a href="">
-                Rua Lorem ipsum dolor sit amet consectetur 145 | São Paulo - SP | 00000-000
-              </a>
-            </p>
-          </div>
-        </li>
-        <li>
-          <span class="icon"></span>
-          <div class="text">
-            <h4>Telefone</h4>
-            <p>
-              <a href="">
-                +55 (11) 2368-3444
-              </a>
-            </p>
-          </div>
-        </li>
-        <li>
-          <span class="icon"></span>
-          <div class="text">
-            <h4>E-mail</h4>
-            <p>
-              <a href="mailto:lorem@lorem.com.br" target="_blank">
-                lorem@lorem.com.br
-              </a>
-            </p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="form">
-      <h3 class="title-section">Contato</h3>
+    // Verifica se não há posts e desativa a seção automaticamente
+    if (!$contato_query->have_posts()) {
+        $disable_contato = '1'; // Desativa a seção se não houver posts
+    }
 
-      <?php echo do_shortcode('[wpforms id="12" title="false"]'); ?>
-    </div>
-  </div>
+    // Verifica se há post de configurações de contato
+    if ($contato_query->have_posts()) {
+        while ($contato_query->have_posts()) : $contato_query->the_post();
+            $localizacao = get_post_meta(get_the_ID(), 'contato_localizacao', true);
+            $telefone = get_post_meta(get_the_ID(), 'contato_telefone', true);
+            $email = get_post_meta(get_the_ID(), 'contato_email', true);
+        endwhile;
+        wp_reset_postdata();
+
+        // Verifica se a seção de contato está desativada
+        if ($disable_contato !== '1') {
+  ?>
+            <h2 class="title">Contato</h2>
+
+            <div class="wrap-content">
+              <div class="information">
+                <h3 class="title-section">Informações</h3>
+
+                <ul>
+                  <li>
+                    <span class="icon"></span>
+                    <div class="text">
+                      <h4>Localização</h4>
+                      <p>
+                          <?php echo esc_html($localizacao); ?>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="icon"></span>
+                    <div class="text">
+                      <h4>Telefone</h4>
+                      <p>
+                          <a href="tel:<?php echo esc_attr($telefone); ?>">
+                            <?php echo esc_html($telefone); ?>
+                          </a>
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="icon"></span>
+                    <div class="text">
+                      <h4>E-mail</h4>
+                      <p>
+                        <a href="mailto:<?php echo esc_html($email); ?>" target="_blank">
+                          <?php echo esc_html($email); ?>
+                        </a>
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="form">
+                <h3 class="title-section">Contato</h3>
+
+                <?php echo do_shortcode('[wpforms id="137" title="false"]'); ?>
+              </div>
+            </div>
+  <?php
+        } // Fim da verificação de desativação
+    } else {
+        echo '<p>Configurações de contato não encontradas.</p>';
+    }
+  ?>
 </section>
 
 <section class="mapa-endereco">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.385166593419!2d-46.666904713902895!3d-23.554606306678146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce582d97462095%3A0x6032d751c2103c1a!2zUi4gZGEgQ29uc29sYcOnw6NvLCAyMzAyIC0gQ29uc29sYcOnw6NvLCBTw6NvIFBhdWxvIC0gU1AsIDAxMzAyLTAwMQ!5e0!3m2!1spt-BR!2sbr!4v1725751089396!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <?php
+    // Consulta para pegar o post de configurações
+    $config_args = array(
+        'post_type' => 'config_secoes',
+        'posts_per_page' => 1, // Pega apenas um post
+    );
+    $config_query = new WP_Query($config_args);
+    
+    $disable_mapa = '0'; // Valor padrão
+    if ($config_query->have_posts()) {
+        while ($config_query->have_posts()) : $config_query->the_post();
+            $disable_mapa = get_post_meta(get_the_ID(), 'disable_mapa', true);
+        endwhile;
+        wp_reset_postdata();
+    }
+
+    // Consulta para pegar o post de configurações de mapa
+    $mapa_args = array(
+        'post_type' => 'config_mapa',
+        'posts_per_page' => 1, // Pega apenas um post
+    );
+    $mapa_query = new WP_Query($mapa_args);
+
+    // Verifica se há post de configurações de mapa
+    if ($mapa_query->have_posts()) {
+        while ($mapa_query->have_posts()) : $mapa_query->the_post();
+            $map_link = get_post_meta(get_the_ID(), 'map_iframe', true); // Corrigido para 'map_iframe'
+        endwhile;
+        wp_reset_postdata();
+
+        // Verifica se a seção de mapa está desativada e se o link não está vazio
+        if ($disable_mapa !== '1' && !empty($map_link)) {
+            echo $map_link; // Exibe o iframe diretamente
+        }
+    }
+  ?>
 </section>
 
 <div class="modal" id="myModal">

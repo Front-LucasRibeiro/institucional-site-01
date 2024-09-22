@@ -407,7 +407,7 @@
         display: block;
         border-top: 1px solid #ddd;
         padding: 12px 24px;
-        font-size: 12px;
+        font-size: 13px;
       }
 
       .title {
@@ -418,6 +418,7 @@
         font-weight: 500;
         text-transform: initial;
         margin: 0;
+        align-items: baseline;
 
         &::after {
           display: none;
@@ -556,6 +557,9 @@
           }
 
           .text {
+            p {
+              color: #fff;
+            }
             h4 {
               color: #fff;
               font-weight: 500;
@@ -614,9 +618,9 @@
 }
 
 .mapa-endereco {
-  height: 450px;
 
   iframe {
     width: 100%;
+    height: 450px;
   }
 }
