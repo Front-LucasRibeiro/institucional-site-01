@@ -14,7 +14,7 @@
   <meta http-equiv="Expires" content="0" />
 
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="<?= $home; ?>/src/build/css/index.css?ver=1.5" type="text/css" />
+  <link rel="stylesheet" href="<?= $home; ?>/src/build/css/index.css?ver=1.6" type="text/css" />
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 </head>
 

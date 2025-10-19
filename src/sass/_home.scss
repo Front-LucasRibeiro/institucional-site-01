@@ -466,7 +466,7 @@
     }
 
     >div {
-      padding: 100px;
+      padding: 56px 100px;
 
       @media (max-width: 992px) {
         padding: 58px;
@@ -484,8 +484,8 @@
     .title-section {
       display: flex;
       flex-direction: column;
-      font-size: 28px;
-      line-height: 31px;
+      font-size: 22px;
+      line-height: 26px;
       text-transform: uppercase;
       color: #fff;
 
