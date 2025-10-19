@@ -10,49 +10,36 @@ Tags: portfólio, blog, site institucional
 
 */
 
-.wp-block-image figcaption{
+.wp-block-image figcaption {
   margin: 8px 0;
 }
 
 .wp-block-video.aligncenter,
 .wp-block-image img,
-.wp-block-image .aligncenter{
+.wp-block-image .aligncenter {
   display: table;
   margin: 0 auto;
 }
 
-.wp-block-video{
-  margin-top: 12px!important;
-  margin-bottom: 12px!important;
+.wp-block-video {
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
 }
 
-@media(min-width: 481px){
+@media (min-width: 481px) {
   .wp-block-video.alignright,
-  .wp-block-image .alignright{
+  .wp-block-image .alignright {
     display: table;
     margin: auto;
     float: right;
     padding: 0 0 0 25px;
   }
-  
+
   .wp-block-video.alignleft,
-  .wp-block-image .alignleft{
+  .wp-block-image .alignleft {
     display: table;
     margin: auto;
     float: left;
     padding: 0 25px 0 0;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,4 +1,7 @@
 <?php
+// Incluir arquivo de limites PHP
+require_once get_template_directory() . '/php-limits.php';
+
 add_filter('show_admin_bar', '__return_false');
 
 add_theme_support('post-thumbnails');
@@ -51,30 +54,31 @@ function createFieldPortfolio() {
     $portfolio_description = get_post_meta($id_post, 'portfolio_description', true);
     ?>
 
-    <style>
-        textarea,
-        input {
-            width: 100%;
-            margin-top: 5px;
-        }
+<style>
+textarea,
+input {
+  width: 100%;
+  margin-top: 5px;
+}
 
-        label {
-            font-weight: bold;
-        }
+label {
+  font-weight: bold;
+}
 
-        .field {
-            margin: 12px 0;
-        }
-    </style>
+.field {
+  margin: 12px 0;
+}
+</style>
 
-    <div class="box">
-        <div class="field">
-            <label for="portfolio_description">Legenda:</label>
-            <textarea id="portfolio_description" name="portfolio_description"><?= esc_textarea($portfolio_description); ?></textarea>
-        </div>
-    </div>
+<div class="box">
+  <div class="field">
+    <label for="portfolio_description">Legenda:</label>
+    <textarea id="portfolio_description"
+      name="portfolio_description"><?= esc_textarea($portfolio_description); ?></textarea>
+  </div>
+</div>
 
-    <?php
+<?php
     // Adicionando nonce para segurança
     wp_nonce_field('save_portfolio_meta', 'portfolio_nonce');
 }
@@ -139,34 +143,34 @@ function createFieldBlog() {
     $blog_date = get_post_meta($id_post, 'blog_date', true);
     ?>
 
-    <style>
-        textarea,
-        input {
-            width: 100%;
-            margin-top: 5px;
-        }
+<style>
+textarea,
+input {
+  width: 100%;
+  margin-top: 5px;
+}
 
-        label {
-            font-weight: bold;
-        }
+label {
+  font-weight: bold;
+}
 
-        .field {
-            margin: 12px 0;
-        }
-    </style>
+.field {
+  margin: 12px 0;
+}
+</style>
 
-    <div class="box">
-        <div class="field">
-            <label for="blog_description">Descrição curta:</label>
-            <textarea id="blog_description" name="blog_description"><?= esc_textarea($description); ?></textarea>
-        </div>
-        <div class="field">
-            <label for="blog_date">Data:</label>
-            <input type="date" placeholder="dd/mm/aaaa" id="blog_date" name="blog_date" value="<?= esc_attr($blog_date); ?>" />
-        </div>
-    </div>
+<div class="box">
+  <div class="field">
+    <label for="blog_description">Descrição curta:</label>
+    <textarea id="blog_description" name="blog_description"><?= esc_textarea($description); ?></textarea>
+  </div>
+  <div class="field">
+    <label for="blog_date">Data:</label>
+    <input type="date" placeholder="dd/mm/aaaa" id="blog_date" name="blog_date" value="<?= esc_attr($blog_date); ?>" />
+  </div>
+</div>
 
-    <?php
+<?php
     // Adicionando nonce para segurança
     wp_nonce_field('save_blog_meta', 'blog_nonce');
 }
@@ -209,7 +213,7 @@ add_action('save_post', 'save_blog_meta');
 function create_blog_cpt() {
     $args = array(
         'labels' => array(
-            'name' => __('Blogs'),
+            'name' => __('Blog'),
             'singular_name' => __('Blog')
         ),
         'public' => true,
@@ -240,107 +244,107 @@ function createFieldMenu() {
     ?>
 
 <style>
-    textarea,
-    input[type="text"],
-    input[type="hidden"] {
-        width: 100%;
-        margin-top: 5px;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
+textarea,
+input[type="text"],
+input[type="hidden"] {
+  width: 100%;
+  margin-top: 5px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
 
-    input[type="checkbox"] {
-        position: relative;
-        top: 2px;
-    }
+input[type="checkbox"] {
+  position: relative;
+  top: 2px;
+}
 
-    label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-    }
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
 
-    .field {
-        margin: 12px 0;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 15px;
-    }
+.field {
+  margin: 12px 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
 
-    .field button {
-        margin-top: 5px;
-    }
+.field button {
+  margin-top: 5px;
+}
 
-    .logo-preview {
-        margin-top: 10px;
-    }
+.logo-preview {
+  margin-top: 10px;
+}
 
-    .logo-preview img {
-        max-width: 100px;
-        height: auto;
-        display: block;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        padding: 4px;
-    }
+.logo-preview img {
+  max-width: 100px;
+  height: auto;
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px;
+}
 
-    .social-field {
-        margin-bottom: 20px;
-    }
+.social-field {
+  margin-bottom: 20px;
+}
 </style>
 
 <div class="box">
-    <!-- Campo de Upload de Logo -->
-    <div class="field">
-        <label for="itemLogo">Logo: (Tamanho de imagem: 172px92px)</label>
-        <input type="hidden" id="itemLogo" name="itemLogo" value="<?php echo esc_attr($itemLogo); ?>" />
-        <button type="button" class="button" id="uploadLogoButton">Selecionar Logo</button>
+  <!-- Campo de Upload de Logo -->
+  <div class="field">
+    <label for="itemLogo">Logo: (Tamanho de imagem: 172px92px)</label>
+    <input type="hidden" id="itemLogo" name="itemLogo" value="<?php echo esc_attr($itemLogo); ?>" />
+    <button type="button" class="button" id="uploadLogoButton">Selecionar Logo</button>
 
-        <div class="logo-preview">
-            <?php if ($itemLogo) : ?>
-                <img src="<?php echo wp_get_attachment_url($itemLogo); ?>" alt="Logo" />
-            <?php endif; ?>
-        </div>
+    <div class="logo-preview">
+      <?php if ($itemLogo) : ?>
+      <img src="<?php echo wp_get_attachment_url($itemLogo); ?>" alt="Logo" />
+      <?php endif; ?>
     </div>
-    <br>
-    <div class="field">
-        <label for="mainColor">Cor Padrão (hexadecimal):</label>
-        <input type="text" id="mainColor" name="mainColor" value="<?= $mainColor ?>" placeholder="#FF0000" />
-    </div>
-    <br>
-                 
-    <script>
-        jQuery(document).ready(function($) {
-            var mediaUploader;
+  </div>
+  <br>
+  <div class="field">
+    <label for="mainColor">Cor Padrão (hexadecimal):</label>
+    <input type="text" id="mainColor" name="mainColor" value="<?= $mainColor ?>" placeholder="#FF0000" />
+  </div>
+  <br>
 
-            $('#uploadLogoButton').click(function(e) {
-                e.preventDefault();
-                if (mediaUploader) {
-                    mediaUploader.open();
-                    return;
-                }
+  <script>
+  jQuery(document).ready(function($) {
+    var mediaUploader;
 
-                mediaUploader = wp.media.frames.file_frame = wp.media({
-                    title: 'Escolher Logo',
-                    button: {
-                        text: 'Escolher Logo'
-                    },
-                    multiple: false
-                });
+    $('#uploadLogoButton').click(function(e) {
+      e.preventDefault();
+      if (mediaUploader) {
+        mediaUploader.open();
+        return;
+      }
 
-                mediaUploader.on('select', function() {
-                    var attachment = mediaUploader.state().get('selection').first().toJSON();
-                    $('#itemLogo').val(attachment.id);
-                    $('.logo-preview').html('<img src="' + attachment.url + '" alt="Logo" />');
-                });
+      mediaUploader = wp.media.frames.file_frame = wp.media({
+        title: 'Escolher Logo',
+        button: {
+          text: 'Escolher Logo'
+        },
+        multiple: false
+      });
 
-                mediaUploader.open();
-            });
-        });
-    </script>
+      mediaUploader.on('select', function() {
+        var attachment = mediaUploader.state().get('selection').first().toJSON();
+        $('#itemLogo').val(attachment.id);
+        $('.logo-preview').html('<img src="' + attachment.url + '" alt="Logo" />');
+      });
 
-    <!-- Campos de Inativar -->
-    <?php
+      mediaUploader.open();
+    });
+  });
+  </script>
+
+  <!-- Campos de Inativar -->
+  <?php
     $fields = [
         'Serviços' => 'itemServicesInativar',
         'Portfólio' => 'itemPortfolioInativar',
@@ -357,10 +361,10 @@ function createFieldMenu() {
         echo '</div>';
     }
     ?>
-    <br><br>
+  <br><br>
 
-    <!-- Redes Sociais -->
-    <?php
+  <!-- Redes Sociais -->
+  <?php
     $socialFields = [
         'Facebook' => 'itemFacebookLink',
         'Instagram' => 'itemInstagramLink',
@@ -373,24 +377,25 @@ function createFieldMenu() {
         $inactivateName = str_replace('Link', 'Inativar', $name);
         $inactivateValue = get_post_meta($post->ID, $inactivateName, true);
         ?>
-        <div class="social-field">
-            <label for="<?= esc_attr($name); ?>"><?= esc_html($label); ?>:</label>
-            <?php if($name === 'itemWhatsAppLink'): ?>
-                <span>(Ex: https://api.whatsapp.com/send?phone=5511988888888)</span>
-            <?php endif; ?>
-            <input type="text" id="<?= esc_attr($name); ?>" name="<?= esc_attr($name); ?>" value="<?= esc_attr($value); ?>" />
-            <div class="field">
-                Desativar <input type="checkbox" id="<?= esc_attr($inactivateName); ?>" name="<?= esc_attr($inactivateName); ?>" value="1" <?= checked($inactivateValue, '1', false); ?> />
-            </div>
-        </div>
-        <?php
+  <div class="social-field">
+    <label for="<?= esc_attr($name); ?>"><?= esc_html($label); ?>:</label>
+    <?php if($name === 'itemWhatsAppLink'): ?>
+    <span>(Ex: https://api.whatsapp.com/send?phone=5511988888888)</span>
+    <?php endif; ?>
+    <input type="text" id="<?= esc_attr($name); ?>" name="<?= esc_attr($name); ?>" value="<?= esc_attr($value); ?>" />
+    <div class="field">
+      Desativar <input type="checkbox" id="<?= esc_attr($inactivateName); ?>" name="<?= esc_attr($inactivateName); ?>"
+        value="1" <?= checked($inactivateValue, '1', false); ?> />
+    </div>
+  </div>
+  <?php
     }
     ?>
 </div>
 
 
 
-    <?php
+<?php
     // Adicionando nonce para segurança
     wp_nonce_field('save_menu_meta', 'menu_nonce');
 
@@ -521,119 +526,126 @@ function createFieldBannerTopo() {
     $banner_image_mobile = get_post_meta($id_post, 'banner_image_mobile', true);
     ?>
 
-    <style>
-        textarea,
-        input[type="text"],
-        input[type="hidden"] {
-            width: 100%;
-            margin-top: 5px;
-        }
+<style>
+textarea,
+input[type="text"],
+input[type="hidden"] {
+  width: 100%;
+  margin-top: 5px;
+}
 
-        .field {
-            margin: 12px 0;
-        }
+.field {
+  margin: 12px 0;
+}
 
-        .banner-preview img{
-          width: 310px!important;
-          height: 310px!important;
-          object-fit: cover;
-          margin-top: 18px;
-        }
+.banner-preview img {
+  width: 310px !important;
+  height: 310px !important;
+  object-fit: cover;
+  margin-top: 18px;
+}
 
-        .label {
-          position: relative;
-          top: 5px;
-        }
-    </style>
+.label {
+  position: relative;
+  top: 5px;
+}
+</style>
 
-    <div>
-      <strong>Imagens (largura x altura):</strong><br><br>
-      Tamanho de imagem para computador: 1920x705<br>
-      Tamanho de imagem para dispositivo móvel: 564x705
-    </div>
+<div>
+  <strong>Imagens (largura x altura):</strong><br><br>
+  Tamanho de imagem para computador: 1920x705<br>
+  Tamanho de imagem para dispositivo móvel: 564x705
+</div>
 
-    <div class="field">
-        <label for="banner_image_desktop" class="label">Imagem para Computador:</label>
-        <input type="hidden" id="banner_image_desktop" name="banner_image_desktop" value="<?php echo esc_attr($banner_image_desktop); ?>" />
-        <button type="button" class="button" id="uploadDesktopButton">Selecionar Imagem</button>
-        <div class="banner-preview">
-            <?php if ($banner_image_desktop) : ?>
-                <img src="<?php echo wp_get_attachment_url($banner_image_desktop); ?>" alt="Banner Desktop" style="max-width: 100%; height: auto;" />
-            <?php endif; ?>
-        </div>
-    </div>
+<div class="field">
+  <label for="banner_image_desktop" class="label">Imagem para Computador:</label>
+  <input type="hidden" id="banner_image_desktop" name="banner_image_desktop"
+    value="<?php echo esc_attr($banner_image_desktop); ?>" />
+  <button type="button" class="button" id="uploadDesktopButton">Selecionar Imagem</button>
+  <div class="banner-preview">
+    <?php if ($banner_image_desktop) : ?>
+    <img src="<?php echo wp_get_attachment_url($banner_image_desktop); ?>" alt="Banner Desktop"
+      style="max-width: 100%; height: auto;" />
+    <?php endif; ?>
+  </div>
+</div>
 
-    <div class="field">
-        <label for="banner_image_mobile" class="label">Imagem para Dispositivo Móvel:</label>
-        <input type="hidden" id="banner_image_mobile" name="banner_image_mobile" value="<?php echo esc_attr($banner_image_mobile); ?>" />
-        <button type="button" class="button" id="uploadMobileButton">Selecionar Imagem</button>
-        <div class="banner-preview">
-            <?php if ($banner_image_mobile) : ?>
-                <img src="<?php echo wp_get_attachment_url($banner_image_mobile); ?>" alt="Banner Mobile" style="max-width: 100%; height: auto;" />
-            <?php endif; ?>
-        </div>
-    </div>
+<div class="field">
+  <label for="banner_image_mobile" class="label">Imagem para Dispositivo Móvel:</label>
+  <input type="hidden" id="banner_image_mobile" name="banner_image_mobile"
+    value="<?php echo esc_attr($banner_image_mobile); ?>" />
+  <button type="button" class="button" id="uploadMobileButton">Selecionar Imagem</button>
+  <div class="banner-preview">
+    <?php if ($banner_image_mobile) : ?>
+    <img src="<?php echo wp_get_attachment_url($banner_image_mobile); ?>" alt="Banner Mobile"
+      style="max-width: 100%; height: auto;" />
+    <?php endif; ?>
+  </div>
+</div>
 
-    <div class="field">
-        <label for="banner_description"><strong>Descrição:</strong></label>
-        <textarea rows="4" id="banner_description" name="banner_description"><?php echo esc_textarea($banner_description); ?></textarea>
-    </div>
+<div class="field">
+  <label for="banner_description"><strong>Descrição:</strong></label>
+  <textarea rows="4" id="banner_description"
+    name="banner_description"><?php echo esc_textarea($banner_description); ?></textarea>
+</div>
 
-    <script>
-        jQuery(document).ready(function($) {
-            var mediaUploaderDesktop, mediaUploaderMobile;
+<script>
+jQuery(document).ready(function($) {
+  var mediaUploaderDesktop, mediaUploaderMobile;
 
-            $('#uploadDesktopButton').click(function(e) {
-                e.preventDefault();
-                if (mediaUploaderDesktop) {
-                    mediaUploaderDesktop.open();
-                    return;
-                }
+  $('#uploadDesktopButton').click(function(e) {
+    e.preventDefault();
+    if (mediaUploaderDesktop) {
+      mediaUploaderDesktop.open();
+      return;
+    }
 
-                mediaUploaderDesktop = wp.media.frames.file_frame = wp.media({
-                    title: 'Escolher Imagem para Computador',
-                    button: {
-                        text: 'Escolher Imagem'
-                    },
-                    multiple: false
-                });
+    mediaUploaderDesktop = wp.media.frames.file_frame = wp.media({
+      title: 'Escolher Imagem para Computador',
+      button: {
+        text: 'Escolher Imagem'
+      },
+      multiple: false
+    });
 
-                mediaUploaderDesktop.on('select', function() {
-                    var attachment = mediaUploaderDesktop.state().get('selection').first().toJSON();
-                    $('#banner_image_desktop').val(attachment.id);
-                    $('.banner-preview').first().html('<img src="' + attachment.url + '" alt="Banner Desktop" style="max-width: 100%; height: auto;" />');
-                });
+    mediaUploaderDesktop.on('select', function() {
+      var attachment = mediaUploaderDesktop.state().get('selection').first().toJSON();
+      $('#banner_image_desktop').val(attachment.id);
+      $('.banner-preview').first().html('<img src="' + attachment.url +
+        '" alt="Banner Desktop" style="max-width: 100%; height: auto;" />');
+    });
 
-                mediaUploaderDesktop.open();
-            });
+    mediaUploaderDesktop.open();
+  });
 
-            $('#uploadMobileButton').click(function(e) {
-                e.preventDefault();
-                if (mediaUploaderMobile) {
-                    mediaUploaderMobile.open();
-                    return;
-                }
+  $('#uploadMobileButton').click(function(e) {
+    e.preventDefault();
+    if (mediaUploaderMobile) {
+      mediaUploaderMobile.open();
+      return;
+    }
 
-                mediaUploaderMobile = wp.media.frames.file_frame = wp.media({
-                    title: 'Escolher Imagem para Dispositivo Móvel',
-                    button: {
-                        text: 'Escolher Imagem'
-                    },
-                    multiple: false
-                });
+    mediaUploaderMobile = wp.media.frames.file_frame = wp.media({
+      title: 'Escolher Imagem para Dispositivo Móvel',
+      button: {
+        text: 'Escolher Imagem'
+      },
+      multiple: false
+    });
 
-                mediaUploaderMobile.on('select', function() {
-                    var attachment = mediaUploaderMobile.state().get('selection').first().toJSON();
-                    $('#banner_image_mobile').val(attachment.id);
-                    $('.banner-preview').last().html('<img src="' + attachment.url + '" alt="Banner Mobile" style="max-width: 100%; height: auto;" />');
-                });
+    mediaUploaderMobile.on('select', function() {
+      var attachment = mediaUploaderMobile.state().get('selection').first().toJSON();
+      $('#banner_image_mobile').val(attachment.id);
+      $('.banner-preview').last().html('<img src="' + attachment.url +
+        '" alt="Banner Mobile" style="max-width: 100%; height: auto;" />');
+    });
 
-                mediaUploaderMobile.open();
-            });
-        });
-    </script>
+    mediaUploaderMobile.open();
+  });
+});
+</script>
 
-    <?php
+<?php
     // Adicionando nonce para segurança
     wp_nonce_field('save_banner_meta', 'banner_nonce');
 
@@ -693,8 +705,8 @@ add_action('save_post', 'save_banner_meta');
 function create_section_topo_cpt() {
     $args = array(
         'labels' => array(
-            'name' => __('Seção Topo'),
-            'singular_name' => __('Seção Topo')
+            'name' => __('Benefícios'),
+            'singular_name' => __('Benefício')
         ),
         'public' => true,
         'has_archive' => true,
@@ -714,78 +726,80 @@ function createFieldSectionTopo() {
     $section_image = get_post_meta($id_post, 'section_image', true);
     ?>
 
-    <style>
-        textarea,
-        input[type="text"],
-        input[type="hidden"] {
-            width: 100%;
-            margin-top: 5px;
-        }
+<style>
+textarea,
+input[type="text"],
+input[type="hidden"] {
+  width: 100%;
+  margin-top: 5px;
+}
 
-        .field {
-            margin: 12px 0;
-        }
+.field {
+  margin: 12px 0;
+}
 
-        .section-preview img{
-          width: 68px;
-          height: 68px;
-          object-fit: cover;
-          margin-top: 18px;
-        }
-    </style>
+.section-preview img {
+  width: 68px;
+  height: 68px;
+  object-fit: cover;
+  margin-top: 18px;
+}
+</style>
 
-    <div>
-      <strong>Imagens (largura x altura):</strong><br>
-      Tamanho de imagem: 68px68px
-    </div>
+<div>
+  <strong>Imagens (largura x altura):</strong><br>
+  Tamanho de imagem: 68px68px
+</div>
 
-    <div class="field">
-        <label for="section_image">Imagem:</label>
-        <input type="hidden" id="section_image" name="section_image" value="<?php echo esc_attr($section_image); ?>" />
-        <button type="button" class="button" id="uploadSectionButton">Selecionar Imagem</button>
-        <div class="section-preview">
-            <?php if ($section_image) : ?>
-                <img src="<?php echo wp_get_attachment_url($section_image); ?>" alt="Section Image" style="max-width: 100%; height: auto;" />
-            <?php endif; ?>
-        </div>
-    </div>
+<div class="field">
+  <label for="section_image">Imagem:</label>
+  <input type="hidden" id="section_image" name="section_image" value="<?php echo esc_attr($section_image); ?>" />
+  <button type="button" class="button" id="uploadSectionButton">Selecionar Imagem</button>
+  <div class="section-preview">
+    <?php if ($section_image) : ?>
+    <img src="<?php echo wp_get_attachment_url($section_image); ?>" alt="Section Image"
+      style="max-width: 100%; height: auto;" />
+    <?php endif; ?>
+  </div>
+</div>
 
-    <div class="field">
-        <label for="section_text">Texto:</label>
-        <textarea rows="4" id="section_text" name="section_text"><?php echo esc_textarea($section_text); ?></textarea>
-    </div>
+<div class="field">
+  <label for="section_text">Texto:</label>
+  <textarea rows="4" id="section_text" name="section_text"><?php echo esc_textarea($section_text); ?></textarea>
+</div>
 
-    <script>
-        jQuery(document).ready(function($) {
-            var mediaUploader;
+<script>
+jQuery(document).ready(function($) {
+  var mediaUploader;
 
-            $('#uploadSectionButton').click(function(e) {
-                e.preventDefault();
-                if (mediaUploader) {
-                    mediaUploader.open();
-                    return;
-                }
+  $('#uploadSectionButton').click(function(e) {
+    e.preventDefault();
+    if (mediaUploader) {
+      mediaUploader.open();
+      return;
+    }
 
-                mediaUploader = wp.media.frames.file_frame = wp.media({
-                    title: 'Escolher Imagem para Section Topo',
-                    button: {
-                        text: 'Escolher Imagem'
-                    },
-                    multiple: false
-                });
+    mediaUploader = wp.media.frames.file_frame = wp.media({
+      title: 'Escolher Imagem para Section Topo',
+      button: {
+        text: 'Escolher Imagem'
+      },
+      multiple: false
+    });
 
-                mediaUploader.on('select', function() {
-                    var attachment = mediaUploader.state().get('selection').first().toJSON();
-                    $('#section_image').val(attachment.id);
-                    $('.section-preview').html('<img src="' + attachment.url + '" alt="Section Image" style="max-width: 100%; height: auto;" />');
-                });
+    mediaUploader.on('select', function() {
+      var attachment = mediaUploader.state().get('selection').first().toJSON();
+      $('#section_image').val(attachment.id);
+      $('.section-preview').html('<img src="' + attachment.url +
+        '" alt="Section Image" style="max-width: 100%; height: auto;" />');
+    });
 
-                mediaUploader.open();
-            });
-        });
-    </script>
+    mediaUploader.open();
+  });
+});
+</script>
 
-    <?php
+<?php
     // Adicionando nonce para segurança
     wp_nonce_field('save_section_meta', 'section_nonce');
 }
@@ -861,77 +875,84 @@ function createFieldConfigSecoes() {
     $disable_mapa = get_post_meta($post->ID, 'disable_mapa', true);
     ?>
 
-    <div class="field">
-        <label for="disable_banners">
-            <input type="checkbox" id="disable_banners" name="disable_banners" value="1" <?php checked($disable_banners, '1'); ?>>
-            Desativar Banners Topo
-        </label>
-    </div>
+<div class="field">
+  <label for="disable_banners">
+    <input type="checkbox" id="disable_banners" name="disable_banners" value="1"
+      <?php checked($disable_banners, '1'); ?>>
+    Desativar Banners Topo
+  </label>
+</div>
 
-    <div class="field">
-        <label for="disable_sections">
-            <input type="checkbox" id="disable_sections" name="disable_sections" value="1" <?php checked($disable_sections, '1'); ?>>
-            Desativar Seção Topo
-        </label>
-    </div>
+<div class="field">
+  <label for="disable_sections">
+    <input type="checkbox" id="disable_sections" name="disable_sections" value="1"
+      <?php checked($disable_sections, '1'); ?>>
+    Desativar Seção Benefícios
+  </label>
+</div>
 
-    <div class="field">
-        <label for="disable_services">
-            <input type="checkbox" id="disable_services" name="disable_services" value="1" <?php checked($disable_services, '1'); ?>>
-            Desativar Seção Serviços
-        </label>
-    </div>
+<div class="field">
+  <label for="disable_services">
+    <input type="checkbox" id="disable_services" name="disable_services" value="1"
+      <?php checked($disable_services, '1'); ?>>
+    Desativar Seção Serviços
+  </label>
+</div>
 
-    <div class="field">
-        <label for="disable_portfolio">
-            <input type="checkbox" id="disable_portfolio" name="disable_portfolio" value="1" <?php checked($disable_portfolio, '1'); ?>>
-            Desativar Seção Portfólios
-        </label>
-    </div>
+<div class="field">
+  <label for="disable_portfolio">
+    <input type="checkbox" id="disable_portfolio" name="disable_portfolio" value="1"
+      <?php checked($disable_portfolio, '1'); ?>>
+    Desativar Seção Portfólios
+  </label>
+</div>
 
-    <div class="field">
-        <label for="disable_empresa">
-            <input type="checkbox" id="disable_empresa" name="disable_empresa" value="1" <?php checked($disable_empresa, '1'); ?>>
-            Desativar Seção Empresa
-        </label>
-    </div>
+<div class="field">
+  <label for="disable_empresa">
+    <input type="checkbox" id="disable_empresa" name="disable_empresa" value="1"
+      <?php checked($disable_empresa, '1'); ?>>
+    Desativar Seção Empresa
+  </label>
+</div>
 
-    <div class="field">
-        <label for="disable_equipe">
-            <input type="checkbox" id="disable_equipe" name="disable_equipe" value="1" <?php checked($disable_equipe, '1'); ?>>
-            Desativar Seção Equipe
-        </label>
-    </div>
+<div class="field">
+  <label for="disable_equipe">
+    <input type="checkbox" id="disable_equipe" name="disable_equipe" value="1" <?php checked($disable_equipe, '1'); ?>>
+    Desativar Seção Equipe
+  </label>
+</div>
 
-    <div class="field">
-        <label for="disable_clientes">
-            <input type="checkbox" id="disable_clientes" name="disable_clientes" value="1" <?php checked($disable_clientes, '1'); ?>>
-            Desativar Seção Clientes
-        </label>
-    </div>
+<div class="field">
+  <label for="disable_clientes">
+    <input type="checkbox" id="disable_clientes" name="disable_clientes" value="1"
+      <?php checked($disable_clientes, '1'); ?>>
+    Desativar Seção Clientes
+  </label>
+</div>
 
-    <div class="field">
-        <label for="disable_blog">
-            <input type="checkbox" id="disable_blog" name="disable_blog" value="1" <?php checked($disable_blog, '1'); ?>>
-            Desativar Seção Blogs
-        </label>
-    </div>
+<div class="field">
+  <label for="disable_blog">
+    <input type="checkbox" id="disable_blog" name="disable_blog" value="1" <?php checked($disable_blog, '1'); ?>>
+    Desativar Seção Blog
+  </label>
+</div>
 
-    <div class="field">
-        <label for="disable_contato">
-            <input type="checkbox" id="disable_contato" name="disable_contato" value="1" <?php checked($disable_contato, '1'); ?>>
-            Desativar Seção Contato
-        </label>
-    </div>
+<div class="field">
+  <label for="disable_contato">
+    <input type="checkbox" id="disable_contato" name="disable_contato" value="1"
+      <?php checked($disable_contato, '1'); ?>>
+    Desativar Seção Contato
+  </label>
+</div>
 
-    <div class="field">
-        <label for="disable_mapa">
-            <input type="checkbox" id="disable_mapa" name="disable_mapa" value="1" <?php checked($disable_mapa, '1'); ?>>
-            Desativar Seção Mapa
-        </label>
-    </div>
+<div class="field">
+  <label for="disable_mapa">
+    <input type="checkbox" id="disable_mapa" name="disable_mapa" value="1" <?php checked($disable_mapa, '1'); ?>>
+    Desativar Seção Mapa
+  </label>
+</div>
 
-    <?php
+<?php
     // Adicionando nonce para segurança
     wp_nonce_field('save_config_meta', 'config_nonce');
 }
@@ -1021,105 +1042,133 @@ function createFieldServicos() {
     $servico_paragraph = get_post_meta($post->ID, 'servico_paragraph', true);
     ?>
 
-    <style>
-        textarea,
-        input[type="text"],
-        input[type="hidden"] {
-            width: 100%;
-            margin-top: 5px;
-        }
+<style>
+textarea,
+input[type="text"],
+input[type="hidden"] {
+  width: 100%;
+  margin-top: 5px;
+}
 
-        .field {
-            margin: 12px 0;
-        }
+.field {
+  margin: 12px 0;
+}
 
-        .section-preview img {
-            width: 68px;
-            height: 68px;
-            object-fit: cover;
-            margin-top: 18px;
-        }
+.section-preview img {
+  width: 68px;
+  height: 68px;
+  object-fit: cover;
+  margin-top: 18px;
+}
 
-        .servico-item {
-            margin-top: 22px;
-        }
+.servico-item {
+  margin-top: 22px;
+}
 
-        #add-servico {
-            width: 100%;
-            max-width: 310px;
-            margin: 42px auto 22px;
-            display: block;
-        }
+#add-servico {
+  width: 100%;
+  max-width: 310px;
+  margin: 42px auto 22px;
+  display: block;
+}
 
 
-        .upload-image-button,
-        #add-servico,
-        .remove-servico {
-            background: rgb(21, 101, 192);
-            color: #fff;
-            border: 1px solid;
-            padding: 10px 12px;
-            border-radius: 4px;
-            margin-top: 14px;
-            min-width: 180px;
-            cursor: pointer;
-        }
+.upload-image-button,
+#add-servico,
+.remove-servico {
+  background: rgb(21, 101, 192);
+  color: #fff;
+  border: 1px solid;
+  padding: 10px 12px;
+  border-radius: 4px;
+  margin-top: 14px;
+  min-width: 180px;
+  cursor: pointer;
+}
 
-        .upload-image-button{
-            padding: 6px 12px;
-        }
-        
-        .image-preview {
-            margin-top: 10px;
-        }
-    </style>
+.upload-image-button {
+  padding: 6px 12px;
+}
 
-    <div class="field">
-        <label for="servico_subtitle">
-            Subtítulo:
-            <input type="text" id="servico_subtitle" name="servico_subtitle" value="<?php echo esc_attr($servico_subtitle); ?>">
-        </label>
-    </div>
+.image-preview {
+  margin-top: 10px;
+}
+</style>
 
-    <div class="field">
-        <label for="servico_paragraph">
-            Parágrafo Descritivo:
-            <textarea id="servico_paragraph" name="servico_paragraph" rows="8"><?php echo esc_textarea($servico_paragraph); ?></textarea>
-        </label>
-    </div>
+<div class="field">
+  <label for="servico_subtitle">
+    Subtítulo:
+    <input type="text" id="servico_subtitle" name="servico_subtitle" value="<?php echo esc_attr($servico_subtitle); ?>">
+  </label>
+</div>
 
-    <div class="field">
-        <h4>Serviços</h4>
-        <div id="servicos-container">
-            <?php foreach ($servicos as $index => $servico): ?>
-                <div class="servico-item">
-                    <label>
-                        Nome do Serviço:
-                        <input type="text" name="servicos[<?php echo $index; ?>][name]" value="<?php echo esc_attr($servico['name']); ?>">
-                    </label>
-                    <label>
-                        Imagem do Serviço:
-                        <input type="hidden" name="servicos[<?php echo $index; ?>][image]" class="image-url" value="<?php echo esc_attr($servico['image']); ?>">
-                        <button type="button" class="upload-image-button">Upload Imagem</button>
-                        <div class="image-preview">
-                            <?php if (!empty($servico['image'])): ?>
-                                <img src="<?php echo esc_url($servico['image']); ?>" style="max-width: 100%; height: auto;">
-                            <?php endif; ?>
-                        </div>
-                    </label>
-                    <button type="button" class="remove-servico">Remover</button>
-                </div>
-            <?php endforeach; ?>
+<div class="field">
+  <label for="servico_paragraph">
+    Parágrafo Descritivo:
+    <textarea id="servico_paragraph" name="servico_paragraph"
+      rows="8"><?php echo esc_textarea($servico_paragraph); ?></textarea>
+  </label>
+</div>
+
+<div class="field">
+  <h4>Serviços</h4>
+  <p><strong>Total de serviços: <span id="servicos-count"><?php echo count($servicos); ?></span></strong></p>
+  <div id="servicos-container">
+    <?php foreach ($servicos as $index => $servico): ?>
+    <div class="servico-item" data-index="<?php echo $index; ?>">
+      <h5>Serviço #<?php echo $index + 1; ?></h5>
+      <label>
+        Nome do Serviço:
+        <input type="text" name="servicos[<?php echo $index; ?>][name]"
+          value="<?php echo esc_attr($servico['name']); ?>">
+      </label>
+      <label>
+        Imagem do Serviço:
+        <input type="hidden" name="servicos[<?php echo $index; ?>][image]" class="image-url"
+          value="<?php echo esc_attr($servico['image']); ?>">
+        <button type="button" class="upload-image-button">Upload Imagem</button>
+        <div class="image-preview">
+          <?php if (!empty($servico['image'])): ?>
+          <img src="<?php echo esc_url($servico['image']); ?>" style="max-width: 100%; height: auto;">
+          <?php endif; ?>
         </div>
-        <button type="button" id="add-servico">Adicionar Serviço</button>
+      </label>
+      <button type="button" class="remove-servico">Remover</button>
     </div>
+    <?php endforeach; ?>
+  </div>
+  <button type="button" id="add-servico">Adicionar Serviço</button>
+</div>
 
-    <script>
-    document.getElementById('add-servico').addEventListener('click', function() {
-        const container = document.getElementById('servicos-container');
-        const index = container.children.length;
-        const newServico = `
-            <div class="servico-item">
+<script>
+function updateServicosCount() {
+  const container = document.getElementById('servicos-container');
+  const count = container.children.length;
+  document.getElementById('servicos-count').textContent = count;
+
+  // Reindexar todos os serviços
+  Array.from(container.children).forEach((item, index) => {
+    item.setAttribute('data-index', index);
+    item.querySelector('h5').textContent = `Serviço #${index + 1}`;
+
+    // Atualizar os nomes dos inputs
+    const nameInput = item.querySelector('input[type="text"]');
+    const imageInput = item.querySelector('input[type="hidden"]');
+
+    nameInput.name = `servicos[${index}][name]`;
+    imageInput.name = `servicos[${index}][image]`;
+  });
+}
+
+document.getElementById('add-servico').addEventListener('click', function() {
+  const container = document.getElementById('servicos-container');
+  const index = container.children.length;
+
+  console.log(`Adicionando serviço #${index + 1}`);
+
+  const newServico = `
+            <div class="servico-item" data-index="${index}">
+                <h5>Serviço #${index + 1}</h5>
                 <label>
                     Nome do Serviço:
                     <input type="text" name="servicos[${index}][name]" value="">
@@ -1133,39 +1182,44 @@ function createFieldServicos() {
                 <button type="button" class="remove-servico">Remover</button>
             </div>
         `;
-        container.insertAdjacentHTML('beforeend', newServico);
+  container.insertAdjacentHTML('beforeend', newServico);
+  updateServicosCount();
+});
+
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('remove-servico')) {
+    event.target.parentElement.remove();
+    updateServicosCount();
+  }
+
+  if (event.target.classList.contains('upload-image-button')) {
+    const imageInput = event.target.previousElementSibling;
+    const previewContainer = event.target.nextElementSibling;
+
+    // Open the media uploader
+    const frame = wp.media({
+      title: 'Escolher Imagem',
+      button: {
+        text: 'Usar esta imagem'
+      },
+      multiple: false
     });
 
-    document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('remove-servico')) {
-            event.target.parentElement.remove();
-        }
-        
-        if (event.target.classList.contains('upload-image-button')) {
-            const imageInput = event.target.previousElementSibling;
-            const previewContainer = event.target.nextElementSibling;
-
-            // Open the media uploader
-            const frame = wp.media({
-                title: 'Escolher Imagem',
-                button: {
-                    text: 'Usar esta imagem'
-                },
-                multiple: false
-            });
-
-            frame.on('select', function() {
-                const attachment = frame.state().get('selection').first().toJSON();
-                imageInput.value = attachment.url;
-                previewContainer.innerHTML = '<img src="' + attachment.url + '" style="max-width: 100%; height: auto;">';
-            });
-
-            frame.open();
-        }
+    frame.on('select', function() {
+      const attachment = frame.state().get('selection').first().toJSON();
+      imageInput.value = attachment.url;
+      previewContainer.innerHTML = '<img src="' + attachment.url + '" style="max-width: 100%; height: auto;">';
     });
-    </script>
 
-    <?php
+    frame.open();
+  }
+});
+
+// Inicializar contador
+updateServicosCount();
+</script>
+
+<?php
     // Adicionando nonce para segurança
     wp_nonce_field('save_servico_meta', 'servico_nonce');
 }
@@ -1194,21 +1248,38 @@ function save_servico_meta($post_id) {
         return;
     }
 
+    // Debug: Verifica quantos serviços estão sendo enviados
+    error_log('Total de variáveis POST: ' . count($_POST, COUNT_RECURSIVE));
+    error_log('Limite max_input_vars: ' . ini_get('max_input_vars'));
+    
+    if (isset($_POST['servicos'])) {
+        error_log('Número de serviços recebidos: ' . count($_POST['servicos']));
+    }
+
     // Salva as configurações
     $servicos = isset($_POST['servicos']) ? $_POST['servicos'] : array();
+    
+    // Filtra apenas serviços com dados válidos
+    $servicos = array_filter($servicos, function($servico) {
+        return !empty($servico['name']);
+    });
+    
     $servicos = array_map(function($servico) {
         return array(
             'name' => sanitize_text_field($servico['name']),
-            'image' => sanitize_text_field($servico['image']),
+            'image' => sanitize_text_field($servico['image'] ?? ''),
         );
     }, $servicos);
 
-    $servico_subtitle = sanitize_text_field($_POST['servico_subtitle']);
-    $servico_paragraph = sanitize_textarea_field($_POST['servico_paragraph']);
+    $servico_subtitle = isset($_POST['servico_subtitle']) ? sanitize_text_field($_POST['servico_subtitle']) : '';
+    $servico_paragraph = isset($_POST['servico_paragraph']) ? sanitize_textarea_field($_POST['servico_paragraph']) : '';
 
     update_post_meta($post_id, 'servicos', $servicos);
     update_post_meta($post_id, 'servico_subtitle', $servico_subtitle);
     update_post_meta($post_id, 'servico_paragraph', $servico_paragraph);
+    
+    // Log do resultado final
+    error_log('Serviços salvos: ' . count($servicos));
 }
 add_action('save_post', 'save_servico_meta');
 // end - CONFIGURAÇÕES DE SERVIÇOS
@@ -1241,40 +1312,40 @@ function createFieldEmpresa() {
     $valores = get_post_meta($post->ID, 'valores', true);
     ?>
 
-    <style>
-        textarea,
-        input[type="text"] {
-            width: 100%;
-            margin-top: 5px;
-        }
+<style>
+textarea,
+input[type="text"] {
+  width: 100%;
+  margin-top: 5px;
+}
 
-        .field {
-            margin: 12px 0;
-        }
-    </style>
+.field {
+  margin: 12px 0;
+}
+</style>
 
-    <div class="field">
-        <label for="missao">
-            Missão:
-            <textarea id="missao" name="missao" rows="4"><?php echo esc_textarea($missao); ?></textarea>
-        </label>
-    </div>
+<div class="field">
+  <label for="missao">
+    Missão:
+    <textarea id="missao" name="missao" rows="4"><?php echo esc_textarea($missao); ?></textarea>
+  </label>
+</div>
 
-    <div class="field">
-        <label for="visao">
-            Visão:
-            <textarea id="visao" name="visao" rows="4"><?php echo esc_textarea($visao); ?></textarea>
-        </label>
-    </div>
+<div class="field">
+  <label for="visao">
+    Visão:
+    <textarea id="visao" name="visao" rows="4"><?php echo esc_textarea($visao); ?></textarea>
+  </label>
+</div>
 
-    <div class="field">
-        <label for="valores">
-            Valores:
-            <textarea id="valores" name="valores" rows="4"><?php echo esc_textarea($valores); ?></textarea>
-        </label>
-    </div>
+<div class="field">
+  <label for="valores">
+    Valores:
+    <textarea id="valores" name="valores" rows="4"><?php echo esc_textarea($valores); ?></textarea>
+  </label>
+</div>
 
-    <?php
+<?php
     // Adicionando nonce para segurança
     wp_nonce_field('save_empresa_meta', 'empresa_nonce');
 }
@@ -1342,87 +1413,87 @@ function createFieldEquipe() {
     $descricao = get_post_meta($post->ID, 'descricao', true);
     ?>
 
-    <style>
-        textarea,
-        input[type="text"],
-        input[type="hidden"] {
-            width: 100%;
-            margin-top: 5px;
-        }
+<style>
+textarea,
+input[type="text"],
+input[type="hidden"] {
+  width: 100%;
+  margin-top: 5px;
+}
 
-        .field {
-            margin: 12px 0;
-        }
+.field {
+  margin: 12px 0;
+}
 
-        .image-preview img {
-            max-width: 150px;
-            height: auto;
-            object-fit: cover;
-            margin-top: 10px;
-        }
+.image-preview img {
+  max-width: 150px;
+  height: auto;
+  object-fit: cover;
+  margin-top: 10px;
+}
 
-        .upload-image-button {
-            background: rgb(21, 101, 192);
-            color: #fff;
-            border: 1px solid;
-            padding: 10px 12px;
-            border-radius: 4px;
-            margin-top: 14px;
-            cursor: pointer;
-            min-width: 180px;
-        }
-    </style>
+.upload-image-button {
+  background: rgb(21, 101, 192);
+  color: #fff;
+  border: 1px solid;
+  padding: 10px 12px;
+  border-radius: 4px;
+  margin-top: 14px;
+  cursor: pointer;
+  min-width: 180px;
+}
+</style>
 
-    <div class="field">
-        <label for="foto">
-            Foto:
-            <input type="hidden" id="foto" name="foto" value="<?php echo esc_attr($foto); ?>" />
-            <button type="button" class="upload-image-button">Upload Imagem</button>
-            <div class="image-preview">
-                <?php if ($foto): ?>
-                    <img src="<?php echo esc_url($foto); ?>" alt="Prévia da foto" />
-                <?php endif; ?>
-            </div>
-        </label>
+<div class="field">
+  <label for="foto">
+    Foto:
+    <input type="hidden" id="foto" name="foto" value="<?php echo esc_attr($foto); ?>" />
+    <button type="button" class="upload-image-button">Upload Imagem</button>
+    <div class="image-preview">
+      <?php if ($foto): ?>
+      <img src="<?php echo esc_url($foto); ?>" alt="Prévia da foto" />
+      <?php endif; ?>
     </div>
+  </label>
+</div>
 
-    <div class="field">
-        <label for="cargo">
-            Cargo:
-            <input type="text" id="cargo" name="cargo" value="<?php echo esc_attr($cargo); ?>" />
-        </label>
-    </div>
+<div class="field">
+  <label for="cargo">
+    Cargo:
+    <input type="text" id="cargo" name="cargo" value="<?php echo esc_attr($cargo); ?>" />
+  </label>
+</div>
 
-    <div class="field">
-        <label for="descricao">
-            Descrição:
-            <textarea id="descricao" name="descricao" rows="4"><?php echo esc_textarea($descricao); ?></textarea>
-        </label>
-    </div>
+<div class="field">
+  <label for="descricao">
+    Descrição:
+    <textarea id="descricao" name="descricao" rows="4"><?php echo esc_textarea($descricao); ?></textarea>
+  </label>
+</div>
 
-    <script>
-        document.querySelector('.upload-image-button').addEventListener('click', function(event) {
-            const input = document.getElementById('foto');
-            const preview = document.querySelector('.image-preview');
-            const frame = wp.media({
-                title: 'Escolher Imagem',
-                button: {
-                    text: 'Usar esta imagem'
-                },
-                multiple: false
-            });
+<script>
+document.querySelector('.upload-image-button').addEventListener('click', function(event) {
+  const input = document.getElementById('foto');
+  const preview = document.querySelector('.image-preview');
+  const frame = wp.media({
+    title: 'Escolher Imagem',
+    button: {
+      text: 'Usar esta imagem'
+    },
+    multiple: false
+  });
 
-            frame.on('select', function() {
-                const attachment = frame.state().get('selection').first().toJSON();
-                input.value = attachment.url;
-                preview.innerHTML = '<img src="' + attachment.url + '" alt="Prévia da foto" />';
-            });
+  frame.on('select', function() {
+    const attachment = frame.state().get('selection').first().toJSON();
+    input.value = attachment.url;
+    preview.innerHTML = '<img src="' + attachment.url + '" alt="Prévia da foto" />';
+  });
 
-            frame.open();
-        });
-    </script>
+  frame.open();
+});
+</script>
 
-    <?php
+<?php
     // Adicionando nonce para segurança
     wp_nonce_field('save_equipe_meta', 'equipe_nonce');
 }
@@ -1489,64 +1560,66 @@ function createFieldClientes() {
     $logo = get_post_meta($post->ID, 'logo', true);
     ?>
 
-    <style>
-        .field {
-            margin: 12px 0;
-        }
-        .image-preview img {
-            max-width: 150px;
-            height: auto;
-            object-fit: cover;
-            margin-top: 10px;
-        }
-        .upload-image-button {
-            background: rgb(21, 101, 192);
-            color: #fff;
-            border: 1px solid;
-            padding: 10px 12px;
-            border-radius: 4px;
-            margin-top: 14px;
-            cursor: pointer;
-            min-width: 180px;
-        }
-    </style>
+<style>
+.field {
+  margin: 12px 0;
+}
 
-    <div class="field">
-        <label for="logo">
-            Logo:
-            <input type="hidden" id="logo" name="logo" value="<?php echo esc_attr($logo); ?>" />
-            <button type="button" class="upload-image-button">Upload Imagem</button>
-            <div class="image-preview">
-                <?php if ($logo): ?>
-                    <img src="<?php echo esc_url($logo); ?>" alt="Prévia do logo" />
-                <?php endif; ?>
-            </div>
-        </label>
+.image-preview img {
+  max-width: 150px;
+  height: auto;
+  object-fit: cover;
+  margin-top: 10px;
+}
+
+.upload-image-button {
+  background: rgb(21, 101, 192);
+  color: #fff;
+  border: 1px solid;
+  padding: 10px 12px;
+  border-radius: 4px;
+  margin-top: 14px;
+  cursor: pointer;
+  min-width: 180px;
+}
+</style>
+
+<div class="field">
+  <label for="logo">
+    Logo:
+    <input type="hidden" id="logo" name="logo" value="<?php echo esc_attr($logo); ?>" />
+    <button type="button" class="upload-image-button">Upload Imagem</button>
+    <div class="image-preview">
+      <?php if ($logo): ?>
+      <img src="<?php echo esc_url($logo); ?>" alt="Prévia do logo" />
+      <?php endif; ?>
     </div>
+  </label>
+</div>
 
-    <script>
-        document.querySelector('.upload-image-button').addEventListener('click', function(event) {
-            const input = document.getElementById('logo');
-            const preview = document.querySelector('.image-preview');
-            const frame = wp.media({
-                title: 'Escolher Imagem',
-                button: {
-                    text: 'Usar esta imagem'
-                },
-                multiple: false
-            });
+<script>
+document.querySelector('.upload-image-button').addEventListener('click', function(event) {
+  const input = document.getElementById('logo');
+  const preview = document.querySelector('.image-preview');
+  const frame = wp.media({
+    title: 'Escolher Imagem',
+    button: {
+      text: 'Usar esta imagem'
+    },
+    multiple: false
+  });
 
-            frame.on('select', function() {
-                const attachment = frame.state().get('selection').first().toJSON();
-                input.value = attachment.url;
-                preview.innerHTML = '<img src="' + attachment.url + '" alt="Prévia do logo" />';
-            });
+  frame.on('select', function() {
+    const attachment = frame.state().get('selection').first().toJSON();
+    input.value = attachment.url;
+    preview.innerHTML = '<img src="' + attachment.url + '" alt="Prévia do logo" />';
+  });
 
-            frame.open();
-        });
-    </script>
+  frame.open();
+});
+</script>
 
-    <?php
+<?php
     // Adicionando nonce para segurança
     wp_nonce_field('save_clientes_meta', 'clientes_nonce');
 }
@@ -1610,28 +1683,28 @@ function createFieldContato() {
     $email = get_post_meta($post->ID, 'contato_email', true);
     ?>
 
-    <style>
-        .field {
-            margin: 12px 0;
-              display: flex;
+<style>
+.field {
+  margin: 12px 0;
+  display: flex;
   flex-direction: column;
-        }
-    </style>
+}
+</style>
 
-    <div class="field">
-        <label for="contato_localizacao">Localização:</label>
-        <textarea id="contato_localizacao" name="contato_localizacao"><?php echo esc_textarea($localizacao); ?></textarea>
-    </div>
-    <div class="field">
-        <label for="contato_telefone">Telefone:</label>
-        <input type="text" id="contato_telefone" name="contato_telefone" value="<?php echo esc_attr($telefone); ?>" />
-    </div>
-    <div class="field">
-        <label for="contato_email">E-mail:</label>
-        <input type="email" id="contato_email" name="contato_email" value="<?php echo esc_attr($email); ?>" />
-    </div>
+<div class="field">
+  <label for="contato_localizacao">Localização:</label>
+  <textarea id="contato_localizacao" name="contato_localizacao"><?php echo esc_textarea($localizacao); ?></textarea>
+</div>
+<div class="field">
+  <label for="contato_telefone">Telefone:</label>
+  <input type="text" id="contato_telefone" name="contato_telefone" value="<?php echo esc_attr($telefone); ?>" />
+</div>
+<div class="field">
+  <label for="contato_email">E-mail:</label>
+  <input type="email" id="contato_email" name="contato_email" value="<?php echo esc_attr($email); ?>" />
+</div>
 
-    <?php
+<?php
     // Adicionando nonce para segurança
     wp_nonce_field('save_contato_meta', 'contato_nonce');
 }
@@ -1701,12 +1774,12 @@ function createFieldMapa() {
     $map_iframe = get_post_meta($post->ID, 'map_iframe', true);
     ?>
 
-    <div class="field">
-        <label for="map_iframe">Código do Mapa (Iframe):</label>
-        <textarea id="map_iframe" name="map_iframe" rows="5" style="width: 100%;"><?= $map_iframe ?></textarea>
-    </div>
+<div class="field">
+  <label for="map_iframe">Código do Mapa (Iframe):</label>
+  <textarea id="map_iframe" name="map_iframe" rows="5" style="width: 100%;"><?= $map_iframe ?></textarea>
+</div>
 
-    <?php
+<?php
 }
 
 // Adiciona o meta box ao post type

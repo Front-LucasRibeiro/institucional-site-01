@@ -1,0 +1,124 @@
+/* CSS para deixar os cards da equipe com o mesmo tamanho */
+
+.equipe .equipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.equipe .equipe-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  /* Garante que todos os cards tenham a mesma altura */
+  min-height: 400px;
+  /* Altura mínima para consistência */
+}
+
+.equipe .equipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.equipe .col-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.equipe .col-left .photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 3px solid #f0f0f0;
+}
+
+.equipe .col-left .name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.equipe .col-left .cargo {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.equipe .col-right {
+  flex: 1;
+  /* Faz a descrição ocupar o espaço restante */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.equipe .col-right .description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #555;
+  text-align: center;
+  flex: 1;
+  /* Faz a descrição se expandir para preencher o espaço */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .equipe .equipe-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .equipe .equipe-card {
+    min-height: 350px;
+    padding: 1rem;
+  }
+
+  .equipe .col-left .photo {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .equipe .equipe-card {
+    min-height: 300px;
+    padding: 0.8rem;
+  }
+
+  .equipe .col-left .name {
+    font-size: 1.1rem;
+  }
+
+  .equipe .col-left .cargo {
+    font-size: 0.9rem;
+  }
+
+  .equipe .col-right .description {
+    font-size: 0.9rem;
+  }
+}
+
+/* Para garantir 3 cards por linha em telas maiores */
+@media (min-width: 1200px) {
+  .equipe .equipe-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
+}
